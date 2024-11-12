@@ -68,18 +68,75 @@
       subtitle="Morphological chart for electronic hardware selection">
       </image-component>
 
-    <h3>Morphological chart for electronic hardware selection</h3>
-    <p>I used a weighted decision matrix to determine which methods to use to fulfil the requirements of the hardware solution. A weighted decision matrix was used as not all criteria or factors are equal in importance. Additionally, instead of rank, I used a normalised score between 0 to 1 to demonstrate the magnitude of the difference in performance in the criteria of interest.</p>
+    <p>I used a weighted decision matrix to determine which methods to use to fulfil the requirements of the hardware solution. 
+      A weighted decision matrix was used as not all criteria or factors are equal in importance. 
+      Additionally, instead of rank, I used a normalised score between 0 to 1 to demonstrate the magnitude of the difference in performance 
+      in the criteria of interest.</p>
 
     <h4>Detecting soil moisture level:</h4>
-    <p>The 3 most prominent types of soil moisture sensors are Capacitive, time-domain reflectometry, and frequency-domain reflectometry sensors. From the system engineering framework, I came up with the criteria that represent:</p>
+    <p>The 3 most prominent types of soil moisture sensors are Capacitive, time-domain reflectometry, and frequency-domain reflectometry sensors. 
+      From the system engineering framework, I came up with the criteria that represent:</p>
     <ol>
         <li>Performance requirement (a. Accuracy)</li>
         <li>Resource constraints ( a. Cost, b. Power)</li>
         <li>Operational needs (a. Form factor, b. Maintenance)</li>
     </ol>
 
-    <p>The scores heavily favoured capacitive sensors (7.8/10) due to their optimal balance of power efficiency (9/10) and cost-effectiveness (9/10), despite lower accuracy (6/10). This scoring distribution acknowledges that for soil moisture monitoring in mobile applications, trend accuracy, and reliability outweigh absolute precision.</p>
+    <image-component 
+      tag="image" 
+      source="../assets/soil_moisture.png"
+      subtitle="Weighted decision matrix for choosing soil moisture sensor mechanism">
+      </image-component>
+
+    <p>The scores heavily favoured capacitive sensors (7.8/10) due to their optimal balance of power efficiency (9/10) and cost-effectiveness (9/10), 
+      despite lower accuracy (6/10). This scoring distribution acknowledges that for soil moisture monitoring in mobile applications, trend accuracy, and 
+      reliability outweigh absolute precision.</p>
+
+    <h4>Relative Temperature and humidity:</h4>
+
+    <p>Using the same framework as done previously, a weighted decision matrix is formed comparing 3 most prominent types of relative 
+        temperature and humidity sensors:</p>
+
+    <image-component 
+    tag="image" 
+    source="../assets/temp_humid.png"
+    subtitle="Weighted decision matrix for choosing temperature and humidity sensor mechanism">
+    </image-component>
+      
+    <p>Resistive/capacitive sensors scored highest (7.6/10) primarily due to their excellent cost-effectiveness (9/10) and integration simplicity (8/10), 
+      accepting lower accuracy scores (6/10) as a reasonable trade-off for field deployment where relative changes often matter more than absolute precision.</p>
+      
+    <h4>Connection of components and power need:</h4>
+
+    <image-component 
+    tag="image" 
+    source="../assets/electronic_flow_diagram.png"
+    subtitle="[Electronic flowchart (Red: Power, Green: Data)]">
+    </image-component>
+       
+    <p>The above diagram shows how components are connected and what signals are being input and output. 
+      This diagram, with the context that it will be used in harsh environments with limited power supply, 
+      has provided me with the design requirements:</p>
+
+    <ol>
+        <li>The solution needs to connect to all the components reliably.</li>
+        <li>The solution should be able to make efficient use of limited space in the chassis.</li>
+        <li>The solution can distribute high power to multiple components.</li>
+        <li>The solution must keep to budget constraints.</li>
+        <li>The solution's maintenance should be easy.</li>
+    </ol>
+      
+    <p>To meet the requirements, the weighted decision matrix is used to choose the appropriate method.</p>
+
+    <image-component 
+    tag="image" 
+    source="../assets/Custom_PCB.png"
+    subtitle="weighted decision matrix for choosing electronic components connection method">
+    </image-component>
+      
+    <p>Custom PCB scored notably higher (8.0/10) than off-shelf solutions (5.2/10), with particularly strong scores in reliability (9/10) and space efficiency (9/10), 
+      justifying the initial design investment through superior long-term performance and system integration.</p>
+      
     </div>
 
     <div id="section-header-3">  
