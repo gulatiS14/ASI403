@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../index.css">
   <link rel="stylesheet" href="../components/scroll-to-top/scroll-to-top.css">
   <script src="../components/scroll-to-top/scroll-to-top.js"></script>
+  <script src="../components/image/image-component.js"></script>
 
   <!--  -->
 </head>
@@ -22,10 +23,73 @@
 <body>
   <div class="content">
     <sl-button href="../">Back</sl-button>
-
+ 
     <sl-button class="scroll-to-top" variant="primary" size="medium" circle onclick="scrollToTop()">
       <sl-icon name="arrow-up" label="Settings"></sl-icon>
     </sl-button>
+     
+    <h1>3. Electrical Sub-system</h1>
+
+    <div id="section-header-1">
+    <h2>3.1 Sub-system specific Value Proposition and Design statement</h2>
+    <p> Electrical sub-system works as a supporting module to enable other science sub-systems achieve the requirements of the science mission.
+      Hence, the approach for my design is to work closely with the needs of other members and their design requirements to determine my own design requirements.
+    </p>
+
+    <p><b> The 2 main value propositions that I identified are:</b></p>
+    <p>
+      <li> My solutions acts as a reliable instrumentation platform for all departments to use to collect samples and data.</li>
+      <br>
+      <li> My solutions has a modular design that functions like a platform that allows for future-proofing.</li>
+     </p>
+
+     <p><b>From these value propositions, I can derive the following design statements for my solutions:</b></p>
+     <p>
+      <li><b>Design statement (1):</b> Solution that collects soil moisture, temperature, and relative humidity module. [Hardware]</li>
+      <br>
+      <li><b>Design statement (2):</b> Solution that is able to power and control science experiments. [Hardware]</li>
+      <br>
+      <li><b>Design statement (3):</b> Solution that provides a reliable communication channel between the main computer, sensor module, and science experiment module. [Software]</li>
+     </p>
+    </div>
+
+    <div id="section-header-2">
+     <h2>3.2 Concept Development</h2>
+    
+    <p>As for my solution, there are 2 main systems working together to achieve the science mission. 
+      First is the hardware solution which will be tackling the design statement (1) and (2). 
+      Second is a software solution which will be tackling the design statement (3). 
+      In the following chapters, I will be going through the design process of hardware solution 
+      in which the software will be delegated for future work.</p>
+
+      <image-component 
+      tag="image" 
+      source="../assets/Morphological_chart.png"
+      subtitle="Morphological chart for electronic hardware selection">
+      </image-component>
+
+    <h3>Morphological chart for electronic hardware selection</h3>
+    <p>I used a weighted decision matrix to determine which methods to use to fulfil the requirements of the hardware solution. A weighted decision matrix was used as not all criteria or factors are equal in importance. Additionally, instead of rank, I used a normalised score between 0 to 1 to demonstrate the magnitude of the difference in performance in the criteria of interest.</p>
+
+    <h4>Detecting soil moisture level:</h4>
+    <p>The 3 most prominent types of soil moisture sensors are Capacitive, time-domain reflectometry, and frequency-domain reflectometry sensors. From the system engineering framework, I came up with the criteria that represent:</p>
+    <ol>
+        <li>Performance requirement (a. Accuracy)</li>
+        <li>Resource constraints ( a. Cost, b. Power)</li>
+        <li>Operational needs (a. Form factor, b. Maintenance)</li>
+    </ol>
+
+    <p>The scores heavily favoured capacitive sensors (7.8/10) due to their optimal balance of power efficiency (9/10) and cost-effectiveness (9/10), despite lower accuracy (6/10). This scoring distribution acknowledges that for soil moisture monitoring in mobile applications, trend accuracy, and reliability outweigh absolute precision.</p>
+    </div>
+
+    <div id="section-header-3">  
+     <h2>3.3 Prototyping</h2>
+
+     <h2>Testing and analysis</h2>
+
+     <h2>Deliverables and short-comings</h2>
+
+     <h2>Future works</h2>
 </body>
 
 </html>
