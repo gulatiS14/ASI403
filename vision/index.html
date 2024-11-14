@@ -178,30 +178,46 @@
         subtitle="Figure : Diagram explaining how the image stitching works">
         </image-component>
 
-        <pre class = "mermaid" style="border: 1px solid black">
-            flowchart TD
-            A[Load Images] --> B[Convert to Grayscale]
+        <br>
 
-            subgraph Critical[Critical Steps]
-            direction TB
-            B --> C[Extract Features using SIFT]
-            C --> D[Match Features using BFMatcher]
-            D --> E[Calculate Homography Transform]
-            end
+        <div class = "diagram-container">
+            <div class = "mermaid" id="flowchart" style="border: 1px solid black">
+                %%{init: {'theme': 'default', 'flowchart': {'nodeSpacing': 50, 'rankSpacing': 50}}}%%
+                flowchart TD
+                    %% Define nodes with consistent sizing
+                    A([Load Images]):::default
+                    B([Convert to Grayscale]):::default
+                    C([Extract Features<br/>using SIFT]):::default
+                    D([Match Features<br/>using BFMatcher]):::default
+                    E([Calculate Homography<br/>Transform]):::default
+                    F([Filter Matches using<br/>Ratio Test]):::default
+                    G([Blend Images using<br/>warpPerspective]):::default
+                    H([Save Panorama]):::default
 
-            subgraph Important[Important Steps]
-            direction TB
-            E --> F[Filter Matches using Ratio Test]
-            F --> G[Blend Images using warpPerspective]
-            end
+                    %% Define connections
+                    A --> B
+                    
+                    subgraph Critical[Critical Steps]
+                        direction TB
+                        B --> C
+                        C --> D
+                        D --> E
+                    end
 
-            G --> H[Save Panorama]
+                    subgraph Important[Important Steps]
+                        direction TB
+                        E --> F
+                        F --> G
+                    end
 
-            style Critical fill:#ffecec,stroke:#ff4444
-            style Important fill:#e6f3ff,stroke:#4477ff
-            style A fill:#f9f9f9,stroke:#333
-            style H fill:#f9f9f9,stroke:#333
-        </pre>
+                    G --> H
+
+                    %% Styling
+                    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px
+                    classDef critical fill:#ffecec,stroke:#ff4444,stroke-width:2px
+                    classDef important fill:#e6f3ff,stroke:#4477ff,stroke-width:2px
+            </div>
+        </div>
         <p style="font-size: 1rem; font-style: italic; text-align: center;">
             Figure : Flowchart of image stitching algorithm 
         </p>
@@ -213,68 +229,71 @@
         <p>
             Initial testing was conducted using two cameras mounted 10cm apart to evaluate real-time panoramic imaging capabilities. The cameras were interfaced through ROS2 Humble running in a Docker container, utilizing OpenCV for image stitching. While the SURF feature detection algorithm successfully identified matching key points between adjacent frames, the stitching process, was of poor quality which can be seen in the video due to the poor hardware and stitching being done at 30 frames per second. 
         </p>
-        <video-component tag="rick" source="https://drive.google.com/file/d/1X3-ifnGLrvob-dnLmB0QrIdE9RL2adAW/preview" width="640" height="480" allow="autoplay"
-          subtitle="Video: ROS2 image stitching Demo">
-        </video-component>
+        <div class="video-container">
+            <video-component tag="rick" source="https://drive.google.com/file/d/1X3-ifnGLrvob-dnLmB0QrIdE9RL2adAW/preview" width="640" height="480" allow="autoplay"
+            subtitle="Video: ROS2 image stitching Demo">
+            </video-component>
+        </div>
 
         <p>
             A ROS2-based state machine is developed for automated panorama capture using a single ZED 2i stereo camera. The system subscribes to three key topics: '/camera/image_raw' for visual data and '/gnss/fix' for positional information. The state machine executes a predetermined sequence where the rover rotates 90 degrees between captures, taking four overlapping stereo images to complete a 360-degree view. Each image is automatically annotated with elevation and coordinates from the GNSS receiver, and an automatically calculated scale bar derived from the stereo camera's depth data. This approach proved more reliable and computationally efficient and will be tested in the future.
         </p>
+        <div class = "diagram-container">
+            <div class="mermaid" id="flowchart" style="border: 1px solid black">
+                    stateDiagram-v2
+                    [*] --> IDLE
+                    IDLE --> CAPTURING_INITIAL: Start Capture / Subscribe RGB & GNSS
+                    CAPTURING_INITIAL --> ROTATING: Capture Success / Store Image & GNSS
+                    CAPTURING_INITIAL --> ERROR: Capture Fail / Publish Status
+                    ROTATING --> CAPTURING_ROTATED: Rotation Complete / Cmd_vel Stop
+                    ROTATING --> ERROR: Rotation Fail / Publish Status
+                    CAPTURING_ROTATED --> ROTATING: More Angles Needed / Cmd_vel Rotate 90°
+                    CAPTURING_ROTATED --> STITCHING: All Images Captured / Begin Processing
+                    CAPTURING_ROTATED --> ERROR: Capture Fail / Publish Status
+                    STITCHING --> COMPLETED: Stitch Success / Publish Panorama & GNSS
+                    STITCHING --> ERROR: Stitch Fail / Publish Status
+                    ERROR --> IDLE: Reset
+                    COMPLETED --> IDLE: Reset
 
-        <pre class = "mermaid" style="border: 1px solid black">
-            stateDiagram-v2
-            [*] --> IDLE
-            IDLE --> CAPTURING_INITIAL: Start Capture / Subscribe RGB & GNSS
-            CAPTURING_INITIAL --> ROTATING: Capture Success / Store Image & GNSS
-            CAPTURING_INITIAL --> ERROR: Capture Fail / Publish Status
-            ROTATING --> CAPTURING_ROTATED: Rotation Complete / Cmd_vel Stop
-            ROTATING --> ERROR: Rotation Fail / Publish Status
-            CAPTURING_ROTATED --> ROTATING: More Angles Needed / Cmd_vel Rotate 90°
-            CAPTURING_ROTATED --> STITCHING: All Images Captured / Begin Processing
-            CAPTURING_ROTATED --> ERROR: Capture Fail / Publish Status
-            STITCHING --> COMPLETED: Stitch Success / Publish Panorama & GNSS
-            STITCHING --> ERROR: Stitch Fail / Publish Status
-            ERROR --> IDLE: Reset
-            COMPLETED --> IDLE: Reset
+                    state IDLE {
+                        [*] --> Waiting
+                        Waiting : Subscribes to RGB and GNSS Topics
+                    }
 
-            state IDLE {
-                [*] --> Waiting
-                Waiting : Subscribes to RGB and GNSS Topics
-            }
+                    state ROTATING {
+                        [*] --> Moving
+                        Moving : Publishes cmd_vel for Rotation
+                        Moving : Monitors Rotation Completion
+                        Moving : Publishes Status
+                    }
 
-            state ROTATING {
-                [*] --> Moving
-                Moving : Publishes cmd_vel for Rotation
-                Moving : Monitors Rotation Completion
-                Moving : Publishes Status
-            }
+                    state COMPLETED {
+                        [*] --> Publishing
+                        Publishing : Publishes Panorama Image
+                        Publishing : Publishes Success Status
+                        Publishing : Includes GNSS Data
+                    }
 
-            state COMPLETED {
-                [*] --> Publishing
-                Publishing : Publishes Panorama Image
-                Publishing : Publishes Success Status
-                Publishing : Includes GNSS Data
-            }
+                    note right of IDLE
+                        Subscribes:
+                        - /zed2i/zed_node/rgb/image_rect_color
+                        - /zed2i/zed_node/gnss/fix
+                    end note
 
-            note right of IDLE
-                Subscribes:
-                - /zed2i/zed_node/rgb/image_rect_color
-                - /zed2i/zed_node/gnss/fix
-            end note
+                    note right of ROTATING
+                        Publishes:
+                        - /cmd_vel (90° rotation)
+                        - /panorama/status
+                    end note
 
-            note right of ROTATING
-                Publishes:
-                - /cmd_vel (90° rotation)
-                - /panorama/status
-            end note
-
-            note right of COMPLETED
-                Publishes:
-                - /panorama/image
-                - /panorama/status
-                With GNSS overlay
-            end note  
-        </pre>
+                    note right of COMPLETED
+                        Publishes:
+                        - /panorama/image
+                        - /panorama/status
+                        With GNSS overlay
+                    end note  
+            </div>
+        </div>
         <p style="font-size: 1rem; font-style: italic; text-align: center;">
             Figure : State diagram of the rover's vision system process.
         </p>
@@ -284,6 +303,43 @@
 
     <div id="Testing-Analysis">
         <h2>2.4 Testing and Analysis</h2>
+
+        <h3>2.4.1 Testing of Close-Up Shots</h3>
+
+        <p>
+        As part of the University Rover Challenge science mission requirements, we need to implement a reliable close-up imaging system to document potential sampling sites with high detail and accurate scaling. We are evaluating two distinct approaches for detailed geological documentation: the Raspberry Pi Camera Module 3 NoIR, featuring a 12-megapixel sensor with 4608 × 2592 pixel resolution and a versatile focus range from 10 cm to infinity, and a Digital Microscope USB camera offering 0.3 megapixels (680 × 480 pixels) with a specialized close-up focus range of 15 mm to 40 mm.
+        </p>
+
+        <image-component 
+        tag="image" 
+        source="../assets/vis_test_tab_1.png"
+        subtitle="Table : Table showing the two different approaches">
+        </image-component>
+
+        <p>
+        These options represent two different methodologies for gathering detailed geological evidence - the Raspberry Pi camera asking "Can we get the information from an overhead camera?" while the digital microscope addresses "Do we need to zoom in to the soil?" This analysis will evaluate how these contrasting approaches serve our need to capture well-focused images at the sampling sites, and help the mechanical team to house the camera in the rover.
+        </p>
+
+        <p>
+            In order to compare the two cameras, a few tests were conducted under lab conditions. The tests will focus on three key aspects: spatial resolution, image noise analysis, and no-reference image quality assessment.
+        </p>
+        
+        <h3>Spatial Resolution</h3>
+        <p>
+            To evaluate the cameras' ability to capture fine geological details, we will measure their spatial resolution by calculating pixels per millimeter using a standardized calibration target. For the Raspberry Pi Camera's 4608 × 2592 resolution and the Digital Microscope's 680 × 480 resolution, we'll determine their effective resolution at their respective working distances (Gonzalez & Woods, 2018). This measurement is crucial for ensuring we can adequately document small-scale geological features in the field.
+        </p>
+
+        <h3>Image Noise Analysis</h3>
+        <p>
+            Image noise assessment will be conducted under controlled lighting conditions. We will measure the signal-to-noise ratio (SNR) for both cameras, with particular attention to their performance in varying light conditions that simulate field operations. The Raspberry Pi Camera's larger sensor size suggests potentially better noise handling, but this needs to be verified through systematic testing (Anderson et al., 2021).
+        </p>
+
+        <h3>No-Reference Image Quality Assessment</h3>
+        <p>
+            To quantitatively compare image quality without relying on reference images, we will employ the Blind/Referenceless Image Spatial Quality Evaluator (BRISQUE) algorithm. BRISQUE offers advantages over other no-reference metrics as it operates in the spatial domain, providing faster computation and better correlation with human perception of image quality (Mittal et al., 2012). This method will provide objective quality scores for images captured by both cameras, helping us evaluate their performance in documenting geological features under real-world conditions.
+        </p>
+
+
     </div>
     
     <div id="Deliverables-Short-Coming">
