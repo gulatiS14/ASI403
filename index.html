@@ -57,24 +57,15 @@
       <h2>Table of Contents</h2>
       <sl-tree>
         <sl-tree-item expanded>
-          <a href="#section-header-1">1. Section Header 1</a>
+          <a href="#section-header-1">1. Introduction</a>
           <sl-tree-item>
-            <a href="#sub-section-1-header-1">1.1. Sub-section Header 1</a>
+            <a href="#sub-section-1-header-1">1.1. University Rover Challenge</a>
           </sl-tree-item>
           <sl-tree-item>
-            <a href="#sub-section-1-header-2">1.2. Sub-section Header 2</a>
+            <a href="#sub-section-1-header-2">1.2. Project Scope</a>
           </sl-tree-item>
         </sl-tree-item>
 
-        <sl-tree-item expanded>
-          <a href="#section-header-2">2. Section Header 1</a>
-          <sl-tree-item>
-            <a href="#sub-section-2-header-1">2.1. Sub-section Header 1</a>
-          </sl-tree-item>
-          <sl-tree-item>
-            <a href="#sub-section-2-header-2">2.2. Sub-section Header 2</a>
-          </sl-tree-item>
-        </sl-tree-item>
 
         <sl-tree-item expanded>
           <a href="#different-subsystems">3. Different Subsystems</a>
@@ -117,6 +108,9 @@
 
           <h2>1.1 University Rover Challenge</h2>
 
+          <image-component tag="image" source="assets/intro_photo.png"
+          subtitle="URC 2023 group photo"></image-component>
+
           <p>The University Rover Challenge (URC) is an international competition for college students, organized annually by the Mars Society in southern Utah, 
             USA deserts. With tasks that simulate real Martian conditions, the URC promotes the development of advanced planetary exploration technologies and 
             fosters innovation in rover design, paving the way for the next generation of Mars rovers that will support future Mars exploration.</p>
@@ -137,7 +131,20 @@
 
         <h2>1.2 Project scope</h2>
         
-        <p>Currently, the NUS URC Rover lacks a science module to conduct the necessary science missions required for life detection.</p>
+        <p>Currently, the NUS URC Rover lacks a science module to conduct the necessary science missions required for life detection. In this mission,
+          there are 5 main tasks that the rover must complete:
+        </p>
+
+        <image-component tag="image" source="assets/science_mission_plan.png"
+        subtitle="Science mission plan"></image-component>
+
+        <ol>
+          <li>Finding a suitable location to collect sample</li>
+          <li>Navigating to the location chosen</li>
+          <li>Collection of soil at minimum depth of 10cm without contamination</li>
+          <li>Storing minimum of 5g of uncontaminated collected soil in a cache</li>
+          <li>Using a separate 5g of uncontaminated collected soil for signs of life science experiment</li>
+        </ol>
 
         <p>Our team aims to bridge this gap by developing a specialized science module that can interface with the existing rover and accurately 
           detect signs of life, adhering to the URC competition standards.</p>
@@ -240,6 +247,8 @@
 
   <div id="different-subsystems">
     <h2>3. Different Subsystems</h2>
+
+    <p>Please click on the sub-system to view:</p>
     <sl-tree>
       <sl-tree-item >
         <a href="./science/">Science</a>
