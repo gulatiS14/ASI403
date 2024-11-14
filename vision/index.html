@@ -16,6 +16,9 @@
   <link rel="stylesheet" href="../components/scroll-to-top/scroll-to-top.css">
   <script src="../components/scroll-to-top/scroll-to-top.js"></script>
   <script src="../components/image/image-component.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11.2.1/dist/mermaid.min.js"></script>
+  <script src="../components/diagram/svg-pan-zoom.min.js"></script>
+  <script type="module" src="../components/video/video.js"></script>
   <!--  -->
 </head>
 
@@ -156,6 +159,127 @@
 
     <div id="Prototyping">
         <h2>2.3 Prototyping</h2>
+
+        <p>
+            The vision subsystem's prototyping focused primarily on software development, with initial testing conducted on alternative hardware platforms to verify functionality. All software prototyping was implemented using Docker containers in a development environment that mirrors the rover's operational system. This approach allowed us to validate key imaging functions before final hardware integration.
+        </p>
+
+        <h3>2.3.1 Image Stitching for Panaroma</h3>
+
+        <p>For the University Rover Challenge, we developed a real-time panoramic imaging system to document sites and get the better understanding of the geological context.</p>
+        
+        <p>Our system uses the Scale-Invariant Feature Transform (SIFT) algorithm for image processing. SIFT effectively handles the varied scales and orientations found in natural terrain. The process converts images to grayscale, detects key features, and filters matches using a ratio test to ensure accuracy under different lighting conditions.</p>
+        
+        <p>We implemented RANSAC (Random Sample Consensus) to calculate image alignment through homography. This approach effectively manages outliers and uneven terrain typical in competition environments, ensuring geometrically accurate panoramas for scientific documentation.</p>
+        
+        <image-component 
+        tag="image" 
+        source="../assets/vis_prop_is.png"
+        subtitle="Figure : Diagram explaining how the image stitching works">
+        </image-component>
+
+        <pre class = "mermaid" style="border: 1px solid black">
+            flowchart TD
+            A[Load Images] --> B[Convert to Grayscale]
+
+            subgraph Critical[Critical Steps]
+            direction TB
+            B --> C[Extract Features using SIFT]
+            C --> D[Match Features using BFMatcher]
+            D --> E[Calculate Homography Transform]
+            end
+
+            subgraph Important[Important Steps]
+            direction TB
+            E --> F[Filter Matches using Ratio Test]
+            F --> G[Blend Images using warpPerspective]
+            end
+
+            G --> H[Save Panorama]
+
+            style Critical fill:#ffecec,stroke:#ff4444
+            style Important fill:#e6f3ff,stroke:#4477ff
+            style A fill:#f9f9f9,stroke:#333
+            style H fill:#f9f9f9,stroke:#333
+        </pre>
+        <p style="font-size: 1rem; font-style: italic; text-align: center;">
+            Figure : Flowchart of image stitching algorithm 
+        </p>
+
+        <p>
+            The system, built using OpenCV and Python, integrates smoothly with our Robot Operating System (ROS) framework, enabling quick development and deployment.
+        </p>
+        
+        <p>
+            Initial testing was conducted using two cameras mounted 10cm apart to evaluate real-time panoramic imaging capabilities. The cameras were interfaced through ROS2 Humble running in a Docker container, utilizing OpenCV for image stitching. While the SURF feature detection algorithm successfully identified matching key points between adjacent frames, the stitching process, was of poor quality which can be seen in the video due to the poor hardware and stitching being done at 30 frames per second. 
+        </p>
+        <video-component tag="rick" source="https://drive.google.com/file/d/1X3-ifnGLrvob-dnLmB0QrIdE9RL2adAW/preview" width="640" height="480" allow="autoplay"
+          subtitle="Video: ROS2 image stitching Demo">
+        </video-component>
+
+        <p>
+            A ROS2-based state machine is developed for automated panorama capture using a single ZED 2i stereo camera. The system subscribes to three key topics: '/camera/image_raw' for visual data and '/gnss/fix' for positional information. The state machine executes a predetermined sequence where the rover rotates 90 degrees between captures, taking four overlapping stereo images to complete a 360-degree view. Each image is automatically annotated with elevation and coordinates from the GNSS receiver, and an automatically calculated scale bar derived from the stereo camera's depth data. This approach proved more reliable and computationally efficient and will be tested in the future.
+        </p>
+
+        <pre class = "mermaid" style="border: 1px solid black">
+            stateDiagram-v2
+            [*] --> IDLE
+            IDLE --> CAPTURING_INITIAL: Start Capture / Subscribe RGB & GNSS
+            CAPTURING_INITIAL --> ROTATING: Capture Success / Store Image & GNSS
+            CAPTURING_INITIAL --> ERROR: Capture Fail / Publish Status
+            ROTATING --> CAPTURING_ROTATED: Rotation Complete / Cmd_vel Stop
+            ROTATING --> ERROR: Rotation Fail / Publish Status
+            CAPTURING_ROTATED --> ROTATING: More Angles Needed / Cmd_vel Rotate 90°
+            CAPTURING_ROTATED --> STITCHING: All Images Captured / Begin Processing
+            CAPTURING_ROTATED --> ERROR: Capture Fail / Publish Status
+            STITCHING --> COMPLETED: Stitch Success / Publish Panorama & GNSS
+            STITCHING --> ERROR: Stitch Fail / Publish Status
+            ERROR --> IDLE: Reset
+            COMPLETED --> IDLE: Reset
+
+            state IDLE {
+                [*] --> Waiting
+                Waiting : Subscribes to RGB and GNSS Topics
+            }
+
+            state ROTATING {
+                [*] --> Moving
+                Moving : Publishes cmd_vel for Rotation
+                Moving : Monitors Rotation Completion
+                Moving : Publishes Status
+            }
+
+            state COMPLETED {
+                [*] --> Publishing
+                Publishing : Publishes Panorama Image
+                Publishing : Publishes Success Status
+                Publishing : Includes GNSS Data
+            }
+
+            note right of IDLE
+                Subscribes:
+                - /zed2i/zed_node/rgb/image_rect_color
+                - /zed2i/zed_node/gnss/fix
+            end note
+
+            note right of ROTATING
+                Publishes:
+                - /cmd_vel (90° rotation)
+                - /panorama/status
+            end note
+
+            note right of COMPLETED
+                Publishes:
+                - /panorama/image
+                - /panorama/status
+                With GNSS overlay
+            end note  
+        </pre>
+        <p style="font-size: 1rem; font-style: italic; text-align: center;">
+            Figure : State diagram of the rover's vision system process.
+        </p>
+
+        
     </div>
 
     <div id="Testing-Analysis">
@@ -170,11 +294,13 @@
         <h2>2.6 Future Work</h2>
     </div>
 
-    <sl-button href="../electrical/">Next Subsystem</sl-button>
+    <sl-button href="../mechanical/">Next Subsystem</sl-button>
 
     <sl-button class="scroll-to-top" variant="primary" size="medium" circle onclick="scrollToTop()">
       <sl-icon name="arrow-up" label="Settings"></sl-icon>
     </sl-button>
+
+    <script src="../components/diagram/diagram.js"></script>
     </div>
 </body>
 
