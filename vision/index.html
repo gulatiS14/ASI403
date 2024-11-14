@@ -15,17 +15,167 @@
   <link rel="stylesheet" href="../index.css">
   <link rel="stylesheet" href="../components/scroll-to-top/scroll-to-top.css">
   <script src="../components/scroll-to-top/scroll-to-top.js"></script>
-
+  <script src="../components/image/image-component.js"></script>
   <!--  -->
 </head>
 
 <body>
   <div class="content">
     <sl-button href="../">Back</sl-button>
+    
+    <h1>2. Vision Sub-system</h1>
+
+    <div id="Value-Prop-and-Design-Statement">
+        <h2>2.1 Sub-system specific Value Proposition and Design statement</h2>
+        <p> The vision subsystem's main use case is to provide the geological context around as well as, to find the best site for rover to sample soil for finding signs of life.</p>
+    
+        <p><b> The 2 main value propositions that were identified are as follows:</b></p>
+        
+        <p> A geological imaging system that transforms the rover's sampling capabilities by providing crucial contextual information that enables informed site selection, comprehensive scientific documentation, and efficient mission execution.</p>
+            
+        <p> By integrating panoramic views, high-resolution close-ups, and stratigraphic profiling capabilities, the system ensures each sample collected has maximum scientific value for detecting potential biosignatures in Mars-analog environments and fullfil the URC requirements.</p>
+            
+        
+    
+        <p><b>From these value propositions, the following design statements can be obtained to design an integrated camera system that can:</b></p>
+        
+        <p><b>Design statement (1): </b>It combines panoramic vision with targeted close-up capabilities to support each phase of the scientific investigation process.</p>
+    
+        <p><b>Design statement (2): </b>The system will enable team to document geological context, provide accurate images for stratigraphic profiles, and precisely identify optimal sampling locations.</p>
+            
+        <p><b>Design statement (3): </b>By automating scale calculations and location documentation, the design allows operators to focus on scientific analysis rather than technical operation, maximizing the scientific return from each collected sample.</p>
+    </div>
+    
+    <div id="Concept-Development">
+        <h2>2.2 Concept Development</h2>
+        <p>
+          The geological complexity of the Mars Desert Research Station (MDRS) environment, with its "horizontal layers" and diverse "regolith terrain systems" [THE_REGOLITH_GEOLOGY_OF_THE_MDRS_STUDY_AREA.pdf], demands sophisticated imaging solutions. The science team's design process explores three critical functions for the rover's vision system: wide-angle photography for contextual documentation, close-up imaging for detailed sample analysis, and methods for identifying optimal sampling locations.
+        </p>
+        
+        <p>These functions are discussed in detail in the following subsections, and Table 1 shows the morphological chart for the overall subsystem: </p>
+
+        <image-component 
+        tag="image" 
+        source="../assets/vis_morph_1.jpg"
+        subtitle="Table 1: Morphological chart for vision component selection">
+        </image-component>
+
+        <h3>2.2.1 For the function to take “wide shots”</h3>
+
+        <p>
+          The team evaluates three potential approaches for wide-angle photography: a stereo camera system that provides depth perception and wide field of view capabilities, a 360° panoramic camera for complete site documentation, or a dual monocular setup. The integration with ROS 2 becomes particularly advantageous here, as it "leverages its strengths in inter-process communication and software modularity" [Team Mountaineers SAR 2024.pdf], allowing efficient handling of high-bandwidth image data and seamless integration with OpenCV for image processing.
+        </p>
+        
+        <p>In order to represent each category, a market study was conducted, and the following options were chosen:</p>
+
+        <ol>
+            <li>
+                <p><strong>Stereo Camera:</strong></p> 
+                <p><strong>ZED 2i Stereo Camera:</strong> A professional-grade stereo vision camera with 4K capability and built-in depth perception.</p>
+            </li>
+            <li>
+                <p><strong>360 Degree Camera:</strong></p> 
+                <p><strong>Insta360 X3:</strong> A 360-degree camera capable of capturing full panoramic views in a single shot.</p>
+            </li>
+            <li>
+                <p><strong>Wide Monocular Camera:</strong></p> 
+                <p><strong>Yealink UVC30:</strong> A high-quality 4K monocular USB camera with good low-light performance.</p>
+            </li>
+        </ol>
+        
+        <image-component 
+        tag="image" 
+        source="../assets/vis_cam_sel_1.png"
+        subtitle="Figure 1: Showing each camera selected for each group">
+        </image-component>
+
+        <p>
+            The team will evaluate these options based on weighted concept selection matrix where criteria such as image quality, field of view and depth perception most importantly, as it is necessary to meet the minimum reuiremnets. This can be seen in the Table 2 below:
+        </p>
+
+        <image-component 
+        tag="image" 
+        source="../assets/vis_con_sel_1.png"
+        subtitle="Table 2: Weighted concept selection matrix for choosing the component for wide eyed functionality">
+        </image-component>
+
+        <p>
+            From the above component matrix, the ZED 2i stereo camera is selected for our URC rover implementation. Other than the benefits in camera quality, it connects via USB Type-C (USB 3.0) to our NVIDIA Jetson platform, enabling real-time spatial computing with depth sensing from 0.3m to 20m. The ZED 2i is well-suited for the harsh desert environment with its IP66 rating, providing complete protection against dust and strong water jets. Its operating temperature range of -10°C to +45°C and robust aluminium construction ensure reliable performance in the Mars Desert Research Station conditions. Compatible with the Jetson platform and requiring only ≥2GB GPU memory, it offers an optimal balance of performance and integration capabilities for our rover's requirements.
+        </p>
+
+        <h3>2.2.2 For the function to take “close-up shots”</h3>
+
+        <p>
+          For close-up documentation, the team is considering a dedicated microscopic camera for maximum magnification, a high-resolution camera with electronic zoom capabilities, or a hybrid autofocus system. This capability is crucial as teams must "take a close up, well-focused, high-resolution picture with some indication of scale" at sampling sites.
+        </p>
+        
+        <p>In order to represent each category, a market study was conducted to look for the most feasible and popular options to represent each category:</p>
+        
+        <ol>
+            <li>
+                <p><strong>Microscopic Camera:</strong></p> 
+                <p><strong>Off-the-shelf Digital Microscope:</strong> Most popular choice among hobbyists and makers.</p>
+            </li>
+            <li>
+                <p><strong>High Resolution with electronic zoom:</strong></p> 
+                <p><strong>RPI Camera:</strong> Industry standard for robotics.</p>
+            </li>
+            <li>
+                <p><strong>Hybrid Autofocus Camera:</strong></p> 
+                <p><strong>Olympus Tough TG-6:</strong> Professional-grade macro photography capabilities.</p>
+            </li>
+        </ol>
+
+        <p>Further analysis is done using a weighted component selection matrix, to determine the suitable choice, which can be seen in the Table 3 below:</p>
+
+        <image-component 
+        tag="image" 
+        source="../assets/vis_con_sel_2.png"
+        subtitle="Table 3: Weighted concept selection matrix for choosing the component for close up functionality">
+        </image-component>
+
+        <p>While both the Digital Microscope Camera and RPi Camera with E-Zoom show promising characteristics (tied at 7.80/10), with the Hybrid Autofocus Camera scoring lower (6.45/10), further testing is required to understand which is the better choice for the mission especially to find the correct sampling location. This testing will likely reveal practical differences not apparent in theoretical analysis and will ensure the selected system meets all mission requirements effectively.</p>
+
+        <h3>2.2.3 For the function of identifying sampling locations</h3>
+
+        <p>
+            Finally, for identifying optimal soil sampling locations, the team evaluated three approaches: manual intervention based on operator expertise, deep learning algorithms for automated feature detection, and hyperspectral imaging for compositional analysis. Site selection is particularly critical at MDRS where soil conditions vary significantly - from cracking clays with high salinity to non-cracking clays that exhibit different moisture retention properties (Clarke, 2003).
+        </p>
+        
+        <image-component 
+        tag="image" 
+        source="../assets/vis_con_sel_3.png"
+        subtitle="Table 4: Weighted concept selection matrix for choosing the methodology of finding site">
+        </image-component>
+
+        <p>
+            The concept selection analysis for sample site identification indicates that a hybrid approach combining manual intervention with deep learning support is optimal for the URC science mission requirements. Manual operation leverages human geological expertise for final decision-making, ensuring scientific rigor in site selection and stratigraphic analysis similar to approaches used in Mars missions (Clarke, 2003; NASA Jet Propulsion Laboratory, 2018). This is augmented by a deep learning system that assists operators by highlighting potential features of interest, comparable to AI-assisted geological feature detection systems deployed on Mars rovers (Neveu & Hays, 2018; Li et al., 2023). The manual component scored 7.95/10 in our weighted analysis, with deep learning scoring 7.75/10, reflecting their complementary strengths. While hyperspectral imaging could provide valuable compositional data (Olszewska & Napora, 2020), it was excluded due to hardware constraints and mission requirements being adequately met with the selected hybrid approach. This combination maximizes accuracy while maintaining operational efficiency, aligning with established Mars exploration methodologies (Clarke, 2003; Neveu & Hays, 2018).
+        </p>
+        
+    </div>
+
+    <div id="Prototyping">
+        <h2>2.3 Prototyping</h2>
+    </div>
+
+    <div id="Testing-Analysis">
+        <h2>2.4 Testing and Analysis</h2>
+    </div>
+    
+    <div id="Deliverables-Short-Coming">
+        <h2>2.5 Deliverables and Short-comings</h2>
+    </div>
+
+    <div id="Future-Work">
+        <h2>2.6 Future Work</h2>
+    </div>
+
+    <sl-button href="../electrical/">Next Subsystem</sl-button>
 
     <sl-button class="scroll-to-top" variant="primary" size="medium" circle onclick="scrollToTop()">
       <sl-icon name="arrow-up" label="Settings"></sl-icon>
     </sl-button>
+    </div>
 </body>
 
 </html>
