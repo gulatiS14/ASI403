@@ -42,9 +42,9 @@
     
         <p><b>From these value propositions, the following design statements can be obtained to design an integrated camera system that can:</b></p>
         
-        <p><b>Design statement (1): </b>It combines panoramic vision with targeted close-up capabilities to support each phase of the scientific investigation process.</p>
+        <p><b>Design statement (1): </b>It combines panoramic vision to support each phase of the scientific investigation process, such as providing accurate images for stratigraphic profiles.</p>
     
-        <p><b>Design statement (2): </b>The system will enable team to document geological context, provide accurate images for stratigraphic profiles, and precisely identify optimal sampling locations.</p>
+        <p><b>Design statement (2): </b>The system will enable team to document geological context, the soil details and precisely identify optimal sampling locations.</p>
             
         <p><b>Design statement (3): </b>By automating scale calculations and location documentation, the design allows operators to focus on scientific analysis rather than technical operation, maximizing the scientific return from each collected sample.</p>
     </div>
@@ -339,6 +339,10 @@
             To quantitatively compare image quality without relying on reference images, we will employ the Blind/Referenceless Image Spatial Quality Evaluator (BRISQUE) algorithm. BRISQUE offers advantages over other no-reference metrics as it operates in the spatial domain, providing faster computation and better correlation with human perception of image quality (Mittal et al., 2012). This method will provide objective quality scores for images captured by both cameras, helping us evaluate their performance in documenting geological features under real-world conditions.
         </p>
 
+        <p>
+            In order to compare the difference between the two methodologies, a standardised test was conducted where they are aiming to focus on word 'I2C'. The results can be seen in the Table below:
+        </p>
+
         <image-component 
         tag="image" 
         source="../assets/vis_test_tab_2.png"
@@ -346,7 +350,7 @@
         </image-component>
 
         <p>
-            TODO: Add the inroduction for analysis of the table.
+            After getting the quatifiable results for each category, an analysis was done to see which camera is better. The results can be seen in the Table below:
         </p>
 
         <image-component 
@@ -356,15 +360,53 @@
         </image-component>
 
         <p>
-            TODO: Add conclusion for this table.
+            Our testing has revealed a key challenge: while the RaspberryPi Camera Module 3 NoIR excels in color accuracy and noise handling, and the USB Digital Microscope provides superior spatial resolution, neither solution fully optimizes both critical parameters. This suggests the need to explore alternative solutions that could better balance these requirements.
         </p>
+        <h3>
+            Potential Alternative: Raspberry Pi HQ Camera with Telephoto Lens
+        </h3>
 
-        <h3>2.4.2 Testing of Site Identification using CNN</h3>
+        <image-component 
+        tag="image" 
+        source="../assets/vis_test_fig_1.png"
+        subtitle="Figure : Raspberry Pi HQ Camera with telephoto lens">
+        </image-component>
+
+        <p>
+            The Raspberry Pi HQ Camera with an 8mm telephoto lens presents a promising alternative that could address our current limitations:
+        </p>
+        <ul>
+                <li>Higher base resolution (12.3MP Sony IMX477 sensor)</li>
+                <li>Larger sensor size (7.9mm diagonal vs 6.287mm)</li>
+                <li>Interchangeable lens capability</li>
+                <li>C/CS-mount lens compatibility offering greater optical flexibility</li>
+                <li>Better low-light performance due to larger pixel size (1.55μm vs 1.4μm)</li>
+        </ul>
+        <h3>Other Potential Solutions to Consider</h3>
+        <p>
+            Alternative approaches that could be investigated include:
+        </p>
+        <ul>
+                <li>Industrial machine vision cameras with dedicated macro lenses</li>
+                <li>Implementation of a dual-camera system where each camera is optimized for either spatial resolution or color accuracy</li>
+                <li>Integration of focus stacking software to enhance effective resolution while maintaining color fidelity</li>
+        </ul>
+        </ul>
+        <p>
+            This investigation has highlighted the importance of considering multiple imaging parameters simultaneously when selecting scientific documentation equipment. While our current options each excel in specific areas, the mission's requirements for both high spatial resolution and accurate color reproduction warrant exploration of more capable imaging solutions.
+        </p>        
+
 
     </div>
     
     <div id="Deliverables-Short-Coming">
         <h2>2.5 Deliverables and Short-comings</h2>
+
+        <h3>2.5.1 Deliverables Satisfied</h3>
+
+        <h3>2.5.2 Short-comings</h3>
+
+
     </div>
 
     <div id="Future-Work">
