@@ -362,39 +362,43 @@
         <p>
             Our testing has revealed a key challenge: while the RaspberryPi Camera Module 3 NoIR excels in color accuracy and noise handling, and the USB Digital Microscope provides superior spatial resolution, neither solution fully optimizes both critical parameters. This suggests the need to explore alternative solutions that could better balance these requirements.
         </p>
+
         <h3>
-            Potential Alternative: Raspberry Pi HQ Camera with Telephoto Lens
+            Potential Alternative: Raspberry Pi HQ Camera with Arducam  Zoom Lens
         </h3>
 
         <image-component 
         tag="image" 
         source="../assets/vis_test_fig_1.png"
-        subtitle="Figure : Raspberry Pi HQ Camera with telephoto lens">
+        subtitle="Figure : Raspberry Pi HQ Camera with zoom lens">
         </image-component>
+        
+        <p>
+            The combination of the Raspberry Pi HQ Camera (IMX477 sensor) with the Arducam 8-50mm C-Mount Zoom Lens presents an optimal solution that addresses the limitations of our tested cameras:
+        </p>
+
+        <ul>
+            <li>Higher base resolution (12.3MP Sony IMX477 sensor)</li>
+            <li>Superior zoom range (8-50mm) offering greater versatility than both tested options</li>
+            <li>Larger sensor size (7.9mm diagonal) for better light capture</li>
+            <li>Professional-grade optics through the C-Mount lens system</li>
+            <li>Adjustable focus range that exceeds both current options</li>
+            <li>Better low-light performance due to larger pixel size (1.55μm)</li>
+        </ul>
 
         <p>
-            The Raspberry Pi HQ Camera with an 8mm telephoto lens presents a promising alternative that could address our current limitations:
+            Key advantages of this solution include:
         </p>
+
         <ul>
-                <li>Higher base resolution (12.3MP Sony IMX477 sensor)</li>
-                <li>Larger sensor size (7.9mm diagonal vs 6.287mm)</li>
-                <li>Interchangeable lens capability</li>
-                <li>C/CS-mount lens compatibility offering greater optical flexibility</li>
-                <li>Better low-light performance due to larger pixel size (1.55μm vs 1.4μm)</li>
-        </ul>
-        <h3>Other Potential Solutions to Consider</h3>
-        <p>
-            Alternative approaches that could be investigated include:
-        </p>
-        <ul>
-                <li>Industrial machine vision cameras with dedicated macro lenses</li>
-                <li>Implementation of a dual-camera system where each camera is optimized for either spatial resolution or color accuracy</li>
-                <li>Integration of focus stacking software to enhance effective resolution while maintaining color fidelity</li>
-        </ul>
+            <li>Variable zoom capability allowing both wide context shots and detailed close-ups</li>
+            <li>Industrial-grade build quality suitable for field operations</li>
+            <li>Mechanical zoom and focus controls for precise adjustments</li>
+            <li>Compatible with our existing Raspberry Pi infrastructure</li>
         </ul>
         <p>
-            This investigation has highlighted the importance of considering multiple imaging parameters simultaneously when selecting scientific documentation equipment. While our current options each excel in specific areas, the mission's requirements for both high spatial resolution and accurate color reproduction warrant exploration of more capable imaging solutions.
-        </p>        
+            Given these capabilities, we recommend proceeding with the development of a prototype using the Raspberry Pi HQ Camera with Arducam zoom lens configuration. This combination promises to deliver both the spatial resolution and color accuracy required for our geological documentation while providing superior operational flexibility through its adjustable zoom range.
+        </p>       
 
 
     </div>
@@ -403,14 +407,79 @@
         <h2>2.5 Deliverables and Short-comings</h2>
 
         <h3>2.5.1 Deliverables Satisfied</h3>
+        
+        <ul>
+            <li><strong>Panoramic Imaging System:</strong>
+                <ul>
+                    <li>Successfully implemented image stitching pipeline</li>
+                    <li>Creates high-quality panoramic views from multiple stereo camera images</li>
+                </ul>
+            </li>
+            <li><strong>Geological Classification:</strong>
+                <ul>
+                    <li>Developed CNN model for terrain analysis</li>
+                    <li>Trained on comprehensive dataset of sedimentary materials</li>
+                    <li>Capable of identifying sand, gravel, and silt compositions</li>
+                </ul>
+            </li>
+            <li><strong>Scale Measurement System:</strong>
+                <ul>
+                    <li>Initiated development of photogrammetric scaling method</li>
+                    <li>Utilizes stereo camera depth sensing capabilities</li>
+                    <li>Combines FOV and depth data for real-world dimension calculations</li>
+                </ul>
+            </li>
+        </ul>
 
         <h3>2.5.2 Short-comings</h3>
 
+        <ul>
+            <li><strong>Close-up Imaging System:</strong>
+                <ul>
+                    <li>Current camera options inadequate for detailed sample documentation</li>
+                    <li>Insufficient magnification and working distance capabilities</li>
+                    <li>Need to integrate dedicated macro photography solution</li>
+                </ul>
+            </li>
+            <li><strong>Scale Measurement Limitations:</strong>
+                <ul>
+                    <li>Photogrammetric method unreliable for distant geological features</li>
+                    <li>Stereo camera depth sensing range insufficient for far objects</li>
+                    <li>Need to implement hybrid approach combining GNSS data</li>
+                </ul>
+            </li>
+            <li><strong>Model Validation:</strong>
+                <ul>
+                    <li>CNN model requires testing with actual camera system images</li>
+                    <li>Need to verify accuracy under competition lighting conditions</li>
+                    <li>Performance validation needed for specific camera resolutions and perspectives</li>
+                </ul>
+            </li>
+        </ul>
 
     </div>
 
     <div id="Future-Work">
         <h2>2.6 Future Work</h2>
+
+        <image-component 
+        tag="image" 
+        source="../assets/vis_soft_arch.png"
+        subtitle="Figure : System architecture for vision subsystem">
+        </image-component>
+        
+        <p>
+            The vision subsystem's architecture integrates multiple components that require comprehensive testing in outdoor environments. Critical integration testing will focus on the data flow between the Zed 2i stereo camera and Jetson Orin for panoramic imaging, alongside the RPI HQ Camera with zoom lens connecting to the Raspberry Pi 5 for detailed sample documentation.
+        </p>
+
+        <p>
+            Future work will concentrate on developing a unified software pipeline that efficiently manages data flow between these components while minimizing latency. We plan to conduct extensive field testing at locations with similar geological features to the competition site, particularly focusing on the system's performance under various lighting conditions, dust exposure, and temperature variations. Additionally, we will implement automated calibration procedures for both cameras to maintain accurate depth perception and scale measurements. 
+        </p>
+
+        <p>
+            The testing protocol will include validating the CNN model's performance with real-time image processing, ensuring the system can maintain consistent performance during extended operation periods, and developing fault tolerance mechanisms for potential communication failures between components
+        </p>
+
     </div>
 
     <sl-button href="../mechanical/">Next Subsystem</sl-button>
