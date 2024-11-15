@@ -1,16 +1,5 @@
 new gridjs.Grid({
-  columns: ["Name", "Email", "Phone Number"],
-  data: [
-    ["John", "john@example.com", "(353) 01 222 3333"],
-    ["Mark", "mark@gmail.com", "(01) 22 888 4444"],
-    ["Eoin", "eoin@gmail.com", "0097 22 654 00033"],
-    ["Sarah", "sarahcdd@gmail.com", "+322 876 1233"],
-    ["Afshin", "afshin@mail.com", "(353) 22 87 8356"],
-  ],
-}).render(document.getElementById("table-1"));
-
-new gridjs.Grid({
-  columns: ["Section", "Description", "Marks allocation"],
+  columns: ["Mission Type", "Description", "Score"],
   data: [
     ["Science Mission", "Assesses the rover's capability to analyze Martian-like environments for signs of life. Key components include site investigation, sample collection, onboard analysis and data documentation.", "100 points"],
     ["Delivery Mission", "Evaluates the rover’s ability to locate, pick up and deliver objects across rugged terrain, which simulates assistance to astronauts. A drone may assist in this mission.", "100 points"],
@@ -19,7 +8,7 @@ new gridjs.Grid({
     ["System Acceptance Review", "Prior to competition, teams submit a technical review covering rover design, functionality and mission-specific capabilities. Scores affect eligibility to compete in the field challenge.", "100 points"],
   ],
   
-}).render(document.getElementById("table-2"));
+}).render(document.getElementById("table-1"));
 
 
 class TableComponent extends HTMLElement {
