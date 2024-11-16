@@ -85,7 +85,7 @@
       in the criteria of interest.</p>
 
     <h4>Detecting soil moisture level:</h4>
-    <p>The 3 most prominent types of soil moisture sensors are Capacitive, time-domain reflectometry, and frequency-domain reflectometry sensors. 
+    <p>The 3 most prominent types of soil moisture sensors are Capacitive, time-domain reflectometry, and frequency-domain reflectometry sensors (Vat et al., 2013).
       From the system engineering framework, I came up with the criteria that represent:</p>
     <ol>
         <li>Performance requirement (a. Accuracy)</li>
@@ -106,7 +106,7 @@
     <h4>Relative Temperature and humidity:</h4>
 
     <p>Using the same framework as done previously, a weighted decision matrix is formed comparing 3 most prominent types of relative 
-        temperature and humidity sensors:</p>
+        temperature and humidity sensors (Chen & Lu, 2005):</p>
 
     <image-component 
     tag="image" 
@@ -181,7 +181,7 @@
       and thermal characteristics.</p>
 
     <p>The PCB layout followed several critical IPC (Institute for Printed Circuits) standards for manufacturing reliability. IPC-2221 
-      "Generic Standard on Printed Board Design" guided the basic design elements, particularly in trace width calculations for power handling. 
+      "Generic Standard on Printed Board Design" guided the basic design elements, particularly in trace width calculations for power handling (IPC-2221, 2012). 
       The 24V/10A power traces were sized according to the standard's current capacity charts, ensuring sufficient width for minimal voltage drop and 
       heat generation. Clearances between high voltage traces (24V) and signal level traces were maintained following these specifications to prevent 
       interference and ensure safety.</p>
@@ -297,7 +297,7 @@
 
     <p>The overall flow of the software will be done as planned in the diagram. Science module will be a wrapper for drill, 
       collection and experiment modes in which each step's status and outcome will be constantly reported back to the Jetson 
-      in case the science module has to be abruptly cancelled for safety/ error reasons.</p>
+      in case the science module has to be abruptly cancelled for safety/ error reasons. (Koopman, 2017)</p>
 
     <p>This back and forth communication between the sensors, science module and Jetson can be achieved using many different 
       but valid communication protocols. In the next half of the project, I will be choosing, prototyping and integrating this 

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Project Title</title>
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/light.css" />
+  <script type="module"
+    src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/shoelace-autoloader.js"></script>
+
+  <!-- You can add what components you want to include here  -->
+  <link rel="stylesheet" href="../index.css">
+  <link rel="stylesheet" href="../components/scroll-to-top/scroll-to-top.css">
+  <script src="../components/scroll-to-top/scroll-to-top.js"></script>
+  <script src="../components/image/image-component.js"></script>
+  <!--  -->
+</head>
+
+<body>
+  <div class="content">
+    <sl-button href="./index.html">Back</sl-button>
+    
+    <!-- Please add the stuff here (start) -->
+
+    <h1 style ="color: blue;">Detection Steps for nucleosides,	nucleotides, and DNA-like molecules</h1>
+
+    <small>(Azab et al, 2015)</small>
+
+    <ol>
+        <li><strong>Fluorescent Probe Preparation</strong></li>
+        <br>
+        <ol>
+            <li>Prepare a solution containing 1x10⁻⁵ M Europium complex, 2x10⁻⁵ M Cyclen, and 1x10⁻⁵ M TNB (4,4,4-trifluoro-1-(2-naphthyl)-1,3-butanedione).</li>
+            <br>
+        </ol>
+        <li><strong>Buffer Solution Preparation</strong></li>
+        <br>
+        <ul>
+            <li>Prepare acetonitrile-isopropanol-0.1 M ammonium acetate-28% ammoniumhydroxide (60:10:20:10) solution.</li>
+            <br>
+        </ul>
+        <li><strong>Sample Preparation</strong></li>
+        <br>
+        <ol>
+            <li>Weigh 1.0 g of soil and transfer it to a sterile beaker.</li>
+            <br>
+            <li>Add 10 mL of buffer solution to the beaker to hydrate the soil sample. Stir the mixture for 5 minutes to ensure even dispersion of particles.</li>
+            <br>
+        </ol>
+        <li><strong>Fluorescent Probe Addition</strong></li>
+        <br>
+        <ol>
+            <li>Add 0.1 mL of the fluorescent solution into 10 mL of filtered soil sample.</li>
+            <br>
+            <li>Stir briefly to mix the solution evenly with the soil extraction. Leave it for 5 minutes.</li>
+            <br>
+        </ol>
+        <li><strong>Fluorescence Detection</strong></li>
+        <br>
+        <ol>
+            <li>Detect the fluorescence using a fluorescence spectrometer.</li>
+            <br>
+            <li>Set the excitation wavelength to 340 nm and the emission wavelength to 614 nm to detect the fluorescence.</li>
+        </ol>
+    </ol>
+
+    <p>Reagent Required:</p>
+
+    <ol>
+        <li>Europium complex</li>
+        <li>Cyclen</li>
+        <li>TNB (4,4,4-trifluoro-1-(2-naphthyl)-1,3-butanedione)</li>
+        <li>Acetonitrile</li>
+        <li>Ammonium acetate</li>
+        <li>Ammonium hydroxide</li>
+    </ol>
+
+    <!-- Please add the stuff here (end) -->
+    <sl-button href="./fad.html">Next Experiment</sl-button>
+    <sl-button class="scroll-to-top" variant="primary" size="medium" circle onclick="scrollToTop()">
+      <sl-icon name="arrow-up" label="Settings"></sl-icon>
+    </sl-button>
+  <div>
+</body>
+
+</html>

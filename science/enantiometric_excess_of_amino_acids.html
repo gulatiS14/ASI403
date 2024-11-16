@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Project Title</title>
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/light.css" />
+  <script type="module"
+    src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/shoelace-autoloader.js"></script>
+
+  <!-- You can add what components you want to include here  -->
+  <link rel="stylesheet" href="../index.css">
+  <link rel="stylesheet" href="../components/scroll-to-top/scroll-to-top.css">
+  <script src="../components/scroll-to-top/scroll-to-top.js"></script>
+  <script src="../components/image/image-component.js"></script>
+  <!--  -->
+</head>
+
+<body>
+  <div class="content">
+    <sl-button href="./index.html">Back</sl-button>
+    
+    <!-- Please add the stuff here (start) -->
+
+    <h1 style ="color: blue;">Detection Steps for Enantiomeric Excess of L- or D-amino acids</h1>
+
+    <small>(Naghashian-Haghighi et al., 2018)</small>
+
+    <ol>
+        <li><strong>Sample Preparation</strong></li>
+        <br>
+        <ol>
+            <li>Weigh 1.0 g of soil and transfer it to a sterile beaker.</li>
+            <br>
+            <li>Add 10 mL of acetone to the beaker to hydrate the soil sample. Stir the mixture for 5 minutes to ensure even dispersion of particles.</li>
+            <br>
+        </ol>
+        <li><strong>Reaction Phase</strong></li>
+        <br>
+        <ul>
+            <li>Add the NDA + L/D-GADE fluorescent probe to the filtered soil sample. Leave it for 5 minutes.</li>
+            <br>
+        </ul>
+        <li><strong>Fluorescent Measurement</strong></li>
+        <br>
+        <ol>
+            <li>Extract 1 mL of the solution and measure the fluorescence of the solution using a fluorescence spectrometer.</li>
+            <br>
+            <li>Set the excitation wavelength to 300–700 nm and the emission wavelength to 300–700 nm to detect the specific peaks corresponding to L- or D-amino acids.</li>
+            <br>
+        </ol>
+        
+    </ol>
+
+    <p>Reagent Required:</p>
+
+    <ol>
+        <li>Acetone</li>
+        <li>NDA + L/D-GADE fluorescent probe</li>
+    </ol>
+
+    <!-- Please add the stuff here (end) -->
+    <sl-button class="scroll-to-top" variant="primary" size="medium" circle onclick="scrollToTop()">
+      <sl-icon name="arrow-up" label="Settings"></sl-icon>
+    </sl-button>
+  <div>
+</body>
+
+</html>
