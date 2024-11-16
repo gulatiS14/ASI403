@@ -41,9 +41,9 @@
     <div id="section-header-1">
     <h2>4.1 Sub-system specific Value Proposition and Design statement</h2>
 
-    <image-component  tag="image" source="../assets/subsystem_interaction.png" subtitle="sub-system relationship diagram"> </image-component>
+    <image-component  tag="image" source="../assets/subsystem_interaction.png" subtitle="Figure 4.1: sub-system relationship diagram"> </image-component>
 
-    <p> Electrical sub-system works as a supporting module to enable other science sub-systems achieve the requirements of the science mission.
+    <p> Electrical sub-system works as a supporting module to enable other science sub-systems achieve the requirements of the science mission as seen in Figure 4.1.
       Hence, the approach for my design is to work closely with the needs of other members and their design requirements to determine my own design requirements.
     </p>
 
@@ -71,12 +71,12 @@
       First is the hardware solution which will be tackling the design statement (1) and (2). 
       Second is a software solution which will be tackling the design statement (3). 
       In the following chapters, I will be going through the design process of hardware solution 
-      in which the software will be delegated for future work.</p>
+      in which the software will be delegated for future work. The following Table 4.1 discusses the morphological chart of the necessary functions</p>
 
       <image-component 
       tag="image" 
       source="../assets/Morphological_chart.png"
-      subtitle="Morphological chart for electronic hardware selection">
+      subtitle="Table 4.1: Morphological chart for electronic hardware selection">
       </image-component>
 
     <p>I used a weighted decision matrix to determine which methods to use to fulfil the requirements of the hardware solution. 
@@ -96,22 +96,22 @@
     <image-component 
       tag="image" 
       source="../assets/soil_moisture.png"
-      subtitle="Weighted decision matrix for choosing soil moisture sensor mechanism">
+      subtitle="Table 4.2: Weighted decision matrix for choosing soil moisture sensor mechanism">
       </image-component>
 
-    <p>The scores heavily favoured capacitive sensors (7.8/10) due to their optimal balance of power efficiency (9/10) and cost-effectiveness (9/10), 
+    <p>In the Table 4.2, the scores heavily favoured capacitive sensors (7.8/10) due to their optimal balance of power efficiency (9/10) and cost-effectiveness (9/10), 
       despite lower accuracy (6/10). This scoring distribution acknowledges that for soil moisture monitoring in mobile applications, trend accuracy, and 
       reliability outweigh absolute precision.</p>
 
     <h4>Relative Temperature and humidity:</h4>
 
     <p>Using the same framework as done previously, a weighted decision matrix is formed comparing 3 most prominent types of relative 
-        temperature and humidity sensors:</p>
+        temperature and humidity sensors as seen in Table 4.2 below:</p>
 
     <image-component 
     tag="image" 
     source="../assets/temp_humid.png"
-    subtitle="Weighted decision matrix for choosing temperature and humidity sensor mechanism">
+    subtitle="Table 4.3: Weighted decision matrix for choosing temperature and humidity sensor mechanism">
     </image-component>
       
     <p>Resistive/capacitive sensors scored highest (7.6/10) primarily due to their excellent cost-effectiveness (9/10) and integration simplicity (8/10), 
@@ -122,10 +122,10 @@
     <image-component 
     tag="image" 
     source="../assets/electronic_flow_diagram.png"
-    subtitle="[Electronic flowchart (Red: Power, Green: Data)]">
+    subtitle="Figure 4.2: Electronic flowchart (Red: Power, Green: Data)">
     </image-component>
        
-    <p>The above diagram shows how components are connected and what signals are being input and output. 
+    <p>The above Figure 4.2 shows how components are connected and what signals are being input and output. 
       This diagram, with the context that it will be used in harsh environments with limited power supply, 
       has provided me with the design requirements:</p>
 
@@ -137,12 +137,12 @@
         <li>The solution's maintenance should be easy.</li>
     </ol>
       
-    <p>To meet the requirements, the weighted decision matrix is used to choose the appropriate method.</p>
+    <p>To meet the requirements, the weighted decision matrix is used to choose the appropriate method as seen in Table 4.2 below:</p>
 
     <image-component 
     tag="image" 
     source="../assets/Custom_PCB.png"
-    subtitle="weighted decision matrix for choosing electronic components connection method">
+    subtitle="Table 4.4: weighted decision matrix for choosing electronic components connection method">
     </image-component>
       
     <p>Custom PCB scored notably higher (8.0/10) than off-shelf solutions (5.2/10), with particularly strong scores in reliability (9/10) and space efficiency (9/10), 
@@ -156,7 +156,7 @@
     <image-component 
     tag="image" 
     source="../assets/PCB_schematics.png"
-    subtitle="[Autodesk Eagle Schematic for the motherboard]">
+    subtitle="Figure 4.3: Autodesk Eagle Schematic for the motherboard">
     </image-component>
 
     <p>The PCB design process began with planning data path connection and power distribution architecture. 
@@ -170,7 +170,7 @@
     <image-component 
     tag="image" 
     source="../assets/PCB_board_diagram.png"
-    subtitle="[Autodesk Eagle Board for the motherboard]">
+    subtitle="Figure 4.4: Autodesk Eagle Board for the motherboard">
     </image-component>
 
     <p>The physical layout was implemented on a 2-layer PCB, with careful consideration given to component placement and routing strategies. 
@@ -211,13 +211,13 @@
     <image-component 
     tag="image" 
     source="../assets/soil_moisture_test_picture.png"
-    subtitle="Testing at 40% water content">
+    subtitle="Figure 4.5: Testing at 40% water content">
     </image-component>
 
     <image-component 
     tag="image" 
     source="../assets/temp_humid_soil_test.png"
-    subtitle="">
+    subtitle="Table 4.5: Graph and the data collected by the soil sensor">
     </image-component>
 
     <p>From the data collected, we can see that accuracy of temperature and humidity sensors are satisfactory as the variance in reading data is negligible. 
@@ -230,12 +230,12 @@
     <image-component 
     tag="image" 
     source="../assets/continuity_test.png"
-    subtitle="Test result for continuity test">
+    subtitle="Table 4.6: Test result for continuity test">
     </image-component>
 
     <p>To confirm that the board is connecting data and power line to components as intended, I carried out the continuity test using a multimeter. 
       The test has confirmed that there were no errors in the logic of the drawing or any manufacturing error. Hence, this board will be able to fulfil 
-      the requirement for reliable connection between all the components in the science module.</p>
+      the requirement for reliable connection between all the components in the science module as seen from Table 4.6.</p>
     </div>
 
 
@@ -292,10 +292,10 @@
     <image-component 
     tag="image" 
     source="../assets/embedded_software_diagram.png"
-    subtitle="Embedded software architecture diagram">
+    subtitle="Figure 4.6: Embedded software architecture diagram">
     </image-component>
 
-    <p>The overall flow of the software will be done as planned in the diagram. Science module will be a wrapper for drill, 
+    <p>The overall flow of the software will be done as planned in the Figure 4.6. Science module will be a wrapper for drill, 
       collection and experiment modes in which each step's status and outcome will be constantly reported back to the Jetson 
       in case the science module has to be abruptly cancelled for safety/ error reasons.</p>
 
