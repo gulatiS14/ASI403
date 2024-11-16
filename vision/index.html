@@ -298,6 +298,123 @@
             Figure : State diagram of the rover's vision system process.
         </p>
 
+        <h3>2.3.2 Vertical Scale for Stratigraphic Profile</h3>
+
+        <p>
+                Stratigraphy is essential for understanding Earth's geological history and identifying potential locations that may have supported life in the past. As shown in the Figure, different rock layers (or strata) tell us a clear story about past environments - from ancient riverbeds to lakebeds to sand dunes. For example, in panel C, we can see distinct members of the Kayenta Formation, where each layer represents a different depositional environment. In the context of the Mars Desert Research Station (MDRS) and our rover operations, understanding stratigraphy helps us identify layers that were deposited in water-rich environments , which are prime targets for finding potential biosignatures or evidence of past microbial life (Clarke, 2003).
+        </p>
+
+        <image-component 
+        tag="image" 
+        source="../assets/vis_prop_strt.png"
+        subtitle="Figure : Stratigraphy Profile of MDRS area">
+        </image-component>
+
+        <p>
+            In order to find, document, and analyze these stratigraphic profiles, we need to develop a reliable method for measuring the vertical scale of geological features. To achieve this, we are developing a photogrammetric scaling method that combines stereo camera depth sensing with field of view (FOV) data to calculate real-world dimensions for each image captured by the rover.
+        </p>
+
+        <p>
+            Photogrammetric height determination relies on the geometric relationship between viewing angles and known distances. When two images are taken of the same feature from different viewing angles, the height of objects can be calculated using trigonometric principles. In satellite applications, this involves:
+        </p>
+
+        <ul>
+            <li>Forward and afterward views with known angles (θF and θA)</li>
+            <li>Known distance between observation points (d)</li>
+            <li>Precise measurement of the angular separation</li>
+        </ul>
+
+        <image-component 
+        tag="image" 
+        source="../assets/vis_prop_strt_2.png"
+        subtitle="Figure : Photogrammetric Method to find scale">
+        </image-component>
+
+        <p>
+            The height (h) can then be calculated using the relationship:<br>
+            <code>  
+                h = d / (tan θF + tan θA)
+            </code>
+        </p>
+
+        <p>
+            For our rover's stratigraphic profiling, we adapt this principle using a single camera with known parameters:
+        </p>
+
+        <ul>
+            <li>The camera's vertical field of view (vFOV) provides our angular reference</li>
+            <li>The depth to the feature is obtained from our stereo vision system</li>
+            <li>Using the camera's resolution in pixels, we can calculate the angular resolution</li>
+            <li>For each pixel in the vertical direction, we can then determine its real-world height using:
+                <ul>
+                    <li>Angular position relative to center = (pixel_y - height/2) * angular_resolution</li>
+                    <li>Real height = depth * tan(angle)</li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="diagram-container">
+            <div class="mermaid" id="flowchart" style="border: 1px solid black">
+                graph TD
+                    %% Main Flowchart
+                    A[Start] --> B[Get Camera Parameters]
+                    B --> C[Vertical FOV from ZED2i]
+                    B --> D[Image Height in Pixels]
+                    B --> E[Get Depth from Camera]
+                    
+                    C & D --> F[Calculate Angular Resolution]
+                    F --> G[Calculate Scale]
+                    
+                    E --> G
+                    
+                    G --> H[For each pixel y position]
+                    H --> I[Calculate angle from center]
+                    I --> J[Use depth and trigonometry]
+                    J --> K[Real world height]
+                    
+                    K --> L[Convert to scale bar]
+                    L --> M[Draw vertical scale]
+                    M --> N[Add height labels]
+                    N --> O[End]
+                
+                    %% Bottom Left Boxes
+                    subgraph Camera_Variables[Camera Variables]
+                    V1[vFOV Camera FOV]---V2[depth Distance]---V3[image_height Pixels]
+                    end
+                
+                    subgraph Key_Equations[Key Equations]
+                    E1[Angular Res = vFOV/image_height]
+                    E2[Angle = y-height/2 * angular_res]
+                    E3[Height = depth * tan angle]
+                    end
+                
+                    %% Position boxes at bottom left
+                    O --> Camera_Variables
+                    Camera_Variables --> Key_Equations
+                    style Camera_Variables fill:#f5f5ff
+                    style Key_Equations fill:#fff5f5
+              
+            </div>
+        </div>
+        <p style="font-size: 1rem; font-style: italic; text-align: center;">
+            Figure : Flowchart of finding vertical scale 
+        </p>
+
+
+
+        <p>
+        This method is particularly valuable for URC operations as it allows us to document geological features with precise measurements while maintaining operational efficiency, as we don't need to physically place scale markers in each image. The scale can be calculated automatically using the camera parameters and depth information, providing accurate measurements for stratigraphic analysis.
+        </p>
+
+        <p>
+            Initial testing of the photogrammetric scaling method was conducted using a ZED 2i stereo camera under Lab conditions. The system captured images of a known height object at varying distances to evaluate the scaling accuracy. While the results were promising, further testing is required to validate the method under field conditions and larger distances. Here are the photos of in the lab testing:
+        </p>
+        
+        <image-component 
+        tag="image" 
+        source="../assets/vis_prop_strt_3.jpg"
+        subtitle="Figure : Initial Lab Testing at E2A">
+        </image-component>
         
     </div>
 
@@ -317,7 +434,7 @@
         </image-component>
 
         <p>
-        These options represent two different methodologies for gathering detailed geological evidence - the Raspberry Pi camera asking "Can we get the information from an overhead camera?" while the digital microscope addresses "Do we need to zoom in to the soil?" This analysis will evaluate how these contrasting approaches serve our need to capture well-focused images at the sampling sites, and help the mechanical team to house the camera in the rover.
+            These options represent two different methodologies for gathering detailed geological evidence - the Raspberry Pi camera asking "Can we get the information from an overhead camera?" while the digital microscope addresses "Do we need to zoom in to the soil?" This analysis will evaluate how these contrasting approaches serve our need to capture well-focused images at the sampling sites, and help the mechanical team to house the camera in the rover.
         </p>
 
         <p>
