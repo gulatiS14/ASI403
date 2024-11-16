@@ -117,15 +117,15 @@
         <ol>
             <li>
                 <p><strong>Microscopic Camera:</strong></p> 
-                <p><strong>Off-the-shelf Digital Microscope:</strong> Most popular choice among hobbyists and makers.</p>
+                <p><strong>Off-the-shelf Digital Microscope:</strong> Most popular choice among hobbyists and makers (Team, n.d.).</p>
             </li>
             <li>
                 <p><strong>High Resolution with electronic zoom:</strong></p> 
-                <p><strong>RPI Camera:</strong> Industry standard for robotics.</p>
+                <p><strong>RPI Camera:</strong> Industry standard for robotics (Raspberry Pi Ltd, 2024).</p>
             </li>
             <li>
                 <p><strong>Hybrid Autofocus Camera:</strong></p> 
-                <p><strong>Olympus Tough TG-6:</strong> Professional-grade macro photography capabilities.</p>
+                <p><strong>Olympus Tough TG-6:</strong> Professional-grade macro photography capabilities (dpreview, 2019).</p>
             </li>
         </ol>
 
@@ -152,7 +152,7 @@
         </image-component>
 
         <p>
-            The concept selection in Table 2.4 analysis for sample site identification indicates that a hybrid approach combining manual intervention with deep learning support is optimal for the URC science mission requirements. Manual operation leverages human geological expertise for final decision-making, ensuring scientific rigor in site selection and stratigraphic analysis similar to approaches used in Mars missions (Clarke, 2003; NASA Jet Propulsion Laboratory, 2018). This is augmented by a deep learning system that assists operators by highlighting potential features of interest, comparable to AI-assisted geological feature detection systems deployed on Mars rovers (Neveu & Hays, 2018; Li et al., 2023). The manual component scored 7.95/10 in our weighted analysis, with deep learning scoring 7.75/10, reflecting their complementary strengths. While hyperspectral imaging could provide valuable compositional data (Olszewska & Napora, 2020), it was excluded due to hardware constraints and mission requirements being adequately met with the selected hybrid approach. This combination maximizes accuracy while maintaining operational efficiency, aligning with established Mars exploration methodologies (Clarke, 2003; Neveu & Hays, 2018).
+            The concept selection in Table 2.4 analysis for sample site identification indicates that a hybrid approach combining manual intervention with deep learning support is optimal for the URC science mission requirements. The manual component scored 8.0/10 in our weighted analysis, with deep learning scoring 7.6/10, reflecting their complementary strengths. It has potential to be a similar sytem comparable to AI-assisted geological feature detection systems deployed on Mars rovers (Neveu et al., 2018; Li et al., 2023). While hyperspectral imaging could provide valuable compositional data (Olszewska & Napora, 2020), it was excluded due to hardware constraints and mission requirements being adequately met with the selected hybrid approach. 
         </p>
         
     </div>
@@ -168,7 +168,7 @@
 
         <p>For the University Rover Challenge, we developed a real-time panoramic imaging system to document sites and get the better understanding of the geological context.</p>
         
-        <p>Our system uses the Scale-Invariant Feature Transform (SIFT) algorithm for image processing. SIFT effectively handles the varied scales and orientations found in natural terrain. The process converts images to grayscale, detects key features, and filters matches using a ratio test to ensure accuracy under different lighting conditions.</p>
+        <p>Our system uses the Scale-Invariant Feature Transform (SIFT) algorithm for image processing. SIFT effectively handles the varied scales and orientations found in natural terrain. The process converts images to grayscale, detects key features, and filters matches using a ratio test to ensure accuracy under different lighting conditions (Kommineni, 2020).</p>
         
         <p>We implemented RANSAC (Random Sample Consensus) to calculate image alignment through homography as shown in flowchart in Figure 2.3. Example of image stitching can be seen in Figure 2.2 below: </p>
         
@@ -315,7 +315,7 @@
         </p>
 
         <p>
-            Photogrammetric height determination relies on the geometric relationship between viewing angles and known distances, as seen in Figure 2.6. When two images are taken of the same feature from different viewing angles, the height of objects can be calculated using trigonometric principles. In satellite applications, this involves:
+            Photogrammetric height determination relies on the geometric relationship between viewing angles and known distances, as seen in Figure 2.6 (Photogrammetric Method - an Overview , n.d.). When two images are taken of the same feature from different viewing angles, the height of objects can be calculated using trigonometric principles. In satellite applications, this involves:
         </p>
 
         <ul>
@@ -494,7 +494,7 @@
 
         <h3>Image Noise Analysis</h3>
         <p>
-            Image noise assessment will be conducted under controlled lighting conditions. We will measure the signal-to-noise ratio (SNR) for both cameras, with particular attention to their performance in varying light conditions that simulate field operations. The Raspberry Pi Camera's larger sensor size suggests potentially better noise handling, but this needs to be verified through systematic testing (Anderson et al., 2021).
+            Image noise assessment will be conducted under controlled lighting conditions. We will measure the signal-to-noise ratio (SNR) for both cameras, with particular attention to their performance in varying light conditions that simulate field operations (Yang & El Gamal, 1999). The Raspberry Pi Camera's larger sensor size suggests potentially better noise handling, but this needs to be verified through systematic testing.
         </p>
 
         <h3>No-Reference Image Quality Assessment</h3>
@@ -537,7 +537,7 @@
         </image-component>
         
         <p>
-            The combination of the Raspberry Pi HQ Camera (IMX477 sensor) with the Arducam 8-50mm C-Mount Zoom Lens presents an optimal solution that addresses the limitations of our tested cameras as seen in Figure 2.13. This configuration offers several key advantages such as:
+            The combination of the Raspberry Pi HQ Camera (IMX477 sensor) with the Arducam 8-50mm C-Mount Zoom Lens presents an optimal solution that addresses the limitations of our tested cameras as seen in Figure 2.13 (Arducam, n.d.). This configuration offers several key advantages such as:
         </p>
 
         <ul>
