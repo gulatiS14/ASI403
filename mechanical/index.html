@@ -25,10 +25,157 @@
     
     <!-- Please add the stuff here (start) -->
     <h1>Mechanical Subsystem</h1>
-    <p>
-      The Mechanical Substem guy did not finish in time to put it in the Website, so here is the attached Google Docs Link to the Mechanical Subsystem:
-      <a href="https://docs.google.com/document/d/1h77ynQXpr0A5isSYLwA9bTrQcwE-m35kIRWvAp7ytqA/edit?usp=sharing">Mechanical Subsystem Google Docs</a>
-    </p>
+    <h2>3.1 Sub-system specific Value Proposition and Design statement</h2>
+    <p>The mechanical subsystem serves to support the other subsystems by providing housing and protecting the other components from the desert environment, as well as enabling the motion required to fulfil the life science and vision processes.</p>
+    <p><b>The 2 main value propositions that were identified are:    </b></p>
+    <p><li>To house and protect onboard equipment and components from the desert environment to ensure reliable performance</li></p>
+    <p><li>To carry out the experiment as planned by the life science team effectively such as to maximise the reliability and consistency of the experimental results.</li></p>
+    <p><b>From these value propositions,the following design statements were derived:</b></p>
+    <p><b>Design statement (1):</b> The module structure that houses and shields the internal components from the harsh desert environment by preventing sand from getting in.</p>
+    <p><b>Design statement (2):</b>An arrangement that effectively allocates space to each component while remaining within the mass and volume budget as outlined in the design envelope provided by the main rover team.</p>
+    <p><b>Design statement (3):</b>To provide solutions to the effective extraction and handling of the samples as required by the science experiment plan provided by the life science team.</p>
+    
+
+    <h2>3.2 Concept Development</h2>
+    <p>To meet the needs of the other subsystems as well as the main rover team, several different mechanical subsystems were identified as necessary to design:</p>
+    <p>1) Housing</p>
+    <p>2) Sample Extraction</p>
+    <p>3) Experiment Execution</p>
+
+    <h3>3.2.1 Designing the Mechanical Housing</h3>
+    <p>We used a top-down approach in designing the mechanical housing by first outlining the mass and volume constraints as provided by the main rover team. The design envelope provided is as follows:</p>
+    <p>Volume: 480mm(side to side width) x 300mm(front to back length) x 500mm(height)</p>
+    <p>Mass: 10kg</p>
+    
+    <h3>3.2.2 Designing the Sample Extraction</h3>
+    <p>According to the URC 2025 rules, “teams shall collect a sub-surface sample from one of the sites at a depth of 10cm or deeper. Sample(s) must be at least 5g”</p>
+    <p>To accomplish this, the sample extraction sub-system shall utilise an auger drill with sheath system to extract sub-surface soil samples</p>
+    
+    <image-component
+    tag="Drill Housing CAD"
+    source="../assets/Mechanical/Drill Housing CAD.png"
+    subtitle="Figure 3.1: CAD of Drill Housing Subsystem"
+    ></image-component>
+
+    <p>A linear actuator lowers the sheathed drill 10cm under the soil to allow for direct extraction of sub-surface soil samples. The opening at the top of the sheath is where the soil exits from allowing for collection to be experimented on.</p>
+
+    <h3>3.2.3 Designing the Experimental Execution</h3>
+    <p>By working closely with the life science team, we have identified the following essential processes for execution of the experiment:</p>
+    <li>Transporting sample from auger drill to experimental beakers</l>
+      <li>Mixing the soil samples with the reagent solution in the beakers</li>
+      <li>Separating out the soil from the solution</li>
+      <li>Mixing the resultant solution with the spectroscopy reagent</li>
+    
+    <image-component
+    tag="Drill Housing System Architectural Diagram"
+    source="../assets/Mechanical/Mechanical System Architecture Diagram 1.png"
+    subtitle="Figure 3.2: Mechanical System Architectural Diagram"
+    ></image-component>
+
+    <h4>3.2.3.1 Sample Transport</h4>
+    <p>The sample transport shall utilise a rotating central pillar with an extended arm to receive the soil samples from the auger drill. It uses a 30mm x 30mm x 30mm cube bucket with 1mm thick walls to receive the soil samples from the opening in the drill sheath.</p>
+
+    <image-component
+    tag="Drill-Arm CAD"
+    source="../assets/Mechanical/Drill-Arm CAD.png"
+    subtitle="Figure 3.3: CAD of Interface between Arm and Drill Sheath"
+    ></image-component>
+
+    <p>The central pillar then rotates 90° such that the bucket is placed over the openings of a beaker preloaded with the experimental reagent. A latch on the bottom of the bucket opens allowing the soil sample to fall through into the beaker. This process is repeated twice more at 180° and 270° angles to allow repeating the experiment two more times for enhanced accuracy of the results.</p>
+
+    <image-component
+    tag="Transport System CAD"
+    source="../assets/Mechanical/Transport System CAD.png"
+    subtitle="Figure 3.4: CAD showing position of Transport Arm and Mixers"
+    ></image-component>
+
+    <h4>3.2.3.2 Sample Mixing</h4>
+    <p>The soil sample and reagent are then thoroughly mixed using a magnetic stir bar.</p>
+
+    <image-component
+    tag="Mixing System"
+    source="../assets/Mechanical/Mixing System CAD.png"
+    subtitle="Figure 3.5: Individual Mixing System CAD"
+    ></image-component>
+
+    <h4>3.2.3.3 Sample Filtering and Introducing Spectroscopy Reagent</h4>
+    <p>After the sample is thoroughly mixed by the magnetic stir bar, a valve at the side of the beaker opens allowing the solution to flow through into the conical flask below. A filter clears out the soil samples while allowing the solution to flow through unobstructed, mixing with the spectroscopy reagent pre-loaded into the conical flask.</p>
+
+    <image-component
+    tag="Separation System"
+    source="../assets/Mechanical/Separation System CAD.png"
+    subtitle="Figure 3.6: Separation System CAD"
+    ></image-component>
+
+    <h2>3.3 Prototyping</h2>
+    <h3>CAD Prototyping</h3>
+    <P>The mechanical prototyping is thus far mainly focused on CAD software emulation using Solidworks. This allows for quick repeated prototyping without requiring any additional budget. The goal of the CAD prototype is to show how the module would look like and how the mechanical parts will be assembled. This allows for improved understanding of the integration of various parts in a virtual environment for better analysis results. Additionally, taking into account the multidisciplinary nature of our team, this allows for improved communication between our members on how our individual components will integrate together.</P>
+
+    <h3>Physical Prototyping</h3>
+    <p>Furthermore, when necessary, physical testing using lo-fi prototypes are utilised to better understand and analyse the various possible solutions when needed. These test the functions of such solutions when online literature is deemed insufficient to solve.</p>
+
+    <h2>3.4 Testing and Analysis</h2>
+    <p>Through literature review and market research the mechanical team has identified several possible solutions for the following design areas</p>
+    <ol>
+      <li>1. Drill Angle</li>
+      <li>2. Sample Handling Method</li>
+      <li>3. Sample Mixing Method</li>
+    </ol>
+
+    <image-component
+    tag="Drill Angle Table"
+    source="../assets/Mechanical/Drill Angle Table.png"
+    subtitle="Table 3.1: Drill Angle Decision Matrix"
+    ></image-component>
+    <p>Drill angle refers to the angle of incidence of the sheathed drill into the soil. Through our testing we have determined a vertical drill to be the best drill angle to fulfil our requirements.</p>
+    
+    <image-component
+    tag="Sample Handling Table"
+    source="../assets/Mechanical/Sample Handling Table.png"
+    subtitle="Table 3.2: Sample Handling Method Decision Matrix"
+    ></image-component>
+    <p>Sample handling refers to the method with which the soil sample is transported from the drill sheath opening to the first beakers for the initial reaction. Through our testing we have determined the bucket method as explained earlier in this document to be the optimal way to transport soil samples within our module.</p>
+
+    <image-component
+    tag="Sample Mixing Table"
+    source="../assets/Mechanical/Sample Mixing Table.png"
+    subtitle="Table 3.3: Sample Mixing Method Decision Matrix"
+    ></image-component>
+    <p>Mixing refers to the method with which the soil sample is mixed with the experimental reagent in the first beaker. Through our testing we have determined that the magnetic stir bar is the best method to meet our requirements.</p>
+
+
+    <h2>3.5 Deliverables and Shortcomings</h2>
+    <h3>3.5.1 Deliverables Satisfied</h3>
+    <li>Mechanical Housing</li>
+    <li>Sample Extraction</li>
+    <li>Experimental Execution</li>
+
+    <h3>3.5.2 Shortcomigns</h3>
+    <li>Mass Budget Unaccounted</li>
+    <li>Manufacturing Methods Unaccounted</li> 
+
+    <h2>3.6 Future Work</h2>
+    <h3>1. Improvements to CAD prototyping:</h3>
+      <li>Stress Testing
+          <ul>Utilise Solidworks Stress testing to evaluate structural integrity, stresses, strains and material bending</ul>
+      </li>
+      <li>Tolerance Analysis
+        <ul>Analyse and calculate manufacturing tolerances such that the parts will fit together as intended</ul>
+      </li>
+    <h3>2. Physical Prototyping</h3>
+      <li>3D Print Prototyping
+        <ul>Use 3D printed parts for rapid preliminary prototyping to before sending individual parts for CNC manufacturing</ul>
+      </li>
+    <h3>3. Documentation</h3>
+      <li>Technical Documentation
+        <ul>Create user manuals, assembly instructions, and maintenance guides</ul>
+      </li>
+      <li> Bill of Materials
+        <ul>Create a detailed list of all components and materials needed for production as well as calculate the mass budget</ul>
+      </li>
+    
+    
+    
     <!-- Please add the stuff here (end) -->
     <sl-button href="../electrical/">Next Subsystem</sl-button>
     <sl-button class="scroll-to-top" variant="primary" size="medium" circle onclick="scrollToTop()">
