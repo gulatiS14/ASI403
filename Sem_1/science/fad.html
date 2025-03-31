@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Project Title</title>
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/light.css" />
+  <script type="module"
+    src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/shoelace-autoloader.js"></script>
+
+  <!-- You can add what components you want to include here  -->
+  <link rel="stylesheet" href="../index.css">
+  <link rel="stylesheet" href="../components/scroll-to-top/scroll-to-top.css">
+  <script src="../components/scroll-to-top/scroll-to-top.js"></script>
+  <script src="../components/image/image-component.js"></script>
+  <!--  -->
+</head>
+
+<body>
+  <div class="content">
+    <sl-button href="./index.html">Back</sl-button>
+    
+    <!-- Please add the stuff here (start) -->
+
+    <h1 style ="color: blue;">Detection Steps for Flavin adenine dinucleotide (FAD)</h1>
+
+    <small>(Rhee et al, 2007)</small>
+
+    <ol>
+        <li><strong>Preparation of the PTZ-DPA buffer solution</strong></li>
+        <br>
+        <ol>
+            <li>Weigh out the 6.31 mg of bis(Zn²⁺-dipicolylamine) complex for a 1 mL of 10 mM solution.</li>
+            <br>
+            <li>Dissolve the bis(Zn²⁺-dipicolylamine) complex in a 1 mL of the DMSO solution to ensure complete dissolution.</li>
+            <br>
+            <li>Once fully dissolved, transfer the solution to a volumetric flask.</li>
+            <br>
+            <li>Dilute the stock solution into the HEPES buffer (pH 7.4) with the ratio of PTZ-DPA:HEPES = 1:999). It can be 0.01 mL of PTZ-DPA mixed with 9.99 mL of HEPES.</li>
+            <br>
+            <li>Mix thoroughly to ensure the solution is homogeneous.</li>
+            <br>
+            <li>Store the 1 mM bis(Zn²⁺-dipicolylamine) complex solution in a sterile, tightly sealed container at -20 until use. Protect from light.</li>
+            <br>
+        </ol>
+        <li><strong>Preparation of soil solution:</strong></li>
+        <br>
+        <ul>
+            <li>Dissolve 1g of the soil in 10 mL of the HEPES buffer solution.</li>
+            <br>
+        </ul>
+        <li><strong>Reaction Phase</strong></li>
+        <br>
+        <ul>
+            <li>Mix 50 µL of the filtered soil sample with 10 µM PTZ-DPA buffer solution. Incubate at room temperature (27°C) for 10 minutes to allow FAD binding and reaction.</li>
+            <br>
+        </ul>
+        <li><strong>Fluorescent Measurement</strong></li>
+        <br>
+        <ol>
+            <li>Extract 1 mL of the solution and measure the fluorescence of the solution using a fluorescence spectrometer.</li>
+            <br>
+            <li>Set the excitation wavelength to 445 nm and the emission wavelength to 525 nm to detect the enhanced fluorescence of FAD.</li>
+            <br>
+        </ol>
+        
+    </ol>
+
+    <p>Reagent Required:</p>
+
+    <ol>
+        <li>bis(Zn²⁺-dipicolylamine) complex</li>
+        <li>DMSO</li>
+        <li>HEPES</li>
+        <li>Flavin adenine dinucleotide</li>
+    </ol>
+
+    <!-- Please add the stuff here (end) -->
+    <sl-button href="./fda.html">Next Experiment</sl-button>
+    <sl-button class="scroll-to-top" variant="primary" size="medium" circle onclick="scrollToTop()">
+      <sl-icon name="arrow-up" label="Settings"></sl-icon>
+    </sl-button>
+  <div>
+</body>
+
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Project Title</title>
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/light.css" />
+  <script type="module"
+    src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/shoelace-autoloader.js"></script>
+
+  <!-- You can add what components you want to include here  -->
+  <link rel="stylesheet" href="../../index.css">
+  <link rel="stylesheet" href="../../components/scroll-to-top/scroll-to-top.css">
+  <script src="../../components/scroll-to-top/scroll-to-top.js"></script>
+  <script src="../../components/image/image-component.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11.2.1/dist/mermaid.min.js"></script>
+  <script src="../../components/diagram/svg-pan-zoom.min.js"></script>
+  <script type="module" src="../../components/video/video.js"></script>
+  <!--  -->
+</head>
+
+<body>
+  <div class="content">
+    <sl-button href="../../">Back</sl-button>
+    
+    <h1>2. Vision Sub-system</h1>
+
+    <div id="Value-Prop-and-Design-Statement">
+        <h2>2.1 Sub-system specific Value Proposition and Design statement</h2>
+        <p> The vision subsystem's main use case is to provide the geological context around as well as, to find the best site for rover to sample soil for finding signs of life.</p>
+    
+        <p><b> The 2 main value propositions that were identified are as follows:</b></p>
+        
+        <p> A geological imaging system that transforms the rover's sampling capabilities by providing crucial contextual information that enables informed site selection, comprehensive scientific documentation, and efficient mission execution.</p>
+            
+        <p> By integrating panoramic views, high-resolution close-ups, and stratigraphic profiling capabilities, the system ensures each sample collected has maximum scientific value for detecting potential biosignatures in Mars-analog environments and fullfil the URC requirements.</p>
+            
+        
+    
+        <p><b>From these value propositions, the following design statements can be obtained to design an integrated camera system that can:</b></p>
+        
+        <p><b>Design statement (1): </b>It combines panoramic vision to support each phase of the scientific investigation process, such as providing accurate images for stratigraphic profiles.</p>
+    
+        <p><b>Design statement (2): </b>The system will enable team to document geological context, the soil details and precisely identify optimal sampling locations.</p>
+            
+        <p><b>Design statement (3): </b>By automating scale calculations and location documentation, the design allows operators to focus on scientific analysis rather than technical operation, maximizing the scientific return from each collected sample.</p>
+    </div>
+    
+    <div id="Concept-Development">
+        <h2>2.2 Concept Development</h2>
+        <p>
+          The geological complexity of the Mars Desert Research Station (MDRS) environment, with its "horizontal layers" and diverse "regolith terrain systems" (Clarke, 2003), demands sophisticated imaging solutions. The science team's design process explores three critical functions for the rover's vision system: wide-angle photography for contextual documentation, close-up imaging for detailed sample analysis, and methods for identifying optimal sampling locations.
+        </p>
+        
+        <p>These functions are discussed in detail in the following subsections, and Table 2.1 shows the morphological chart for the overall subsystem: </p>
+
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_morph_1.jpg"
+        subtitle="Table 2.1: Morphological chart for vision component selection">
+        </image-component>
+
+        <h3>2.2.1 For the function to take “wide shots”</h3>
+
+        <p>
+          The team evaluates three potential approaches for wide-angle photography: a stereo camera system that provides depth perception and wide field of view capabilities, a 360° panoramic camera for complete site documentation, or a dual monocular setup. The integration with ROS 2 becomes particularly advantageous here, as it "leverages its strengths in inter-process communication and software modularity" (WVU Team Mountaineers & , 2024), allowing efficient handling of high-bandwidth image data and seamless integration with OpenCV for image processing.
+        </p>
+        
+        <p>In order to represent each category, a market study was conducted, and the following options were chosen:</p>
+
+        <ol>
+            <li>
+                <p><strong>Stereo Camera:</strong></p> 
+                <p><strong>ZED 2i Stereo Camera:</strong> A professional-grade stereo vision camera with 4K capability and built-in depth perception (StereoLabs, 2022).</p>
+            </li>
+            <li>
+                <p><strong>360 Degree Camera:</strong></p> 
+                <p><strong>Insta360 X3:</strong> A 360-degree camera capable of capturing full panoramic views in a single shot (Insta360 , n.d.).</p>
+            </li>
+            <li>
+                <p><strong>Wide Monocular Camera:</strong></p> 
+                <p><strong>Yealink UVC30:</strong> A high-quality 4K monocular USB camera with good low-light performance (Yealink, 2021).</p>
+            </li>
+        </ol>
+        
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_cam_sel_1.png"
+        subtitle="Figure 2.1: Showing each camera selected for each group">
+        </image-component>
+
+        <p>
+            The team will evaluate these options based on weighted concept selection matrix where criteria such as image quality, field of view and depth perception most importantly, as it is necessary to meet the minimum reuiremnets. This can be seen in the Table 2.2 below:
+        </p>
+
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_con_sel_1.png"
+        subtitle="Table 2.2: Weighted concept selection matrix for choosing the component for wide eyed functionality">
+        </image-component>
+
+        <p>
+            From the above component matrix, the ZED 2i stereo camera is selected for our URC rover implementation. Other than the benefits in camera quality, it connects via USB Type-C (USB 3.0) to our NVIDIA Jetson platform, enabling real-time spatial computing with depth sensing from 0.3m to 20m. The ZED 2i is well-suited for the harsh desert environment with its IP66 rating and operating temperature range of -10°C to +45°C, to ensure reliable performance in the Mars Desert Research Station conditions (StereoLabs, 2022).
+        </p>
+
+        <h3>2.2.2 For the function to take “close-up shots”</h3>
+
+        <p>
+          For close-up documentation, the team is considering a dedicated microscopic camera for maximum magnification, a high-resolution camera with electronic zoom capabilities, or a hybrid autofocus system. This capability is crucial as teams must "take a close up, well-focused, high-resolution picture with some indication of scale" at sampling sites.
+        </p>
+        
+        <p>In order to represent each category, a market study was conducted to look for the most feasible and popular options to represent each category:</p>
+        
+        <ol>
+            <li>
+                <p><strong>Microscopic Camera:</strong></p> 
+                <p><strong>Off-the-shelf Digital Microscope:</strong> Most popular choice among hobbyists and makers (Team, n.d.).</p>
+            </li>
+            <li>
+                <p><strong>High Resolution with electronic zoom:</strong></p> 
+                <p><strong>RPI Camera:</strong> Industry standard for robotics (Raspberry Pi Ltd, 2024).</p>
+            </li>
+            <li>
+                <p><strong>Hybrid Autofocus Camera:</strong></p> 
+                <p><strong>Olympus Tough TG-6:</strong> Professional-grade macro photography capabilities (dpreview, 2019).</p>
+            </li>
+        </ol>
+
+        <p>Further analysis is done using a weighted component selection matrix, to determine the suitable choice, which can be seen in the Table 2.3 below:</p>
+
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_con_sel_2.png"
+        subtitle="Table 2.3: Weighted concept selection matrix for choosing the component for close up functionality">
+        </image-component>
+
+        <p>While both the Digital Microscope Camera and RPi Camera with E-Zoom show promising characteristics (tied at 7.80/10), with the Hybrid Autofocus Camera scoring lower (6.45/10), further testing is required to understand which is the better choice for the mission especially to find the correct sampling location. This testing will likely reveal practical differences not apparent in theoretical analysis and will ensure the selected system meets all mission requirements effectively.</p>
+
+        <h3>2.2.3 For the function of identifying sampling locations</h3>
+
+        <p>
+            Finally, for identifying optimal soil sampling locations, the team evaluated three approaches: manual intervention based on operator expertise, deep learning algorithms for automated feature detection, and hyperspectral imaging for compositional analysis. Site selection is particularly critical at MDRS where soil conditions vary significantly - from cracking clays with high salinity to non-cracking clays that exhibit different moisture retention properties (Clarke, 2003).
+        </p>
+        
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_con_sel_3.png"
+        subtitle="Table 2.4: Weighted concept selection matrix for choosing the methodology of finding site">
+        </image-component>
+
+        <p>
+            The concept selection in Table 2.4 analysis for sample site identification indicates that a hybrid approach combining manual intervention with deep learning support is optimal for the URC science mission requirements. The manual component scored 8.0/10 in our weighted analysis, with deep learning scoring 7.6/10, reflecting their complementary strengths. It has potential to be a similar sytem comparable to AI-assisted geological feature detection systems deployed on Mars rovers (Neveu et al., 2018; Li et al., 2023). While hyperspectral imaging could provide valuable compositional data (Olszewska & Napora, 2020), it was excluded due to hardware constraints and mission requirements being adequately met with the selected hybrid approach. 
+        </p>
+        
+    </div>
+
+    <div id="Prototyping">
+        <h2>2.3 Prototyping</h2>
+
+        <p>
+            The vision subsystem's prototyping focused primarily on software development, with initial testing conducted on alternative hardware platforms to verify functionality. All software prototyping was implemented using Docker containers in a development environment that mirrors the rover's operational system. This approach allowed us to validate key imaging functions before final hardware integration.
+        </p>
+
+        <h3>2.3.1 Image Stitching for Panaroma</h3>
+
+        <p>For the University Rover Challenge, we developed a real-time panoramic imaging system to document sites and get the better understanding of the geological context.</p>
+        
+        <p>Our system uses the Scale-Invariant Feature Transform (SIFT) algorithm for image processing. SIFT effectively handles the varied scales and orientations found in natural terrain. The process converts images to grayscale, detects key features, and filters matches using a ratio test to ensure accuracy under different lighting conditions (Kommineni, 2020).</p>
+        
+        <p>We implemented RANSAC (Random Sample Consensus) to calculate image alignment through homography as shown in flowchart in Figure 2.3. Example of image stitching can be seen in Figure 2.2 below: </p>
+        
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_prop_is.png"
+        subtitle="Figure 2.2 : Diagram explaining how the image stitching works">
+        </image-component>
+
+        <br>
+
+        <div class = "diagram-container">
+            <div class = "mermaid" id="flowchart" style="border: 1px solid black">
+                %%{init: {'theme': 'default', 'flowchart': {'nodeSpacing': 50, 'rankSpacing': 50}}}%%
+                flowchart TD
+                    %% Define nodes with consistent sizing
+                    A([Load Images]):::default
+                    B([Convert to Grayscale]):::default
+                    C([Extract Features<br/>using SIFT]):::default
+                    D([Match Features<br/>using BFMatcher]):::default
+                    E([Calculate Homography<br/>Transform]):::default
+                    F([Filter Matches using<br/>Ratio Test]):::default
+                    G([Blend Images using<br/>warpPerspective]):::default
+                    H([Save Panorama]):::default
+
+                    %% Define connections
+                    A --> B
+                    
+                    subgraph Critical[Critical Steps]
+                        direction TB
+                        B --> C
+                        C --> D
+                        D --> E
+                    end
+
+                    subgraph Important[Important Steps]
+                        direction TB
+                        E --> F
+                        F --> G
+                    end
+
+                    G --> H
+
+                    %% Styling
+                    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px
+                    classDef critical fill:#ffecec,stroke:#ff4444,stroke-width:2px
+                    classDef important fill:#e6f3ff,stroke:#4477ff,stroke-width:2px
+            </div>
+        </div>
+        <p style="font-size: 1rem; font-style: italic; text-align: center;">
+            Figure 2.3: Flowchart of image stitching algorithm 
+        </p>
+
+        <p>
+            The system, built using OpenCV and Python, integrates smoothly with our Robot Operating System (ROS) framework, enabling quick development and deployment.
+        </p>
+        
+        <p>
+            Initial testing was conducted using two cameras mounted 10cm apart to evaluate real-time panoramic imaging capabilities. The cameras were interfaced through ROS2 Humble running in a Docker container, utilizing OpenCV for image stitching. While the SURF feature detection algorithm successfully identified matching key points between adjacent frames, the stitching process, was of poor quality which can be seen in the video due to the poor hardware and stitching being done at 30 frames per second. 
+        </p>
+        <div class="video-container">
+            <video-component tag="rick" source="https://drive.google.com/file/d/1X3-ifnGLrvob-dnLmB0QrIdE9RL2adAW/preview" width="640" height="480" allow="autoplay"
+            subtitle="Video: ROS2 image stitching Demo">
+            </video-component>
+        </div>
+
+        <p>
+            A ROS2-based state machine is developed for automated panorama capture using a single ZED 2i stereo camera as seen in Figure 2.4. The system subscribes to three key topics: '/camera/image_raw' for visual data and '/gnss/fix' for positional information. The state machine executes a predetermined sequence where the rover rotates 90 degrees between captures, taking four overlapping stereo images to complete a 360-degree view. Each image is automatically annotated with elevation and coordinates from the GNSS receiver, and an automatically calculated scale bar derived from the stereo camera's depth data. This approach seems more reliable and will be tested in the future.
+        </p>
+        <div class = "diagram-container">
+            <div class="mermaid" id="flowchart" style="border: 1px solid black">
+                    stateDiagram-v2
+                    [*] --> IDLE
+                    IDLE --> CAPTURING_INITIAL: Start Capture / Subscribe RGB & GNSS
+                    CAPTURING_INITIAL --> ROTATING: Capture Success / Store Image & GNSS
+                    CAPTURING_INITIAL --> ERROR: Capture Fail / Publish Status
+                    ROTATING --> CAPTURING_ROTATED: Rotation Complete / Cmd_vel Stop
+                    ROTATING --> ERROR: Rotation Fail / Publish Status
+                    CAPTURING_ROTATED --> ROTATING: More Angles Needed / Cmd_vel Rotate 90°
+                    CAPTURING_ROTATED --> STITCHING: All Images Captured / Begin Processing
+                    CAPTURING_ROTATED --> ERROR: Capture Fail / Publish Status
+                    STITCHING --> COMPLETED: Stitch Success / Publish Panorama & GNSS
+                    STITCHING --> ERROR: Stitch Fail / Publish Status
+                    ERROR --> IDLE: Reset
+                    COMPLETED --> IDLE: Reset
+
+                    state IDLE {
+                        [*] --> Waiting
+                        Waiting : Subscribes to RGB and GNSS Topics
+                    }
+
+                    state ROTATING {
+                        [*] --> Moving
+                        Moving : Publishes cmd_vel for Rotation
+                        Moving : Monitors Rotation Completion
+                        Moving : Publishes Status
+                    }
+
+                    state COMPLETED {
+                        [*] --> Publishing
+                        Publishing : Publishes Panorama Image
+                        Publishing : Publishes Success Status
+                        Publishing : Includes GNSS Data
+                    }
+
+                    note right of IDLE
+                        Subscribes:
+                        - /zed2i/zed_node/rgb/image_rect_color
+                        - /zed2i/zed_node/gnss/fix
+                    end note
+
+                    note right of ROTATING
+                        Publishes:
+                        - /cmd_vel (90° rotation)
+                        - /panorama/status
+                    end note
+
+                    note right of COMPLETED
+                        Publishes:
+                        - /panorama/image
+                        - /panorama/status
+                        With GNSS overlay
+                    end note  
+            </div>
+        </div>
+        <p style="font-size: 1rem; font-style: italic; text-align: center;">
+            Figure 2.4: State diagram of the rover's vision system process.
+        </p>
+
+        <p>
+            Github sites for the following:
+            <li>
+                <a href="https://github.com/gulatiS14/Image-Stitching-OpenCV-Demo">Image Stitching</a>
+            </li>
+            <li>
+                <a href="https://github.com/gulatiS14/ROS2-image-stitcher">ROS2 Image Stitcher</a>
+            </li>
+        </p>
+
+        <h3>2.3.2 Vertical Scale for Stratigraphic Profile</h3>
+
+        <p>
+                Stratigraphy is essential for understanding Earth's geological history and identifying potential locations that may have supported life in the past. As shown in the Figure 2.5, different rock layers (or strata) tell us a clear story about past environments - from ancient riverbeds to lakebeds to sand dunes. For example, in panel C, we can see distinct members of the Kayenta Formation, where each layer represents a different depositional environment. In the context of the Mars Desert Research Station (MDRS) and our rover operations, understanding stratigraphy helps us identify layers that were deposited in water-rich environments , which are prime targets for finding potential biosignatures or evidence of past microbial life (Clarke, 2003).
+        </p>
+
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_prop_strt.png"
+        subtitle="Figure 2.5: Stratigraphy Profile of MDRS area">
+        </image-component>
+
+        <p>
+            In order to find, document, and analyze these stratigraphic profiles, we need to develop a reliable method for measuring the vertical scale of geological features. To achieve this, we are developing a photogrammetric scaling method that combines stereo camera depth sensing with field of view (FOV) data to calculate real-world dimensions for each image captured by the rover.
+        </p>
+
+        <p>
+            Photogrammetric height determination relies on the geometric relationship between viewing angles and known distances, as seen in Figure 2.6 (Photogrammetric Method - an Overview , n.d.). When two images are taken of the same feature from different viewing angles, the height of objects can be calculated using trigonometric principles. In satellite applications, this involves:
+        </p>
+
+        <ul>
+            <li>Forward and afterward views with known angles (θF and θA)</li>
+            <li>Known distance between observation points (d)</li>
+            <li>Precise measurement of the angular separation</li>
+        </ul>
+
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_prop_strt_2.png"
+        subtitle="Figure 2.6: Photogrammetric Method to find scale">
+        </image-component>
+
+        <p>
+            The height (h) can then be calculated using the relationship:<br>
+            <code>  
+                h = d / (tan θF + tan θA)
+            </code>
+        </p>
+
+        <p>
+            For our rover's stratigraphic profiling, we adapt this principle using a stereo camera with known parameters, can be seen in the flowchart in Figure 2.7. The process involves:
+        </p>
+
+        <ul>
+            <li>The camera's vertical field of view (vFOV) provides our angular reference</li>
+            <li>The depth to the feature is obtained from our stereo vision system</li>
+            <li>Using the camera's resolution in pixels, we can calculate the angular resolution</li>
+            <li>For each pixel in the vertical direction, we can then determine its real-world height using:
+                <ul>
+                    <li>Angular position relative to center = (pixel_y - height/2) * angular_resolution</li>
+                    <li>Real height = depth * tan(angle)</li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="diagram-container">
+            <div class="mermaid" id="flowchart" style="border: 1px solid black">
+                graph TD
+                    %% Main Flowchart
+                    A[Start] --> B[Get Camera Parameters]
+                    B --> C[Vertical FOV from ZED2i]
+                    B --> D[Image Height in Pixels]
+                    B --> E[Get Depth from Camera]
+                    
+                    C & D --> F[Calculate Angular Resolution]
+                    F --> G[Calculate Scale]
+                    
+                    E --> G
+                    
+                    G --> H[For each pixel y position]
+                    H --> I[Calculate angle from center]
+                    I --> J[Use depth and trigonometry]
+                    J --> K[Real world height]
+                    
+                    K --> L[Convert to scale bar]
+                    L --> M[Draw vertical scale]
+                    M --> N[Add height labels]
+                    N --> O[End]
+                
+                    %% Bottom Left Boxes
+                    subgraph Camera_Variables[Camera Variables]
+                    V1[vFOV Camera FOV]---V2[depth Distance]---V3[image_height Pixels]
+                    end
+                
+                    subgraph Key_Equations[Key Equations]
+                    E1[Angular Res = vFOV/image_height]
+                    E2[Angle = y-height/2 * angular_res]
+                    E3[Height = depth * tan angle]
+                    end
+                
+                    %% Position boxes at bottom left
+                    O --> Camera_Variables
+                    Camera_Variables --> Key_Equations
+                    style Camera_Variables fill:#f5f5ff
+                    style Key_Equations fill:#fff5f5
+              
+            </div>
+        </div>
+        <p style="font-size: 1rem; font-style: italic; text-align: center;">
+            Figure 2.7: Flowchart of finding vertical scale 
+        </p>
+
+
+
+        <p>
+        This method is particularly valuable for URC operations as it allows us to document geological features with precise measurements while maintaining operational efficiency, as we don't need to physically place scale markers in each image. The scale can be calculated automatically using the camera parameters and depth information, providing accurate measurements for stratigraphic analysis.
+        </p>
+
+        <p>
+            Initial testing of the photogrammetric scaling method was conducted using a ZED 2i stereo camera under Lab conditions. The system captured images of a known height object at varying distances to evaluate the scaling accuracy. While the results were promising as seen in Figure 2.7, further testing is required to validate the method under field conditions and larger distances.
+        </p>
+        
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_prop_strt_3.jpg"
+        subtitle="Figure 2.8: Initial Lab Testing using Zed 2i Stereo Camera">
+        </image-component>
+
+        <h3>2.3.2 Deep Learning for Soil Classification</h3>
+
+        <p>
+            To streamline our sample site selection process at the URC, we have developed a machine learning-based soil classification system. Our approach uses convolutional neural networks (CNNs) to analyze imagery from our dedicated "close-up" camera, automatically classifying soil types into three categories based on grain size: gravel (greater than 2mm), sand (less than 1/16mm - 2mm), and silt/clay (1/16mm) can be seen in Figure 2.9 (Katwyk, 2023). Currently, the model is trained on a limited public dataset of 75 geological images with data augmentation techniques including rotation, scaling, and brightness variations to improve generalization. While our initial dataset is small, this automated grain size analysis serves as a proof-of-concept to complement our other scientific instruments.
+        </p>
+
+        
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_prop_cnn.png"
+        subtitle="Figure 2.9: Types of soil Classification">
+        </image-component>
+
+        <p>
+            Our soil classification CNN model processes 256x256 RGB images through a series of convolutional blocks. Each block consists of a Conv2D layer with 3x3 kernels, followed by ReLU activation and 2x2 max pooling, progressively extracting features from the input image. After the convolutional blocks, the features are flattened and passed through dense layers with ReLU activation. The final layer uses softmax activation to output classification probabilities for three soil types: gravel, sand, and silt/clay, can be seen in flowchart in Figure 2.10.
+        </p>
+
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_prop_cnn_1.png"
+        subtitle="Figure 2.10: Flowchart of the CNN model">
+        </image-component>
+        
+
+        <p>
+            While relatively simple in architecture, this model demonstrates promising initial results can see at Figure 2.11 , though we acknowledge the need for additional training data to improve robustness in field conditions.
+        </p>
+
+
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_prop_cnn_2.png"
+        subtitle="Figure 2.11: Testing of the model">
+        </image-component>
+
+        <p>
+            Analysis of the confusion matrix as seen in Figure 2.12, reveals potential biases and limitations in our current soil classification model. The matrix shows that class 1 (likely sand) has the strongest predictive accuracy with 5 correct predictions, while classes 0 and 2 (likely gravel and silt) show some concerning misclassifications between each other. This pattern suggests a bias in our model, primarily stemming from our limited dataset. Despite data augmentation techniques, the model struggles to clearly differentiate between certain soil types, particularly in edge cases. These results emphasize the critical need to expand our training dataset with more diverse soil samples to improve the model's generalization capabilities.
+        </p>
+
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_prop_cnn_3.png"
+        subtitle="Figure 2.12: Confusion Matrix for our Model">
+        </image-component>
+
+        <a href="https://github.com/gulatiS14/Soil_Classification">Github link for the Soil Classification</a>
+        
+    </div>
+
+    <div id="Testing-Analysis">
+        <h2>2.4 Testing and Analysis</h2>
+
+        <h3>2.4.1 Testing of Close-Up Shots</h3>
+
+        <p>
+        As part of the University Rover Challenge science mission requirements, we need to implement a reliable close-up imaging system to document potential sampling sites with high detail and accurate scaling. We are evaluating two distinct approaches for detailed geological documentation: the Raspberry Pi Camera Module 3 NoIR, featuring a 12-megapixel sensor with 4608 × 2592 pixel resolution and a versatile focus range from 10 cm to infinity, and a Digital Microscope USB camera offering 0.3 megapixels (680 × 480 pixels) with a specialized close-up focus range of 15 mm to 40 mm.
+        </p>
+
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_test_tab_1.png"
+        subtitle="Table 2.5: Table showing the two different approaches">
+        </image-component>
+
+        <p>
+            As seen in Table 2.5, these options represent two different methodologies for gathering detailed geological evidence - the Raspberry Pi camera asking "Can we get the information from an overhead camera?" while the digital microscope addresses "Do we need to zoom in to the soil?" This analysis will evaluate how these contrasting approaches serve our need to capture well-focused images at the sampling sites, and help the mechanical team to house the camera in the rover.
+        </p>
+
+        <p>
+            In order to compare the two cameras, a few tests were conducted under lab conditions. The tests will focus on three key aspects: spatial resolution, image noise analysis, and no-reference image quality assessment.
+        </p>
+        
+        <h3>Spatial Resolution</h3>
+        <p>
+            To evaluate the cameras' ability to capture fine geological details, we will measure their spatial resolution by calculating pixels per millimeter using a standardized calibration target. For the Raspberry Pi Camera's 4608 × 2592 resolution and the Digital Microscope's 680 × 480 resolution, we'll determine their effective resolution at their respective working distances (Gonzalez & Woods, 2018). This measurement is crucial for ensuring we can adequately document small-scale geological features in the field.
+        </p>
+
+        <h3>Image Noise Analysis</h3>
+        <p>
+            Image noise assessment will be conducted under controlled lighting conditions. We will measure the signal-to-noise ratio (SNR) for both cameras, with particular attention to their performance in varying light conditions that simulate field operations (Yang & El Gamal, 1999). The Raspberry Pi Camera's larger sensor size suggests potentially better noise handling, but this needs to be verified through systematic testing.
+        </p>
+
+        <h3>No-Reference Image Quality Assessment</h3>
+        <p>
+            To quantitatively compare image quality without relying on reference images, we will employ the Blind/Referenceless Image Spatial Quality Evaluator (BRISQUE) algorithm. BRISQUE offers advantages over other no-reference metrics as it operates in the spatial domain, providing faster computation and better correlation with human perception of image quality (Mittal et al., 2012). This method will provide objective quality scores for images captured by both cameras, helping us evaluate their performance in documenting geological features under real-world conditions.
+        </p>
+
+        <p>
+            In order to compare the difference between the two methodologies, a standardised test was conducted where they are aiming to focus on word 'I2C'. The results can be seen in the Table 2.6 below:
+        </p>
+
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_test_tab_2.png"
+        subtitle="Table 2.6: Table comparing the scores of different methodolgies with the comparing image of the two approaches">
+        </image-component>
+
+        <p>
+            After getting the quatifiable results for each category, an analysis was done to see which camera is better. The results can be seen in the Table 2.7 below:
+        </p>
+
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_test_tab_3.png"
+        subtitle="Table 2.7: Table analysing the scores from Table and analysing the different methodologies">
+        </image-component>
+
+        <p>
+            Our testing has revealed a key challenge: while the RaspberryPi Camera Module 3 NoIR excels in color accuracy and noise handling, and the USB Digital Microscope provides superior spatial resolution, neither solution fully optimizes both critical parameters. This suggests the need to explore alternative solutions that could better balance these requirements.
+        </p>
+
+        <h3>
+            Potential Alternative: Raspberry Pi HQ Camera with Arducam  Zoom Lens
+        </h3>
+
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_test_fig_1.png"
+        subtitle="Figure 2.13: Raspberry Pi HQ Camera with zoom lens">
+        </image-component>
+        
+        <p>
+            The combination of the Raspberry Pi HQ Camera (IMX477 sensor) with the Arducam 8-50mm C-Mount Zoom Lens presents an optimal solution that addresses the limitations of our tested cameras as seen in Figure 2.13 (Arducam, n.d.). This configuration offers several key advantages such as:
+        </p>
+
+        <ul>
+            <li>Higher base resolution (12.3MP Sony IMX477 sensor)</li>
+            <li>Superior zoom range (8-50mm) offering greater versatility than both tested options</li>
+            <li>Larger sensor size (7.9mm diagonal) for better light capture</li>
+            <li>Professional-grade optics through the C-Mount lens system</li>
+            <li>Adjustable focus range that exceeds both current options</li>
+            <li>Better low-light performance due to larger pixel size (1.55μm)</li>
+        </ul>
+
+        <p>
+            Key advantages of this solution include:
+        </p>
+
+        <ul>
+            <li>Variable zoom capability allowing both wide context shots and detailed close-ups</li>
+            <li>Industrial-grade build quality suitable for field operations</li>
+            <li>Mechanical zoom and focus controls for precise adjustments</li>
+            <li>Compatible with our existing Raspberry Pi infrastructure</li>
+        </ul>
+        <p>
+            Given these capabilities, we recommend proceeding with the development of a prototype using the Raspberry Pi HQ Camera with Arducam zoom lens configuration. This combination promises to deliver both the spatial resolution and color accuracy required for our geological documentation while providing superior operational flexibility through its adjustable zoom range.
+        </p>       
+
+
+    </div>
+    
+    <div id="Deliverables-Short-Coming">
+        <h2>2.5 Deliverables and Short-comings</h2>
+
+        <h3>2.5.1 Deliverables Satisfied</h3>
+        
+        <ul>
+            <li><strong>Panoramic Imaging System:</strong>
+                <ul>
+                    <li>Successfully implemented image stitching pipeline</li>
+                    <li>Creates high-quality panoramic views from multiple stereo camera images</li>
+                </ul>
+            </li>
+            <li><strong>Geological Classification:</strong>
+                <ul>
+                    <li>Developed CNN model for terrain analysis</li>
+                    <li>Trained on comprehensive dataset of sedimentary materials</li>
+                    <li>Capable of identifying sand, gravel, and silt compositions</li>
+                </ul>
+            </li>
+            <li><strong>Scale Measurement System:</strong>
+                <ul>
+                    <li>Initiated development of photogrammetric scaling method</li>
+                    <li>Utilizes stereo camera depth sensing capabilities</li>
+                    <li>Combines FOV and depth data for real-world dimension calculations</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>2.5.2 Short-comings</h3>
+
+        <ul>
+            <li><strong>Close-up Imaging System:</strong>
+                <ul>
+                    <li>Current camera options inadequate for detailed sample documentation</li>
+                    <li>Insufficient magnification and working distance capabilities</li>
+                    <li>Need to integrate dedicated macro photography solution</li>
+                </ul>
+            </li>
+            <li><strong>Scale Measurement Limitations:</strong>
+                <ul>
+                    <li>Photogrammetric method unreliable for distant geological features</li>
+                    <li>Stereo camera depth sensing range insufficient for far objects</li>
+                    <li>Need to implement hybrid approach combining GNSS data</li>
+                </ul>
+            </li>
+            <li><strong>Model Validation:</strong>
+                <ul>
+                    <li>CNN model requires testing with actual camera system images</li>
+                    <li>Need to verify accuracy under competition lighting conditions</li>
+                    <li>Performance validation needed for specific camera resolutions and perspectives</li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+
+    <div id="Future-Work">
+        <h2>2.6 Future Work</h2>
+
+        <image-component 
+        tag="image" 
+        source="../../assets/vis_soft_arch.png"
+        subtitle="Figure 2.14: System architecture for vision subsystem">
+        </image-component>
+        
+        <p>
+            The vision subsystem's architecture as seen in Figure 2.14, integrates multiple components that require comprehensive testing in outdoor environments. Critical integration testing will focus on the data flow between the Zed 2i stereo camera and Jetson Orin for panoramic imaging, alongside the RPI HQ Camera with zoom lens connecting to the Raspberry Pi 5 for detailed sample documentation.
+        </p>
+
+        <p>
+            Future work will concentrate on developing a unified software pipeline that efficiently manages data flow between these components while minimizing latency. We plan to conduct extensive field testing at locations with similar geological features to the competition site, particularly focusing on the system's performance under various lighting conditions, dust exposure, and temperature variations. Additionally, we will implement automated calibration procedures for both cameras to maintain accurate depth perception and scale measurements. 
+        </p>
+
+        <p>
+            The testing protocol will include validating the CNN model's performance with real-time image processing, ensuring the system can maintain consistent performance during extended operation periods, and developing fault tolerance mechanisms for potential communication failures between components
+        </p>
+
+    </div>
+
+    <sl-button href="../mechanical/">Next Subsystem</sl-button>
+
+    <sl-button class="scroll-to-top" variant="primary" size="medium" circle onclick="scrollToTop()">
+      <sl-icon name="arrow-up" label="Settings"></sl-icon>
+    </sl-button>
+
+    <script src="../../components/diagram/diagram.js"></script>
+    </div>
+</body>
+
+</html>

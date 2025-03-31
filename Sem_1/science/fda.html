@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Project Title</title>
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/light.css" />
+  <script type="module"
+    src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/shoelace-autoloader.js"></script>
+
+  <!-- You can add what components you want to include here  -->
+  <link rel="stylesheet" href="../index.css">
+  <link rel="stylesheet" href="../components/scroll-to-top/scroll-to-top.css">
+  <script src="../components/scroll-to-top/scroll-to-top.js"></script>
+  <script src="../components/image/image-component.js"></script>
+  <!--  -->
+</head>
+
+<body>
+  <div class="content">
+    <sl-button href="./index.html">Back</sl-button>
+    
+    <!-- Please add the stuff here (start) -->
+
+    <h1 style ="color: blue;">Detection Steps for Fluorescein Diacetate (FDA)</h1>
+
+    <small>(Lundgren, 1981)</small>
+
+    <ol>
+        <li><strong>Preparation of the FDA stock solution</strong></li>
+        <br>
+        <ol>
+            <p><small><strong>Prepare the Fluorescein Diacetate (FDA) stock solution at 20 μmol/L concentration.</strong></small></p>
+            <li>Weigh 0.8328 mg of Fluorescein Diacetate (FDA) using an analytical balance.</li>
+            <br>
+            <li>Transfer the 0.8328 mg of FDA powder into a 100 mL volumetric flask for the preparation of a 20 μmol/L stock solution. Gradually add acetone while gently swirling to dissolve the FDA completely. Continue adding acetone until the total volume reaches 100 mL.</li>
+            <br>
+            <li>Swirl the flask gently to ensure the FDA is fully dissolved. Transfer the 20 μmol L-1 FDA stock solution to a sterile amber glass bottle. Seal the bottle with Parafilm and store the solution at -20°C. Before use, allow the solution to reach room temperature and mix gently.</li>
+            <br>
+        </ol>
+        <li><strong>Preparation of the Sodium Phosphate buffer solution</strong></li>
+        <br>
+        <ul>
+            <li>Dissolve 22.74 g of sodium phosphate tribasic (Na₃PO₄·12H₂O) in 700 mL deionized water. Adjust pH to 7.6 with 1 M HCl. Dilute to a final volume of 1 L.</li>
+            <br>
+        </ul>
+        <li><strong>Preparation of soil sample</strong></li>
+        <br>
+        <ol>
+            <li>Weigh 1.0 g of soil and transfer it to a sterile beaker.</li>
+            <br>
+            <li>Add 10 mL of sodium phosphate buffer to the beaker to hydrate the soil sample. Stir the mixture for 5 minutes to ensure even dispersion of particles.</li>
+            <br>
+        </ol>
+        <li><strong>Reaction Phase</strong></li>
+        <br>
+        <ul>
+            <li>Mix 9 mL of the filtered soil sample with 0.5 mL of the FDA stock solution. Incubate at room temperature (27°C) for 10 minutes to allow reaction.</li>
+        </ul>
+        <li><strong>Fluorescent Measurement</strong></li>
+        <br>
+        <ol>
+            <li>Extract 1 mL of the solution and measure the fluorescence of the solution using a fluorescence spectrometer.</li>
+            <br>
+            <li>Set the excitation wavelength to 490 nm and the emission wavelength to 514-520 nm to detect the enhanced fluorescence of FAD.</li>
+            <br>
+        </ol>
+        
+    </ol>
+
+    <p>Reagent Required:</p>
+
+    <ol>
+        <li>Fluorescein Diacetate (FDA)</li>
+        <li>Acetone</li>
+        <li>Sodium phosphate tribasic (Na₃PO₄·12H₂O)</li>
+        <li>HCl</li>
+    </ol>
+
+    <!-- Please add the stuff here (end) -->
+    <sl-button href="./enantiometric_excess_of_amino_acids.html">Next Experiment</sl-button>
+    <sl-button class="scroll-to-top" variant="primary" size="medium" circle onclick="scrollToTop()">
+      <sl-icon name="arrow-up" label="Settings"></sl-icon>
+    </sl-button>
+  <div>
+</body>
+
+</html>

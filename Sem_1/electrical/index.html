@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Project Title</title>
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/light.css" />
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@v0.166.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.166.1/examples/jsm/"
+      }
+    }
+  </script>
+  
+  <script type="module"
+    src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/shoelace-autoloader.js"></script>
+
+  <!-- You can add what components you want to include here  -->
+  <link rel="stylesheet" href="../../index.css">
+  <link rel="stylesheet" href="../../components/scroll-to-top/scroll-to-top.css">
+  <script src="../../components/scroll-to-top/scroll-to-top.js"></script>
+  <script src="../../components/image/image-component.js"></script>
+  <script type="module" src="../../components/3d-render_jinuk/render.js"></script>
+
+  <!--  -->
+</head>
+
+<body>
+  <div class="content">
+    <sl-button href="../../">Back</sl-button>
+ 
+     
+    <h1>4. Electrical Sub-system</h1>
+
+    <div id="section-header-1">
+    <h2>4.1 Sub-system specific Value Proposition and Design statement</h2>
+
+    <image-component  tag="image" source="../../assets/subsystem_interaction.png" subtitle="Figure 4.1: sub-system relationship diagram"> </image-component>
+
+    <p> Electrical sub-system works as a supporting module to enable other science sub-systems achieve the requirements of the science mission as seen in Figure 4.1.
+      Hence, the approach for my design is to work closely with the needs of other members and their design requirements to determine my own design requirements.
+    </p>
+
+    <p><b> The 2 main value propositions that I identified are:</b></p>
+    <p>
+      <li> My solutions acts as a reliable instrumentation platform for all departments to use to collect samples and data.</li>
+      <br>
+      <li> My solutions has a modular design that functions like a platform that allows for future-proofing.</li>
+     </p>
+
+     <p><b>From these value propositions, I can derive the following design statements for my solutions:</b></p>
+     <p>
+      <li><b>Design statement (1):</b> Solution that collects soil moisture, temperature, and relative humidity module. [Hardware]</li>
+      <br>
+      <li><b>Design statement (2):</b> Solution that is able to power and control science experiments. [Hardware]</li>
+      <br>
+      <li><b>Design statement (3):</b> Solution that provides a reliable communication channel between the main computer, sensor module, and science experiment module. [Software]</li>
+     </p>
+    </div>
+
+    <div id="section-header-2">
+     <h2>4.2 Concept Development</h2>
+    
+    <p>As for my solution, there are 2 main systems working together to achieve the science mission. 
+      First is the hardware solution which will be tackling the design statement (1) and (2). 
+      Second is a software solution which will be tackling the design statement (3). 
+      In the following chapters, I will be going through the design process of hardware solution 
+      in which the software will be delegated for future work. The following Table 4.1 discusses the morphological chart of the necessary functions</p>
+
+      <image-component 
+      tag="image" 
+      source="../../assets/Morphological_chart.png"
+      subtitle="Table 4.1: Morphological chart for electronic hardware selection">
+      </image-component>
+
+    <p>I used a weighted decision matrix to determine which methods to use to fulfil the requirements of the hardware solution. 
+      A weighted decision matrix was used as not all criteria or factors are equal in importance. 
+      Additionally, instead of rank, I used a normalised score between 0 to 1 to demonstrate the magnitude of the difference in performance 
+      in the criteria of interest.</p>
+
+    <h4>Detecting soil moisture level:</h4>
+    <p>The 3 most prominent types of soil moisture sensors are Capacitive, time-domain reflectometry, and frequency-domain reflectometry sensors (Vat et al., 2013).
+      From the system engineering framework, I came up with the criteria that represent:</p>
+    <ol>
+        <li>Performance requirement (a. Accuracy)</li>
+        <li>Resource constraints ( a. Cost, b. Power)</li>
+        <li>Operational needs (a. Form factor, b. Maintenance)</li>
+    </ol>
+
+    <image-component 
+      tag="image" 
+      source="../../assets/soil_moisture.png"
+      subtitle="Table 4.2: Weighted decision matrix for choosing soil moisture sensor mechanism">
+      </image-component>
+
+    <p>In the Table 4.2, the scores heavily favoured capacitive sensors (7.8/10) due to their optimal balance of power efficiency (9/10) and cost-effectiveness (9/10), 
+      despite lower accuracy (6/10). This scoring distribution acknowledges that for soil moisture monitoring in mobile applications, trend accuracy, and 
+      reliability outweigh absolute precision.</p>
+
+    <h4>Relative Temperature and humidity:</h4>
+
+    <p>Using the same framework as done previously, a weighted decision matrix is formed comparing 3 most prominent types of relative 
+        temperature and humidity sensors (Chen & Lu, 2005):</p>
+
+    <image-component 
+    tag="image" 
+    source="../../assets/temp_humid.png"
+    subtitle="Table 4.3: Weighted decision matrix for choosing temperature and humidity sensor mechanism">
+    </image-component>
+      
+    <p>Resistive/capacitive sensors scored highest (7.6/10) primarily due to their excellent cost-effectiveness (9/10) and integration simplicity (8/10), 
+      accepting lower accuracy scores (6/10) as a reasonable trade-off for field deployment where relative changes often matter more than absolute precision.</p>
+      
+    <h4>Connection of components and power need:</h4>
+
+    <image-component 
+    tag="image" 
+    source="../../assets/electronic_flow_diagram.png"
+    subtitle="Figure 4.2: Electronic flowchart (Red: Power, Green: Data)">
+    </image-component>
+       
+    <p>The above Figure 4.2 shows how components are connected and what signals are being input and output. 
+      This diagram, with the context that it will be used in harsh environments with limited power supply, 
+      has provided me with the design requirements:</p>
+
+    <ol>
+        <li>The solution needs to connect to all the components reliably.</li>
+        <li>The solution should be able to make efficient use of limited space in the chassis.</li>
+        <li>The solution can distribute high power to multiple components.</li>
+        <li>The solution must keep to budget constraints.</li>
+        <li>The solution's maintenance should be easy.</li>
+    </ol>
+      
+    <p>To meet the requirements, the weighted decision matrix is used to choose the appropriate method as seen in Table 4.2 below:</p>
+
+    <image-component 
+    tag="image" 
+    source="../../assets/Custom_PCB.png"
+    subtitle="Table 4.4: weighted decision matrix for choosing electronic components connection method">
+    </image-component>
+      
+    <p>Custom PCB scored notably higher (8.0/10) than off-shelf solutions (5.2/10), with particularly strong scores in reliability (9/10) and space efficiency (9/10), 
+      justifying the initial design investment through superior long-term performance and system integration.</p>
+      
+    </div>
+
+    <div id="section-header-3">  
+    <h2>4.3 Prototyping</h2>
+    
+    <image-component 
+    tag="image" 
+    source="../../assets/PCB_schematics.png"
+    subtitle="Figure 4.3: Autodesk Eagle Schematic for the motherboard">
+    </image-component>
+
+    <p>The PCB design process began with planning data path connection and power distribution architecture. 
+      The core power system was designed around a 24V/10A input delivered through an XT60 connector from the rover's battery, 
+      feeding into two separate DC-DC conversion stages. The first converter steps down 24V to 12V for intermediate power requirements, 
+      while the second provides 5V for logic-level components and the Raspberry Pi 3B. A relay was incorporated into the design for 12V power control, 
+      providing 12V/10A output when activated through GPIO control. The relay was included only for 24V to 12V buck converter for safety purposes to allow for 
+      intentional activation of high power lines. This power distribution approach was chosen to efficiently manage the varying voltage requirements of different 
+      components while maintaining system reliability.</p>
+
+    <image-component 
+    tag="image" 
+    source="../../assets/PCB_board_diagram.png"
+    subtitle="Figure 4.4: Autodesk Eagle Board for the motherboard">
+    </image-component>
+
+    <p>The physical layout was implemented on a 2-layer PCB, with careful consideration given to component placement and routing strategies. 
+      High-current components, including the XT60 connectors and DC-DC converters, were strategically positioned near the board edges to minimize 
+      heat concentration and simplify power routing. Signal components, such as GPIO headers and sensor connectors, were centrally located to optimize 
+      signal path lengths. The top layer was primarily dedicated to power routing and critical signal traces, while the bottom layer was maximized as a 
+      ground plane with secondary signal routing. This layout strategy aimed to balance the constraints of a 2-layer board while maintaining proper electrical 
+      and thermal characteristics.</p>
+
+    <p>The PCB layout followed several critical IPC (Institute for Printed Circuits) standards for manufacturing reliability. IPC-2221 
+      "Generic Standard on Printed Board Design" guided the basic design elements, particularly in trace width calculations for power handling (IPC-2221, 2012). 
+      The 24V/10A power traces were sized according to the standard's current capacity charts, ensuring sufficient width for minimal voltage drop and 
+      heat generation. Clearances between high voltage traces (24V) and signal level traces were maintained following these specifications to prevent 
+      interference and ensure safety.</p>
+
+    <p>Interface organisation was a key focus of the design, incorporating connections for multiple peripheral devices. The board includes dedicated connectors 
+      for a DHT22 temperature/ humidity sensor, soil moisture sensor, H-bridge linear actuator driver, and BLDC motor driver. These interfaces were arranged to 
+      maintain signal integrity and provide logical access points. Pull-up and pull-down resistors were strategically placed to ensure proper signal conditioning 
+      for the GPIO connections. The Raspberry Pi GPIO routing was carefully planned to minimise crossing signals and maintain clean signal paths. This thoughtful 
+      organisation of interfaces demonstrates the sound application of PCB design principles while ensuring the practical usability of the final board.</p>
+
+    <p>For signal integrity, the GPIO connections and sensor interfaces followed design practices outlined in IPC-A-610 "Acceptability of Electronic Assemblies." 
+      The 2-layer stackup utilised a common FR4 material with 1oz copper weight, which is an industry-standard offering good electrical properties and mechanical 
+      stability while remaining cost-effective. Ground plane design and power distribution followed basic EMC (Electromagnetic Compatibility) practices, 
+      with attention to return path considerations and proper ground plane coverage.</p>
+
+    <p>Manufacturing specifications adhered to standard fabrication capabilities, with trace width and spacing following the commonly accepted minimum of 
+      6 mils (0.152mm) for reliable production. The design incorporated standard mounting hole sizes of 2.75mm for board securing, and component spacing allowed 
+      for standard assembly processes. The XT60 connectors' pad sizes and high-current traces followed IPC-7351 pad design guidelines to ensure reliable solder joints
+       for these high-power connections.</p>
+    </div>
+
+    <div id="section-header-4">
+    <h2>4.4 Testing and analysis</h2>
+    
+    <h4>Relative humidity, temperature and Soil moisture sensors test:</h4>
+
+    <image-component 
+    tag="image" 
+    source="../../assets/soil_moisture_test_picture.png"
+    subtitle="Figure 4.5: Testing at 40% water content">
+    </image-component>
+
+    <image-component 
+    tag="image" 
+    source="../../assets/temp_humid_soil_test.png"
+    subtitle="Table 4.5: Graph and the data collected by the soil sensor">
+    </image-component>
+
+    <p>From the data collected, we can see that accuracy of temperature and humidity sensors are satisfactory as the variance in reading data is negligible. 
+      However, soil moisture sensor data vary significantly. Through the testing process, the variance in soil moisture data is found to be caused by the physical 
+      contact between soil and the sensor due to its capacitive nature. This means that we will be taking into account the nature of capacitive sensors when 
+      collecting soil with the rover in the future.</p>
+
+    <h4>Motherboard test:</h4>
+
+    <image-component 
+    tag="image" 
+    source="../../assets/continuity_test.png"
+    subtitle="Table 4.6: Test result for continuity test">
+    </image-component>
+
+    <p>To confirm that the board is connecting data and power line to components as intended, I carried out the continuity test using a multimeter. 
+      The test has confirmed that there were no errors in the logic of the drawing or any manufacturing error. Hence, this board will be able to fulfil 
+      the requirement for reliable connection between all the components in the science module as seen from Table 4.6.</p>
+    </div>
+
+
+    <div id="section-header-5">
+    <h2>4.5 Deliverables and short-comings</h2>
+
+    <h3>Deliverables satisfied:</h3>
+    <p>The Motherboard has successfully connected all integral components in the operation of Rover's science module. Hence, the 
+      technical requirements of the solution that were previously outlined in the design statements have been met:</p>
+    <ol>
+        <li>Temperature measurement</li>
+        <li>Relative humidity measurement</li>
+        <li>Soil moisture measurement</li>
+        <li>Reliable connection of power and signals between science module components</li>
+    </ol>
+
+    <p>The motherboard has also value-added to the project by:</p>
+    <ol>
+        <li>Simplifying integration of the science module to the rest of the rover</li>
+        <li>Safety features for both the team and the rover - Relay for high power line</li>
+        <li>Providing room for additional hardware for the science module in the future</li>
+    </ol>
+
+    <h3>Shortcomings identified:</h3>
+
+    <p>Through testing, several notable shortcomings are identified - 3D rendering for reference. 
+      I will break the shortcomings down as such:</p>
+
+    <a href="./3d-render/">3D Render of the motherboard</a>
+
+    <p>a. Testing</p>
+    <p style="margin-left: 20px">i. Lack of indicator LEDs such as 12V power status LED</p>
+    <p style="margin-left: 20px">ii. Lack of labelled test points for oscilloscope and multimeter</p>
+
+    <p>b. Documentation</p>
+    <p style="margin-left: 20px">i. The lack of silkscreens/ label text makes it difficult for other members to assemble</p>
+
+    <p>c. Thermal performance</p>
+    <p style="margin-left: 20px">i. Lack of thermal management system such as a fan for heat dissipation</p>
+    <p style="margin-left: 40px">1. Raspberry pi runs at mid 50 degrees at normal load which is too hot for outdoor application</p>
+
+    <p>d. System reliability</p>
+    <p style="margin-left: 20px">i. Lack of diodes and protection circuit in the case of reverse polarity and power spike during power 
+      on/ off sequence respectively.</p>
+
+    </div>
+
+    <div id="section-header-6">
+    <h2>4.6 Future works</h2>
+
+    <p>In addition to fixing the shortcomings in the first prototype, I have not fulfilled the software solution of the 
+      design statement - a reliable communication channel between the main computer, sensor module, and sample collection module.</p>
+
+    <image-component 
+    tag="image" 
+    source="../../assets/embedded_software_diagram.png"
+    subtitle="Figure 4.6: Embedded software architecture diagram">
+    </image-component>
+
+    <p>The overall flow of the software will be done as planned in the Figure 4.6. Science module will be a wrapper for drill, 
+      collection and experiment modes in which each step's status and outcome will be constantly reported back to the Jetson 
+      in case the science module has to be abruptly cancelled for safety/ error reasons. (Koopman, 2017)</p>
+
+    <p>This back and forth communication between the sensors, science module and Jetson can be achieved using many different 
+      but valid communication protocols. In the next half of the project, I will be choosing, prototyping and integrating this 
+      solution to the hardware solution.</p>
+
+    
+    </div>
+
+     <sl-button href="../../">Back to Main</sl-button>
+     <sl-button class="scroll-to-top" variant="primary" size="medium" circle onclick="scrollToTop()">
+      <sl-icon name="arrow-up" label="Settings"></sl-icon>
+    </sl-button>
+</body>
+
+</html>
