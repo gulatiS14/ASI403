@@ -43,268 +43,443 @@
 
     <image-component  tag="image" source="../assets/subsystem_interaction.png" subtitle="Figure 4.1: sub-system relationship diagram"> </image-component>
 
-    <p> Electrical sub-system works as a supporting module to enable other science sub-systems achieve the requirements of the science mission as seen in Figure 4.1.
-      Hence, the approach for my design is to work closely with the needs of other members and their design requirements to determine my own design requirements.
-    </p>
+    <p>As identified in the previous semester, the 2 main value propositions for the electronic 
+      subsystem are to provide:</p>
+    <ol>
+        <li><b>Solution</b> that acts as a reliable instrumentation platform for all departments to use to 
+          collect samples and data </li>
+        <li><b>Solution</b> that has a modular design that functions like a platform that allows for future
+          proofing </li>
+    </ol>
+    <p><u>Based on these propositions,</u> the key design statements were established:</p>
+    <ol>
+        <li><b>Solution</b> that collects soil moisture, temperature, and relative humidity </li>
+        <li><b>Solution</b> that can power and control science experiments </li>
+        <li><b>Solution</b> that provides a reliable communication channel between the main computer, 
+          sensor module, and science experiment module </li>
+    </ol>
+    <p>In this semester, I have not deviated or made any changes to these criteria. Instead, I have 
+      made multiple iterations to the prototype to address the initial shortcomings identified. As for 
+      the future works, however, some adjustments had to be made to fit the solution better, which 
+      will be discussed in the following sections. </p>
 
-    <p><b> The 2 main value propositions that I identified are:</b></p>
-    <p>
-      <li> My solutions acts as a reliable instrumentation platform for all departments to use to collect samples and data.</li>
-      <br>
-      <li> My solutions has a modular design that functions like a platform that allows for future-proofing.</li>
-     </p>
+    <p>Additionally, in alignment to the value propositions, I have expanded on <u>2 new design 
+      statements</u> to meet the demand of the extra work that I have undertaken: </p>
 
-     <p><b>From these value propositions, I can derive the following design statements for my solutions:</b></p>
-     <p>
-      <li><b>Design statement (1):</b> Solution that collects soil moisture, temperature, and relative humidity module. [Hardware]</li>
-      <br>
-      <li><b>Design statement (2):</b> Solution that is able to power and control science experiments. [Hardware]</li>
-      <br>
-      <li><b>Design statement (3):</b> Solution that provides a reliable communication channel between the main computer, sensor module, and science experiment module. [Software]</li>
-     </p>
+    <ol>
+        <li><b>Enabling</b> the rover to collect soil samples from 10cm underground.</li>
+        <li><b>Providing</b> housing for all required experiment components.</li>
+    </ol>
     </div>
 
     <div id="section-header-2">
-     <h2>4.2 Concept Development</h2>
-    
-    <p>As for my solution, there are 2 main systems working together to achieve the science mission. 
-      First is the hardware solution which will be tackling the design statement (1) and (2). 
-      Second is a software solution which will be tackling the design statement (3). 
-      In the following chapters, I will be going through the design process of hardware solution 
-      in which the software will be delegated for future work. The following Table 4.1 discusses the morphological chart of the necessary functions</p>
+      <h2>4.2 Concept Development</h2>
+      <p>As an electronic lead, I took up the task of choosing the mechanical components needed for the science module. From this, I could work backwards to find which electronic components need to be integrated. These are the mechanical functions required:</p>
+      <ol>
+        <li>Drilling - requires a motor for drilling</li>
+        <li>Moving the drill down to the soil - requires a linear actuator to bring the drill down</li>
+        <li>Moving the sensors down into the drill hole - requires a linear actuator to bring the sensors down</li>
+        <li>Carousel for spectroscopy - requires a stepper motor for specific rotation</li>
+      </ol>
+      
+      <p>Working backwards to find electronic components to enable these functions is:</p>
+      <ol>
+        <li>DC motor driver - controlling the drill speed and direction</li>
+        <li>H-bridge motor driver - controlling the direction of the linear actuator</li>
+        <li>H-bridge motor driver - controlling the direction and rotation of the stepper motor</li>
+      </ol>
+      
+      <p>The connection between them can be seen in the flowchart below.</p>
 
       <image-component 
       tag="image" 
-      source="../assets/Morphological_chart.png"
-      subtitle="Table 4.1: Morphological chart for electronic hardware selection">
+      source="../assets/Electronic/3a.png"
+      subtitle="Figure 3a: Blue represents Data, and Red represents Power">
       </image-component>
 
-    <p>I used a weighted decision matrix to determine which methods to use to fulfil the requirements of the hardware solution. 
-      A weighted decision matrix was used as not all criteria or factors are equal in importance. 
-      Additionally, instead of rank, I used a normalised score between 0 to 1 to demonstrate the magnitude of the difference in performance 
-      in the criteria of interest.</p>
-
-    <h4>Detecting soil moisture level:</h4>
-    <p>The 3 most prominent types of soil moisture sensors are Capacitive, time-domain reflectometry, and frequency-domain reflectometry sensors (Vat et al., 2013).
-      From the system engineering framework, I came up with the criteria that represent:</p>
-    <ol>
-        <li>Performance requirement (a. Accuracy)</li>
-        <li>Resource constraints ( a. Cost, b. Power)</li>
-        <li>Operational needs (a. Form factor, b. Maintenance)</li>
-    </ol>
-
-    <image-component 
-      tag="image" 
-      source="../assets/soil_moisture.png"
-      subtitle="Table 4.2: Weighted decision matrix for choosing soil moisture sensor mechanism">
-      </image-component>
-
-    <p>In the Table 4.2, the scores heavily favoured capacitive sensors (7.8/10) due to their optimal balance of power efficiency (9/10) and cost-effectiveness (9/10), 
-      despite lower accuracy (6/10). This scoring distribution acknowledges that for soil moisture monitoring in mobile applications, trend accuracy, and 
-      reliability outweigh absolute precision.</p>
-
-    <h4>Relative Temperature and humidity:</h4>
-
-    <p>Using the same framework as done previously, a weighted decision matrix is formed comparing 3 most prominent types of relative 
-        temperature and humidity sensors (Chen & Lu, 2005):</p>
-
-    <image-component 
-    tag="image" 
-    source="../assets/temp_humid.png"
-    subtitle="Table 4.3: Weighted decision matrix for choosing temperature and humidity sensor mechanism">
-    </image-component>
+      <p>The following section aims to demonstrate the decision process for choosing these components.</p>
       
-    <p>Resistive/capacitive sensors scored highest (7.6/10) primarily due to their excellent cost-effectiveness (9/10) and integration simplicity (8/10), 
-      accepting lower accuracy scores (6/10) as a reasonable trade-off for field deployment where relative changes often matter more than absolute precision.</p>
+      <h3>Choosing the motor for drilling</h3>
       
-    <h4>Connection of components and power need:</h4>
+      <table>
+        <tr><th>Type of motor</th><th>Torque (25%)</th><th>Efficiency (10%)</th><th>Durability (10%)</th><th>Cost (10%)</th><th>Simplicity (25%)</th><th>Availability (20%)</th><th>Average score</th></tr>
+        <tr><td>DC brushed motor</td><td>5</td><td>3</td><td>3</td><td>5</td><td>5</td><td>5</td><td>4.6</td></tr>
+        <tr><td>DC brushless motor</td><td>3</td><td>5</td><td>5</td><td>4</td><td>3</td><td>4</td><td>3.7</td></tr>
+      </table>
+      <p style="text-align: center;"><em>Figure 3C: weighted decision matrix for Drill motor</em></p>
 
-    <image-component 
-    tag="image" 
-    source="../assets/electronic_flow_diagram.png"
-    subtitle="Figure 4.2: Electronic flowchart (Red: Power, Green: Data)">
-    </image-component>
-       
-    <p>The above Figure 4.2 shows how components are connected and what signals are being input and output. 
-      This diagram, with the context that it will be used in harsh environments with limited power supply, 
-      has provided me with the design requirements:</p>
+      <p>The weightage for torque, simplicity and availability are higher than the rest as these metrics are the most crucial for mission specification. Especially for torque, I have to
+        ensure that the drill motor is able to drill through the soil. The simplicity and availability are also important as I need to make sure that the components are easy to integrate and can be procured in a timely manner.</p>
+      </p>
 
-    <ol>
-        <li>The solution needs to connect to all the components reliably.</li>
-        <li>The solution should be able to make efficient use of limited space in the chassis.</li>
-        <li>The solution can distribute high power to multiple components.</li>
-        <li>The solution must keep to budget constraints.</li>
-        <li>The solution's maintenance should be easy.</li>
-    </ol>
-      
-    <p>To meet the requirements, the weighted decision matrix is used to choose the appropriate method as seen in Table 4.2 below:</p>
+      <p>As there are multiple types of DC motors, I compared which type of motor is the most appropriate for drilling soil.
+        Since our experiment would be done in the desert of Arizona, we would need high torque and low to moderate RPM motors. In addition, though I considered a much more efficient 
+        brushless DC motor to be used, due to its lack of torque and high RPM, a DC brushed motor with a gearbox was chosen. With consideration for price and procurement timeline, IG42 from 
+        Cytron was chosen.</p>
 
-    <image-component 
-    tag="image" 
-    source="../assets/Custom_PCB.png"
-    subtitle="Table 4.4: weighted decision matrix for choosing electronic components connection method">
-    </image-component>
+        <p style="text-align: center;">
+          <a href="https://sg.cytron.io/p-12v-120rpm-18kgfcm-planetary-dc-geared-motor-with-encoder" target="_blank">
+            <img src="../assets/Electronic/drill.png" alt="Motor Image" style="width: 500px; height: auto;">
+          </a>
+          <br>
+          <em>Click image for link to IG42 motor cytron website</em>
+        </p>
       
-    <p>Custom PCB scored notably higher (8.0/10) than off-shelf solutions (5.2/10), with particularly strong scores in reliability (9/10) and space efficiency (9/10), 
-      justifying the initial design investment through superior long-term performance and system integration.</p>
+      <p>With the rated current of IG42 being 5.5A, I decided to use Cytron's recommended motor driver MD10C, which could accommodate up to 10A constant output and 3.3-5V logic level from GPIO.</p>
+    </div>  
+
+    <div id="section-header-2">
+      <h3>Choosing the motor for moving the drill into the soil</h3>
+
+      <p>There are 2 main systems that are used for this application. One is a linear actuator and the 
+        other is a DC motor with a lead screw mechanism.</p>
       
-    </div>
+      <table>
+        <tr><th>Requirement</th><th>Linear Actuator (Chosen)</th><th>DC motor + Lead Screw</th></tr>
+        <tr><td>Precision & control</td><td>✅</td><td>❌ requires additional sensors</td></tr>
+        <tr><td>Ease of integration</td><td>✅</td><td>❌</td></tr>
+        <tr><td>Holding force</td><td>✅</td><td>❌ requires brake/feedback loop</td></tr>
+        <tr><td>Energy Efficiency</td><td>✅</td><td>❌ requires constant power to hold position</td></tr>
+        <tr><td>Complexity & Maintenance</td><td>✅</td><td>❌</td></tr>
+      </table>
+      <p style="text-align: center;"><em>Figure 3D: Comparison matrix for motor moving the drill module</em></p>
+      
+      <p>As for the linear actuator, it has to reach 10cm beneath the soil. Hence, in the case that we place the linear actuator at a height of 20cm (diameter of the wheels), I will need the linear actuator to extend at least 30cm into the soil.</p>
+      
+      <p style="text-align: center;">
+        <a href="https://sg.rs-online.com/web/p/electric-linear-actuators/1774492" target="_blank">
+          <img src="../assets/Electronic/linearactuator.png" alt="Motor Image" style="width: 500px; height: auto;">
+        </a>
+        <br>
+        <em>Click image for link to RS Pro linear actuator website</em>
+      </p>
+
+      <p>Therefore, I chose RS Pro's 12V 300mm range linear actuator.</p>
+
+      <h3>Choosing the motor for the carousel used in spectroscopy analysis</h3>
+
+      <p>In the case of the motor for the carousel, we need to make sure that the maximum axial load 
+        is greater than the weight of the carousel, including the sample solutions. The 2 main motors 
+        used for controlled rotating motions are stepper and servo motors. </p>
+
+      <p>The table below demonstrates how different components are chosen in relation to 
+        alternatives. </p>
+
+      <table>
+        <tr><th>Requirements</th><th>Stepper motor (Chosen)</th><th>Servo motor</th></tr>
+        <tr><td>Precise positioning</td><td>✅</td><td>✅</td></tr>
+        <tr><td>Sufficient load capacity</td><td>✅</td><td>✅</td></tr>
+        <tr><td>Energy efficiency</td><td>✅</td><td>❌</td></tr>
+        <tr><td>360-degree rotation</td><td>✅</td><td>❌</td></tr>
+      </table>
+      <p style="text-align: center;"><em>Figure 3E: Comparison matrix</em></p>
+
+      <p style="text-align: center;">
+        <a href="https://sg.rs-online.com/web/p/stepper-motors/1805279" target="_blank">
+          <img src="../assets/Electronic/stepper.png" alt="Motor Image" style="width: 500px; height: auto;">
+        </a>
+        <br>
+        <em>Click image for link to RS Pro stepper motor website</em>
+      </p>
+
+      <p>Since carousel rotates continuously and, at the same time, require precise positioning, the stepper motor was chosen. The stepper motor I have decided to procure was the RS Pro's 12V model
+        which has a maz axial force of 10N and max radial force of 28N. Additionally, it operates using bipolar connection (2 phase), making it easy to connect to any H-bridge
+      with 2 motor outputs.</p>
+      </p>
+      
+      <h3>Choosing the H-bridge for linear actuator and stepper motor</h3>
+      <table>
+        <tr><th>Criteria</th><th>Importance</th><th><img src="../assets/Electronic/l298n.png" alt="L298N" style="width: 50px; height: auto;"><br>L298N (Initial)</th><th><img src="../assets/Electronic/tb6122fng.png" alt="TB6122FNG" style="width: 50px; height: auto;"><br>TB6122FNG (Final)</th></tr>
+        <tr><td>Size efficiency</td><td>5</td><td>2</td><td>5</td></tr>
+        <tr><td>Power efficiency</td><td>4</td><td>3</td><td>5</td></tr>
+        <tr><td>Electrical specs</td><td>4</td><td>4</td><td>5</td></tr>
+        <tr><td>Ease of integration</td><td>3</td><td>3</td><td>4</td></tr>
+        <tr><td>Overall Score</td><td></td><td>53</td><td>72</td></tr>
+      </table>
+      <p style="text-align: center;"><em>Figure 3F: Weighted decision matrix for H-bridge motor driver</em></p>
+      
+      <p>For the H-bridge motor driver, initially, L298N was chosen to be used for both the linear actuator and the stepper motor. However, after the 2nd round of PCB iteration, it was found that the size of L298N was taking up a disproportionate amount of space on the motherboard PCB. Hence, TB6122FNG was chosen as its replacement due to its high efficiency, electrical specification, and form factor. This will be further discussed in the prototype section.</p>
+      </div>
 
     <div id="section-header-3">  
     <h2>4.3 Prototyping</h2>
     
-    <image-component 
-    tag="image" 
-    source="../assets/PCB_schematics.png"
-    subtitle="Figure 4.3: Autodesk Eagle Schematic for the motherboard">
-    </image-component>
-
-    <p>The PCB design process began with planning data path connection and power distribution architecture. 
-      The core power system was designed around a 24V/10A input delivered through an XT60 connector from the rover's battery, 
-      feeding into two separate DC-DC conversion stages. The first converter steps down 24V to 12V for intermediate power requirements, 
-      while the second provides 5V for logic-level components and the Raspberry Pi 3B. A relay was incorporated into the design for 12V power control, 
-      providing 12V/10A output when activated through GPIO control. The relay was included only for 24V to 12V buck converter for safety purposes to allow for 
-      intentional activation of high power lines. This power distribution approach was chosen to efficiently manage the varying voltage requirements of different 
-      components while maintaining system reliability.</p>
+    <h3>Prototyping the motherboard (2nd iteration)</h3>  
+    <p>To make sure that all the power connectors are standardised in polarity, I had decided to use XT60 for all the connections regarding power. The XT60 female is used for power input, and the XT60 male is used for power output. This includes:</p>  
+    <ol>  
+      <li>24V power in (Female)</li>  
+      <li>12V power out (Male)</li>  
+      <li>DC_MOTOR_OUT_1_+/- (Male)</li>  
+      <li>DC_MOTOR_OUT_2_+/- (Male)</li>  
+      <li>L298N_OUT_1/2 (Male)</li>  
+      <li>L298N_OUT_3/4 (Male)</li>  
+    </ol>  
 
     <image-component 
     tag="image" 
-    source="../assets/PCB_board_diagram.png"
-    subtitle="Figure 4.4: Autodesk Eagle Board for the motherboard">
-    </image-component>
+    source="../assets/Electronic/4b.png"
+    subtitle="Figure 4B: 2nd PCB iteration">
+    </image-component> 
 
-    <p>The physical layout was implemented on a 2-layer PCB, with careful consideration given to component placement and routing strategies. 
-      High-current components, including the XT60 connectors and DC-DC converters, were strategically positioned near the board edges to minimize 
-      heat concentration and simplify power routing. Signal components, such as GPIO headers and sensor connectors, were centrally located to optimize 
-      signal path lengths. The top layer was primarily dedicated to power routing and critical signal traces, while the bottom layer was maximized as a 
-      ground plane with secondary signal routing. This layout strategy aimed to balance the constraints of a 2-layer board while maintaining proper electrical 
-      and thermal characteristics.</p>
+    <p>The new design allows MD10C driver and L298N H-bridge drivers to be directly connected to the GPIO pins of the Raspberry Pi 5 (RPI5). The mechanical components will be powered through XT60 connectors on the driver's output terminal.</p>  
 
-    <p>The PCB layout followed several critical IPC (Institute for Printed Circuits) standards for manufacturing reliability. IPC-2221 
-      "Generic Standard on Printed Board Design" guided the basic design elements, particularly in trace width calculations for power handling (IPC-2221, 2012). 
-      The 24V/10A power traces were sized according to the standard's current capacity charts, ensuring sufficient width for minimal voltage drop and 
-      heat generation. Clearances between high voltage traces (24V) and signal level traces were maintained following these specifications to prevent 
-      interference and ensure safety.</p>
+    <p>From the previous semester's future work, I had mentioned that there were several flaws to the first PCB prototype, which were:</p>  
+    <ol>  
+      <li>Lack of labels for future users</li>  
+      <li>Thermal issue where RPI5 reaches a temperature above 55 ℃</li>  
+    </ol>  
 
-    <p>Interface organisation was a key focus of the design, incorporating connections for multiple peripheral devices. The board includes dedicated connectors 
-      for a DHT22 temperature/ humidity sensor, soil moisture sensor, H-bridge linear actuator driver, and BLDC motor driver. These interfaces were arranged to 
-      maintain signal integrity and provide logical access points. Pull-up and pull-down resistors were strategically placed to ensure proper signal conditioning 
-      for the GPIO connections. The Raspberry Pi GPIO routing was carefully planned to minimise crossing signals and maintain clean signal paths. This thoughtful 
-      organisation of interfaces demonstrates the sound application of PCB design principles while ensuring the practical usability of the final board.</p>
+    <p>The thermal issue can be seen in the simulation under the extended full load scenario.</p>  
 
-    <p>For signal integrity, the GPIO connections and sensor interfaces followed design practices outlined in IPC-A-610 "Acceptability of Electronic Assemblies." 
-      The 2-layer stackup utilised a common FR4 material with 1oz copper weight, which is an industry-standard offering good electrical properties and mechanical 
-      stability while remaining cost-effective. Ground plane design and power distribution followed basic EMC (Electromagnetic Compatibility) practices, 
-      with attention to return path considerations and proper ground plane coverage.</p>
+    <image-component 
+    tag="image" 
+    source="../assets/Electronic/4c.png"
+    subtitle="Figure 4C: Fusion 360 thermal simulation. White represents anything above 55 ℃">
+    </image-component> 
 
-    <p>Manufacturing specifications adhered to standard fabrication capabilities, with trace width and spacing following the commonly accepted minimum of 
-      6 mils (0.152mm) for reliable production. The design incorporated standard mounting hole sizes of 2.75mm for board securing, and component spacing allowed 
-      for standard assembly processes. The XT60 connectors' pad sizes and high-current traces followed IPC-7351 pad design guidelines to ensure reliable solder joints
-       for these high-power connections.</p>
-    </div>
+    <p>The test was done with a setting where the air temperature was set at 25 ℃, minimal air velocity, and RPI5 was using 25W of power (worst case scenario). At its peak, certain parts of RPI5 were reaching temperatures up to 85 ℃. Hence, the RPI5 cooling fan was added, which helped the CPU from throttling past the appropriate temperature of 55 ℃.</p>  
 
-    <div id="section-header-4">
-    <h2>4.4 Testing and analysis</h2>
+    <h3>Prototyping the motherboard (3rd iteration)</h3>  
+    <p>Additional XT60 output pins:</p>  
+    <ol>  
+      <li>STEPPER_1/2 (Male)</li>  
+      <li>STEPPER_3/4 (Male)</li>  
+      <li>LINEAR_ACTUATOR_1_+/- (Male)</li>  
+      <li>LINEAR_ACTUATOR_2_+/- (Male)</li>  
+    </ol>  
+
+    <image-component 
+    tag="image" 
+    source="../assets/Electronic/4d.png"
+    subtitle="Figure 4D: 3rd PCB prototype">
+    </image-component>  
+
+    <p>This iteration was to fix a major issue where the stepper motor needs 1 H-bridge for itself. Hence, I had to use 2 H-bridge motor drivers. However, due to the problem mentioned in the concept development section, I had to redesign the board.</p>  
+
+    <p>In addition, with the life science UREX team suggesting a vibration motor and a pump motor to be added, I had to introduce ESP32 due to the lack of GPIO pins in RPI5. In this decision, I had to change connections from electronic components to ESP32, except for the Relay.</p>  
+
+    <p>Since the relay served as an important safety feature of isolating the 12V power rail, I had to leave the control of the relay to RPI5 so that the user had direct authority over the relay through RPI5 instead of indirect control through ESP32.</p>  
+
+    <p>The additional JST 2.54mm pins on the right and top side of the boards are to accommodate PWM and digital pins.</p>  
+
+    <p>On top of these new features, I have added surface-mounted (SMT) light-emitting diodes (LEDs) to signal when corresponding devices are being used:</p>  
+    <ol>  
+      <li>Drill motor status</li>  
+      <li>Stepper motor status</li>  
+      <li>12V power rail status</li>  
+    </ol>  
+
+    <h3>3D printed sensor probe</h3>  
+
+    <image-component 
+    tag="image" 
+    source="../assets/Electronic/4e.png"
+    subtitle="Figure 4E: Assembly of sensor probe">
+    </image-component> 
     
-    <h4>Relative humidity, temperature and Soil moisture sensors test:</h4>
-
-    <image-component 
-    tag="image" 
-    source="../assets/soil_moisture_test_picture.png"
-    subtitle="Figure 4.5: Testing at 40% water content">
-    </image-component>
-
-    <image-component 
-    tag="image" 
-    source="../assets/temp_humid_soil_test.png"
-    subtitle="Table 4.5: Graph and the data collected by the soil sensor">
-    </image-component>
-
-    <p>From the data collected, we can see that accuracy of temperature and humidity sensors are satisfactory as the variance in reading data is negligible. 
-      However, soil moisture sensor data vary significantly. Through the testing process, the variance in soil moisture data is found to be caused by the physical 
-      contact between soil and the sensor due to its capacitive nature. This means that we will be taking into account the nature of capacitive sensors when 
-      collecting soil with the rover in the future.</p>
-
-    <h4>Motherboard test:</h4>
-
-    <image-component 
-    tag="image" 
-    source="../assets/continuity_test.png"
-    subtitle="Table 4.6: Test result for continuity test">
-    </image-component>
-
-    <p>To confirm that the board is connecting data and power line to components as intended, I carried out the continuity test using a multimeter. 
-      The test has confirmed that there were no errors in the logic of the drawing or any manufacturing error. Hence, this board will be able to fulfil 
-      the requirement for reliable connection between all the components in the science module as seen from Table 4.6.</p>
-    </div>
-
-
-    <div id="section-header-5">
-    <h2>4.5 Deliverables and short-comings</h2>
-
-    <h3>Deliverables satisfied:</h3>
-    <p>The Motherboard has successfully connected all integral components in the operation of Rover's science module. Hence, the 
-      technical requirements of the solution that were previously outlined in the design statements have been met:</p>
-    <ol>
-        <li>Temperature measurement</li>
-        <li>Relative humidity measurement</li>
-        <li>Soil moisture measurement</li>
-        <li>Reliable connection of power and signals between science module components</li>
-    </ol>
-
-    <p>The motherboard has also value-added to the project by:</p>
-    <ol>
-        <li>Simplifying integration of the science module to the rest of the rover</li>
-        <li>Safety features for both the team and the rover - Relay for high power line</li>
-        <li>Providing room for additional hardware for the science module in the future</li>
-    </ol>
-
-    <h3>Shortcomings identified:</h3>
-
-    <p>Through testing, several notable shortcomings are identified - 3D rendering for reference. 
-      I will break the shortcomings down as such:</p>
-
-    <a href="./3d-render/">3D Render of the motherboard</a>
-
-    <p>a. Testing</p>
-    <p style="margin-left: 20px">i. Lack of indicator LEDs such as 12V power status LED</p>
-    <p style="margin-left: 20px">ii. Lack of labelled test points for oscilloscope and multimeter</p>
-
-    <p>b. Documentation</p>
-    <p style="margin-left: 20px">i. The lack of silkscreens/ label text makes it difficult for other members to assemble</p>
-
-    <p>c. Thermal performance</p>
-    <p style="margin-left: 20px">i. Lack of thermal management system such as a fan for heat dissipation</p>
-    <p style="margin-left: 40px">1. Raspberry pi runs at mid 50 degrees at normal load which is too hot for outdoor application</p>
-
-    <p>d. System reliability</p>
-    <p style="margin-left: 20px">i. Lack of diodes and protection circuit in the case of reverse polarity and power spike during power 
-      on/ off sequence respectively.</p>
-
-    </div>
-
-    <div id="section-header-6">
-    <h2>4.6 Future works</h2>
-
-    <p>In addition to fixing the shortcomings in the first prototype, I have not fulfilled the software solution of the 
-      design statement - a reliable communication channel between the main computer, sensor module, and sample collection module.</p>
-
-    <image-component 
-    tag="image" 
-    source="../assets/embedded_software_diagram.png"
-    subtitle="Figure 4.6: Embedded software architecture diagram">
-    </image-component>
-
-    <p>The overall flow of the software will be done as planned in the Figure 4.6. Science module will be a wrapper for drill, 
-      collection and experiment modes in which each step's status and outcome will be constantly reported back to the Jetson 
-      in case the science module has to be abruptly cancelled for safety/ error reasons. (Koopman, 2017)</p>
-
-    <p>This back and forth communication between the sensors, science module and Jetson can be achieved using many different 
-      but valid communication protocols. In the next half of the project, I will be choosing, prototyping and integrating this 
-      solution to the hardware solution.</p>
-
+    <p>For the soil moisture, relative humidity, and temperature sensor to measure the characteristics of soil 10cm underground, I had to design a probe that attaches to the linear actuator. This probe includes a hollow body for wires to pass through and an M8 hole to be securely mounted to the linear actuator. The probe would be used right after a hole is created by drilling.</p>  
     
-    </div>
+    <h3>Designing the drill connector for the linear actuator</h3>  
+
+    <image-component 
+    tag="image" 
+    source="../assets/Electronic/4f.png"
+    subtitle="Figure 4F: Drill module assembly">
+    </image-component> 
+    
+    <p>The assembly consists of 3 main parts:</p>  
+    <ol>  
+      <li>3D printed drill motor to linear actuator connector</li>  
+      <li>Guide rail</li>  
+      <li>20x20 profile bars</li>  
+    </ol>  
+    
+    <p>The first concern with the 3D printed connector was that the line of action of the linear actuator had to pass through the center of the drill motor. This was to make sure that the torque induced by the drill would not cause the swinging of the whole system as it would:</p>  
+    <ol>  
+      <li>Cause the drill hole to be away from the center of the drill</li>  
+      <li>Lead to the dangerous swinging of a sharp, spinning drill bit</li>  
+      <li>Cause mechanical failure, such as the drill module breaking off from the main rover chassis</li>  
+    </ol>  
+    
+    <p>However, the 3D printed connector is not able to address all these issues. To address them, a linear guide rail is required to make sure that the extension is indeed linear. Thus, the connector is screwed onto the slide on both sides. However, these measures do not constrain the remaining side axis.</p>  
+    
+    <p>Thus, I used 20x20 profile bars to ensure that the remaining side axis is constrained as it will provide multiple points of contact with the main rover chassis using M5 screws and rhombus nuts.</p>  
+    
+    <h3>Making the acrylic panel body</h3>  
+
+    <image-component 
+    tag="image" 
+    source="../assets/Electronic/4g.png"
+    subtitle="Figure 4G: Acrylic body assembled in Fusion 360">
+    </image-component>  
+    
+    <p>While designing the acrylic panel, I had to consider certain points. For one, it was the placement of the PCB mounting hole. To ensure that enough space is left for the carousel, vibration motor, and pump motor, I decided to place it on the side plate. This was also to ensure that the wires could be routed properly through both the first and second layers of the box.</p>  
+    
+    <p>Secondly, the hole on the bottom is made for the microscope to point down to the ground. It was placed next to the PCB to make the wiring of the microscope easier without it tangling with moving parts such as the carousel.</p>  
+    
+    <p>Lastly, as seen on the side of the PCB, there are tiny holes for cable ties which make it easier to carry out cable management.</p>  
+    </div>  
+
+
+  <div id="section-header-4">
+  <h2>4.4 Testing and analysis</h2>
+  
+  <h3>Thermal testing</h3>  
+  <p>To verify that the RPI 5 cooling kit was sufficient, I used a Flir thermal camera to check for its temperature and idle, and peak usage.</p>  
+  <p>Idle usage refers to when the camera module, spectroscope module, and image processing module are not being used. Peak usage refers to when all the modules listed are being used simultaneously.</p>  
+
+  <image-component 
+  tag="image" 
+  source="../assets/Electronic/5a.png"
+  subtitle="Figure 5A: Idle temperature; Heat sink (left), CPU (right)">
+  </image-component> 
+ 
+  <p>For the idle use case, the temperature of the heat sink was 50.9 ℃, and that of the CPU was 57.7 ℃.</p>  
+
+  <image-component 
+  tag="image" 
+  source="../assets/Electronic/5b.png"
+  subtitle="Figure 5B: Peak temperature; Heat sink (left), CPU (right)">
+  </image-component> 
+
+  <p>For the peak use case, the temperature of the heat sink was 53.5℃, and that of the CPU was 66.7℃.</p>  
+
+  <p>Hence, with the addition of the cooling kit, it does not reach the throttling point - 85℃. However, it is still hotter than the threshold of 55℃. This is important for 2 reasons:</p>  
+  <ol>  
+    <li>Potential damage to components over prolonged use</li>  
+    <li>Potential to throttle in the hot desert of Arizona</li>  
+  </ol>  
+
+  <p>While I recognise that the cooling kit is sufficient for current testing use, I would require greater mechanical expertise/guidance for a more nuanced thermal solution.</p>  
+
+  <h3>Power testing</h3> 
+  
+  <image-component 
+  tag="image" 
+  source="../assets/Electronic/5c.png"
+  subtitle="Figure 5C: Drill test bench">
+  </image-component> 
+
+  <p>Using 20x20 profile bars, I built a test bench where I can simulate the drilling task. The objectives of the test are two-pronged:</p>  
+  <ol>  
+    <li>Power test</li>  
+    <li>Graphic User Interface (GUI) test</li>  
+  </ol>  
+
+  <p>I will be covering the power test as the GUI test is covered by Shobhit.</p>  
+
+  <p>The task involves extending the linear actuator, stopping, drilling, and finally retracting back. The power usage is then measured by a power meter as shown below.</p>  
+  
+  <image-component 
+  tag="image" 
+  source="../assets/Electronic/5d.png"
+  subtitle="Figure 5D: Power meter">
+  </image-component> 
+
+  <p><em>Figure 5D: Power meter</em></p>  
+
+  <p>I wanted to measure each component at different stages without any load. Once done, I changed the load to our typical use case scenario and repeated the experiment.</p>  
+
+  <h4>Power testing analysis</h4>  
+
+  <image-component 
+  tag="image" 
+  source="../assets/Electronic/5e.png"
+  subtitle="Figure 5E: Power testing result table">
+  </image-component> 
+
+  <p><em>Figure 5E: Power testing result table</em></p>  
+  <p>Using power usage from each component under different loads, I charted out a few combinations of electrical usage. The green represents lower power usage, and red represents higher power usage. The 2 main objectives of this test were to find out:</p>  
+  <ol>  
+    <li>Whether we are overshooting the power budget.</li>  
+    <li>How individual components affect the power usage.</li>  
+  </ol>  
+
+  <p>From this, we can see that in the peak power usage, we use up to 120.36W, which is well below the 240W power budget. Hence, there is extra capacity for additional components to be attached by the next team that will take over the project.</p>  
+
+  <p>Additionally, we can see that linear actuators and stepper motors are able to take on greater loads as the linear rate of increase in power usage is marginal. This also allows for future teams to add more attachments to these motors in case of feature expansion.</p>  
+
+  <h3>Sensor calibration</h3>  
+  <p>The Adafruit 4026 soil moisture sensor that I am using is capacitive. It is known for its affordable price, but it is not as accurate compared to other types of soil moisture sensors. This was a problem that I found out after carrying out a test in the previous semester using a normalization method. This was caused due to the fact that wetness of 100% referred to submersion of the sensor into the water. In our case, however, soil moisture at 100% refers to an equal mass of water and soil.</p>  
+
+  <p>To calibrate the sensor for our use case, I used gravimetric water content measurement, which is given by these equations (Hrisko, 2020):</p>  
+
+  <image-component 
+  tag="image" 
+  source="../assets/Electronic/eqn1.png"
+  subtitle="">
+  </image-component> 
+
+  <p>Where the Moisture Percentage is given by</p>  
+
+  <image-component 
+  tag="image" 
+  source="../assets/Electronic/eqn2.png"
+  subtitle="">
+  </image-component> 
+
+  <p>To find <em>m</em> and <em>b</em>, I carried out the experiment using dry gardening soil. The data collected can be seen in the table below:</p>
+  
+  <image-component 
+  tag="image" 
+  source="../assets/Electronic/5f.png"
+  subtitle="Figure 5F: Soil moisture test result table">
+  </image-component>  
+
+  <p>From this, I could plot a graph as such:</p>  
+
+  <image-component 
+  tag="image" 
+  source="../assets/Electronic/5g.png"
+  subtitle="Figure 5G: Soil moisture test graph">
+  </image-component>  
+
+  <p>The calibration has shown that it will yield an RMSE of 46, which in the worst-case scenario will lead to 10% inaccuracy (dry soil). However, as a whole, the normalised RMSE value is approximately 1.5%. This means that when trying to find water signatures in the soil, I will need to make sure to increase the threshold for water moisture level to above 5% to make sure that the error caused by random noise or interference will not affect the rover's decision-making.</p>  
+  </div>  
+
+  <div id="section-header-5">  
+  <h2>Deliverable achieved</h2>  
+  <p>Due to the mechanical work that I had to undertake, the software solution that I promised to fulfill has been fulfilled by Shobhit. Hence, through our cooperation, the electronic sub-system team has achieved all the design statements proposed:</p>  
+  <ol>  
+    <li>Solution that collects soil moisture, temperature, and relative humidity</li>  
+    <li>Solution that can power and control science experiments</li>  
+    <li>Solution that provides a reliable communication channel between the main computer, sensor module, and science experiment module</li>  
+    <li>Solution that enables the rover to collect the soil 10cm underground</li>  
+    <li>Solution that houses all the components required for the experiment</li>  
+  </ol>  
+
+  <p>In addition, I have also value-added through:</p>  
+  <ol>  
+    <li>Simplifying the integration of the science module to the rest of the rover through standardised connectors</li>  
+    <li>Safety features for both the team and the rover through a high-power control relay and status LEDs</li>  
+    <li>Providing room for additional hardware for the science module in the future through the power budget and additional digital and PWM IO pins</li>  
+  </ol>  
+  </div>  
+
+  <div id="section-header-6">  
+  <h2>Shortcomings and future work</h2>  
+  <h3>Shortcomings</h3>  
+  <p>The shortcomings that I have identified are mainly the mechanical system which I have designed. Due to my lack of domain expertise in Mechanical engineering, I was not able to carry out any mechanical simulations or analysis required to truly justify my design choices.</p>  
+
+  <p>In addition, my initial plan was to port all the components from RPI5 over to ESP32. This was to make sure that there were enough GPIO pins for future expansions. In addition, ESP32 has wireless communication features such as Bluetooth and WIFI access point mode which could be used to make wireless transmission between different sub-systems.</p>  
+
+  <p>However, due to a lack of team effort from the mechanical sub-system, I had to take up the work of the mechanical sub-system to ensure that the science module was integrated as a whole. This meant that there was not enough time for me to integrate the final PCB into the science module.</p>  
+
+  <h3>Future work</h3>  
+  <p>As for the future work, I would like the next batch of the electronic team to:</p>  
+  <ol>  
+    <li>Migrate all peripherals to ESP32</li>  
+    <li>Integrate the science module into the main Rover chassis</li>  
+    <li>Carry out full system testing in the field</li>  
+  </ol>  
+
+  <p>In addition, I would like to suggest that the next team carry out a full mechanical simulation of the science module. This is to ensure that the design choices made are indeed valid and that the system is safe for use. This will also enable them to find faults and work on improving on the weakest part of the link in the project which is the mechanical system.</p>
+
+  <p>With ESP32 integrated, the future team should aim to use its wireless features and low power mode to create a more robust system that can build onto the platform that I have created.</p>
+
+  <h3>Reference</h3>  
+  <p>Hrisko, J. (2020). Capacitive soil moisture sensor theory, calibration, and testing. Maker Portal LLC. DOI: 10.1145/978-3-31921-68573</p>  
+  </div>  
 
      <sl-button href="../">Back to Main</sl-button>
      <sl-button class="scroll-to-top" variant="primary" size="medium" circle onclick="scrollToTop()">
