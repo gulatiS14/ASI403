@@ -96,9 +96,10 @@
       source="../assets/Electronic/3a.png"
       subtitle="Figure 3a: Blue represents Data, and Red represents Power">
       </image-component>
+
+      <p>The following section aims to demonstrate the decision process for choosing these components.</p>
       
       <h3>Choosing the motor for drilling</h3>
-      <p>As there are multiple types of DC motors, I compared which type of motor is the most appropriate for drilling soil. The first considerations were the torque and RPM. Since our experiment would be done in the desert of Arizona, we would need high torque and low to moderate RPM motors. In addition, though I considered a much more efficient brushless DC motor to be used, due to its torque and RPM, a DC brushed motor with a gearbox was chosen. With consideration for price and procurement timeline, IG42 from Cytron was chosen.</p>
       
       <table>
         <tr><th>Type of motor</th><th>Torque (25%)</th><th>Efficiency (10%)</th><th>Durability (10%)</th><th>Cost (10%)</th><th>Simplicity (25%)</th><th>Availability (20%)</th><th>Average score</th></tr>
@@ -106,6 +107,15 @@
         <tr><td>DC brushless motor</td><td>3</td><td>5</td><td>5</td><td>4</td><td>3</td><td>4</td><td>3.7</td></tr>
       </table>
       <p style="text-align: center;"><em>Figure 3C: weighted decision matrix for Drill motor</em></p>
+
+      <p>The weightage for torque, simplicity and availability are higher than the rest as these metrics are the most crucial for mission specification. Especially for torque, I have to
+        ensure that the drill motor is able to drill through the soil. The simplicity and availability are also important as I need to make sure that the components are easy to integrate and can be procured in a timely manner.</p>
+      </p>
+
+      <p>As there are multiple types of DC motors, I compared which type of motor is the most appropriate for drilling soil.
+        Since our experiment would be done in the desert of Arizona, we would need high torque and low to moderate RPM motors. In addition, though I considered a much more efficient 
+        brushless DC motor to be used, due to its lack of torque and high RPM, a DC brushed motor with a gearbox was chosen. With consideration for price and procurement timeline, IG42 from 
+        Cytron was chosen.</p>
       
       <p>With the rated current of IG42 being 5.5A, I decided to use Cytron's recommended motor driver MD10C, which could accommodate up to 10A constant output and 3.3-5V logic level from GPIO.</p>
     </div>  
@@ -128,6 +138,8 @@
       
       <p>As for the linear actuator, it has to reach 10cm beneath the soil. Hence, in the case that we place the linear actuator at a height of 20cm (diameter of the wheels), I will need the linear actuator to extend at least 30cm into the soil.</p>
       
+      <p>Therefore, I chose RS Pro's 12V 300mm range linear actuator.</p>
+
       <h3>Choosing the motor for the carousel used in spectroscopy analysis</h3>
 
       <p>In the case of the motor for the carousel, we need to make sure that the maximum axial load 
@@ -145,6 +157,11 @@
         <tr><td>360-degree rotation</td><td>✅</td><td>❌</td></tr>
       </table>
       <p style="text-align: center;"><em>Figure 3E: Comparison matrix</em></p>
+
+      <p>Since carousel rotates continuously and, at the same time, require precise positioning, the stepper motor was chosen. The stepper motor I have decided to procure was the RS Pro's 12V model
+        which has a torque of 0.4Nm. This is sufficient to rotate the carousel with a load of 1kg. Additionally, it operates using bipolar connection (2 phase), making it easy to connect to any H-bridge
+      with 2 motor outputs.</p>
+      </p>
       
       <h3>Choosing the H-bridge for linear actuator and stepper motor</h3>
       <table>
