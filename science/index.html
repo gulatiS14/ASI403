@@ -43,296 +43,66 @@
 
     <image-component  tag="image" source="../assets/subsystem_interaction.png" subtitle="sub-system relationship diagram"> </image-component>
 
-    <p> This section aims to provide a comprehensive overview of current methodologies utilized by Mars rovers operating on Mars, as well as common life detection 
-      methods employed by other teams in the University Rover Challenge. By examining these methods, we seek to identify research gaps at both levels- professional 
-      Mars rovers and student-led rovers, and refine our problem statement to determine which gaps to address. </p>
+    <p> Professional Mars Rovers, including NASA’s Curiosity and Perseverance, deploy powerful but resource-intensive instruments such as X-ray diffraction, 
+      laser-induced breakdown spectroscopy and mass spectrometry to identify geochemical and organic markers. Although highly sophisticated, 
+      these devices possess a few downsides including: </p>
 
+    <p><ul>
+    <li><strong>High Power and Mass:</strong> Spaceflight-grade instruments are large and energy-hungry.</li>
+    <li><strong>Ambiguous Biotic vs. Abiotic Signals:</strong> Detecting carbon-based molecules is not always enough to confirm biological origins.</li>
+    </ul></p>
 
-    <p>Table 1.1 below summarizes the life detection methods and general limitations for various professional and student-led Mars rover models.
-    </p>
+    <p> On the other hand, student-Led Mars Rovers often adopt simpler and lower-cost methods such as colorimetric or 
+      small-scale optical detection, typically for for proteins or pigments. 
+      While more feasible within typical university budgets, these approaches: </p>
 
-    <table border="1">
-    <tr>
-      <th>Rover Model</th>
-      <th>Life Detection Methods</th>
-      <th>General Limitation</th>
-    </tr>
+    <p><ul>
+    <li>Provide narrow or shallow detection scope</li>
+    <li>Risk false negatives or false positive as determining the results using naked eyes is relatively unreliable </li>
+    <li>May struggle in dusty conditions, as soil coloration can confound results</li>
+    </ul></p>
 
-    <tr>
-    <td colspan="3" style = "color: white; background-color: black; text-align: center;">
-      <strong>Professional Mars Rovers</strong> 
-    </td>
-    </tr>
+    <p>Hence, two principal value propositions for the life science subsystem were determined in the previous semester as follows:</p>
 
-    <tr>
-      <td>NASA Curiosity Rover
-        <br><br>
-        (Curiosity Science Instruments - NASA Science, n.d.)
-      </td>  
-      
-      <td>
-        - Alpha Particle X-Ray Spectrometer (APXS): <br>Analyzes the chemical composition of Martian rocks and soil.<br><br>
-        - Chemistry & Camera (ChemCam): <br>Employs a laser to vaporize material samples, followed by the analysis of their elemental composition through an onboard spectrograph.<br><br>
-        - Chemistry & Mineralogy X-Ray Diffraction (CheMin): <br>Determines and quantifies the presence and concentration of various minerals on Mars.<br><br>
-        - Sample Analysis at Mars (SAM) Instrument Suite: <br>Detects and identifies a broad spectrum of carbon-based compounds.
-      </td>
+    <p><ul>
+    <li>A comprehensive science plan that ensures high-accuracy detection of potential 
+      biosignatures which provides critical insights into the habitability of selected sites that replicate Martian conditions.</li>
+    <li>A science plan that enables real-time, in-situ onboard analysis of soil samples for potential life signals with minimal reliance on external technical 
+      support which enhances the rover's scientific capability and overall mission value.</li>
+    </ul></p>
 
-      <td>
-        - High energy consumption and the bulky design of the instruments, which limits portability.<br><br>
-        - Difficulty in reliably distinguishing between biotic and abiotic sources of detected compounds, such as methane.
-      </td>
-    </tr>
-
-    <tr>
-      <td>NASA Perseverance Rover
-      <br><br>
-        (Perseverance Science Instruments - NASA Science, n.d.)
-      </td>  
-      
-      <td>
-        - SuperCam: <br>Analyzes the chemical composition of rocks and soils, including the atomic and molecular structure of their components.<br><br>
-        - SHERLOC (Scanning Habitable Environments with Raman & Luminescence for Organics & Chemicals): <br>Detects minerals, organic molecules and potential biosignatures at a fine scale.<br><br>
-        - PIXL (Planetary Instrument for X-ray Lithochemistry): <br>Measures the chemical composition of rocks with high precision at a very fine scale.
-      </td>
-      <td>
-        - Limited sensitivity in detecting low concentrations of organics.<br><br>
-        - Challenges in distinguishing between biotic and abiotic origins of detected organics.
-      </td>
-    </tr>
-
-    <tr>
-      <td colspan="3" bgcolor = "black" style = "color: white; background-color: black; text-align: center;">
-        <strong>Student-led Mars Rovers in Previous URC Submission</strong> 
-      </td>
-    </tr>
-
-    <tr>
-      <td>BYU Team 2024 URC Mars Rover
-      <br><br>  
-        (BYU Mars Rover, 2024) 
-      </td>  
-      
-      <td>
-        - Flavin Adenine Dinucleotide (FAD) detector combined with OpenCV Li Python library: <br>Detects metabolic activity and biochemical processes involving FAD-utilizing enzymes by emitting blue light onto soil samples and capturing any green fluorescence emitted by FAD coenzymes.
-      </td>
-
-      <td>
-        - Limited to surface-level analysis, potentially missing deeper subsurface life signals.<br><br>
-        - Risk of false positives due to difficulty in distinguishing between biological and non-biological fluorescence sources.
-      </td>
-    </tr>
-
-    <tr>
-      <td>West Virginia University Team Mountaineers' 2024 URC Mars Rover 
-      <br><br>
-        (WVUIRL, 2024)
-      </td>  
-      
-      <td>
-      - UV-Vis Spectroscopy: <br>Detects natural pigments and proteins by mixing soil samples with isopropyl alcohol.<br><br>
-      </td>
-
-      <td>
-        - Limited to detecting specific biosignatures, potentially missing a wide variety of organic compounds present in different forms on Mars 
-      </td>
-    </tr>
-
-    <tr>
-      <td>Manipal Team 2024 URC Mars Rover
-      <br><br>
-        (Mars Rover Manipal, 2024)
-      </td>  
-      
-      <td>
-        - Fluorescence Assay:<br>
-        • Detects proteins as indicators of potential biological material by applying Bradford's reagent to soil samples and measuring the resulting color change.<br>
-        • Identifies labile carbon compounds as signs of recent or ongoing biological activity by analyzing soil samples.<br>
-        • Detects carbonate minerals by analyzing soil reactions that indicate carbonate content.
-      </td>
-
-      <td>
-        - Limited in sensitivity, potentially failing to detect low concentrations of proteins or organic compounds and leading to false negatives.
-        <br><br>
-        - Limited to detecting specific biosignatures, potentially missing other key biological markers like lipids or nucleic acids, resulting in incomplete life signal assessments.
-      </td>
-    </tr>
-    <caption style = "caption-side: bottom;"><strong> Table 1.1: Life Detection Methods and General Limitations of Professional and Student-led Mars Rovers</strong></caption>
-    
-  </table>
-
-  <p>As seen in Table 1.1 above, both professional and student-led Mars rovers face notable limitations that highlight critical gaps 
-    in current life detection methods. These rovers are generally limited to surface-level analysis, which means they may miss 
-    potential subsurface biosignatures that could indicate past or present life. Their sensitivity is often restricted, making it 
-    difficult to detect low concentrations of proteins or organic compounds and leading to possible false negatives. Additionally, 
-    differentiating biological and non-biological sources with the current detection method is challenging, resulting in false positives
-     and complicating data interpretation. Furthermore, current methods tend to focus on detecting specific biosignatures, which may 
-     lead to potentially overlooking other important markers, such as nucleic acids or the biosignature with different forms on Mars. 
-     This narrow focus leads to incomplete assessments of life signals and highlights the need for complementary techniques for more 
-     thorough analysis. Moreover, the instruments used are often bulky and consume substantial energy, limiting their portability and
-      operational efficiency.</p>
-
-  <h3>Value proposition and Design statement</h3>
-
-  <p>To design a more effective onboard life detection system for Mars rovers, the following gaps must be addressed:</p>
-
-  <p><ul>
-    <li><strong>Broader Biosignature Detection:</strong> Implement a comprehensive science plan that enables the analysis of a diverse range of biomarkers to achieve a more holistic approach to life detection.</li>
-    <li><strong>Enhanced Sensitivity:</strong> Develop advanced methods capable of detecting low concentrations of organic compounds to reduce the likelihood of false negatives.</li>
-    <li><strong>Improved Biotic vs. Abiotic Differentiation:</strong> Establish reliable techniques for distinguishing between biological and non-biological sources of detected compounds.</li>
-    <li><strong>Compact, Energy-Efficient Design:</strong> Create a science plan that relies on minimal yet efficient technical instrumentation to enhance portability and operational sustainability.</li>
-  </ul></p>
-
-  <p>Addressing these gaps will allow us to develop a Mars rover that is capable of more comprehensive and reliable life detection, 
-    thereby enhancing the overall success of our rover in the URC Science Mission.</p>
-
-  <p>Considering the URC 2025 Science Mission requirements and the current gaps in life detection capabilities, <strong>two primary value 
-    propositions for life science subsystem</strong> have been identified:</p>  
-
-  <p><ol>
-    <li>A comprehensive science plan that ensures high-accuracy detection of potential biosignatures which provides critical insights 
-      into the habitability of selected sites that replicate Martian conditions.</li>
-    <li>A science plan that enables real-time, in-situ onboard analysis of soil samples for potential life signals with minimal reliance 
-      on external technical support which enhances the rover's scientific capability and overall mission value.</li>
-  </ol></p>
-
-    <p><b>From these value propositions, the following design statements can be obtained to design a solution that can:</b></p>
     <p>
-    <li><b>Design statement (1):</b> Detect multiple type of biosignatures</li>
-    <br>
-    <li><b>Design statement (2):</b> Enable real-time detection of potential life markers onboard the Mars rover</li>
-    <br>
-    <li><b>Design statement (3):</b> Provide results interpretable by minimal amount of onboard device with a short duration</li>
+      Building on these value propositions, the following design statements guide the development of a solution that can:
     </p>
-  </div>
+
+    <p>
+      Design statement (1): Detect multiple type of biosignatures
+    </p>
+
+    <p>
+      Design statement (2): Enable real-time detection of potential life markers onboard the Mars rover    
+    </p>
+
+    <p>
+      Design statement (3): Provide results interpretable by minimal amount of onboard device with a short duration
+    </p>
+
+    <p>
+    This semester, I continue to develop solutions that closely adhere to the established criteria. However, several iterations have been made to account
+      for the engineering complexities involved in constructing the onboard system. In addition, given the high cost and limited availability of the necessary 
+      chemicals in the NUS laboratory, my focus in this semester is on refining the chemistry experiments through literature review and only starting to 
+      commence hands-on testing in the laboratory once the experimental flow is approved by the engineering team.
+    </p>
 
     <div id="section-header-2">
      <h2>1.2 Concept Development</h2>
-    
-    <p>Before delving into the concept development for the science plan, it is crucial to first define what constitutes life. 
-      This will provide a clearer framework for understanding and refining the focus of the experiments.
-      <br><br>
-      The classification of living organisms is traditionally divided into five primary kingdoms: Animalia, Plantae, Fungi, Protista, 
-      and Monera (Whittaker, 1969). Table 1.2 provides an overview of these kingdoms, highlighting their respiration types, the air 
-      they interact with during metabolic processes and their fundamental building blocks.</p>
-
-      <image-component 
-      tag="image" 
-      source="../assets/life_science/Table 1.2 Overview of Respiration Types and Key Building Blocks Across Biological Kingdoms.png"
-      subtitle="Table 1.2 Overview of Respiration Types and Key Building Blocks Across Biological Kingdoms">
-      </image-component>
-
-    <p>Based on Table 1.2 shown above, the essential building blocks of living organisms on Earth can be categorized into amino acids
-       (proteins), nucleic acids (DNA/RNA), lipid acids (lipids) and carbohydrates.</p>
-
+      
     <div id = "section-header-2-1">
-    <h3>1.2.1 Concept 1</h3>
+    <h3>1.2.1 Concept 1: Colorimetric Assays as Stopgap</h3>
 
-    <p>Selecting which molecules to target for detection involves evaluating various biomolecules against criteria such as their specificity
-       to life, stability in Martian conditions and feasibility of detection. These factors are vital for ensuring reliable and practical 
-       life detection on Mars, given the planet's harsh environment and limited detection opportunities. A weighted selection matrix as 
-       shown in Table 1.3 is used to assess each type of molecule against these criteria, with scores ranging from 0 to 5, where 0 indicates 
-       the lowest relevance to each criterion and 5 represents the highest.</p>
-
-       <image-component 
-       tag="image" 
-       source="../assets/life_science/Table 1.3 Weighted Target Biosignature Selection Matrix Table.png"
-       subtitle="Table 1.3 Weighted Target Biosignature Selection Matrix Table">
-       </image-component>
-
-    <ul>
-        <li><strong>Specificity to Life:</strong> Higher scores indicate better specificity to biological origins.</li>
-        <li><strong>Stability in Martian Conditions:</strong> Higher scores suggest greater resilience to Mars's harsh conditions.</li>
-        <li><strong>Detection Feasibility:</strong> Higher scores reflect the higher practicality of detecting each molecule type using available technology or chemical analysis methods.</li>
-    </ul>
-
-    <p>According to Table 1.3, the weighted concept selection matrix for identifying biosignatures indicative of life on Mars, 
-      amino acids (proteins) and nucleic acids (DNA/RNA) have emerged as the highest-scoring candidates and were therefore selected 
-      for life signal detection on the Mars rover. 
-      
-      <br><br>To strikes a balance between detection feasibility and specificity to life, proteins
-       and nucleic acids were ultimately selected as the specific targeted biosignatures due to the high levels of radiation on Mars,
-        which significantly increase the likelihood of molecular decomposition (Dartnell, 2011; Pavlov et al., 2012). <br><br>As a result, 
-        smaller molecular fragments, such as nucleic acids and amino acids, have a higher probability of being detected compared to intact
-         DNA/RNA and proteins. To prioritize specificity to life, nucleic acids were chosen for their enhanced detection potential on Mars. 
-         Proteins, while exhibiting greater stability under Martian conditions but lower specificity to life, were included to detect larger 
-         fragments and thereby improve the reliability of the results because larger fragments of biological building blocks have higher specificity 
-         to life and thus detecting larger fragments of biological building blocks reduces the likelihood of false positive results compared 
-         to detecting amino acids which have higher chance of being produced through abiotic processes (McKay et al., 1996). 
-    </p>
-
-    <p>To address key gaps identified in current Mars rover life detection method in the “1.1: Context of Problem” section, FAD 
-      (Flavin Adenine Dinucleotide) and FDA (Fluorescein Diacetate) detection methods have been incorporated alongside nucleic acid and protein 
-      analysis to create a more effective and comprehensive science plan (Kieft & Phelps, 1997; Boulos et al., 1999). 
-      
-      <br><br>This strategy directly supports broader biosignature detection by enabling the identification of metabolic and enzymatic activities that extend beyond structural markers. FAD
-      detection is crucial for signaling active or historic cellular respiration, which serves as evidence of energy production processes, while FDA
-        acts as a marker of esterase enzyme activity, indicative of cell viability (Kieft & Phelps, 1997; Boulos et al., 1999). These additions enhance
-        sensitivity by detecting low concentrations of active biomolecules, reducing the risk of false negatives.Moreover, this integrated approach 
-        addresses the need for improved biotic and abiotic differentiation by distinguishing between compounds of biological and non-biological origins.
-      <br><br>While nucleic acids and proteins can be remnants of past life or products of abiotic processes, FAD and FDA detection focus on current metabolic
-      activity, making it easier to identify truly biotic signals. In addition, the enantiomeric excess testing is also considered to be included to
-      further ensure reliability by identifying amino acid chirality linked to biological processes, confirming that detected biosignatures are of 
-      biotic origin, even when no current life signals are evident (Kvenvolden et al., 1970). The detection of enantiomeric excess of amino acids can 
-      be considered a biosignature because life on Earth predominantly uses specific chirality (L-amino acids) in its amino acids which results in an 
-      enantiomeric imbalance. This characteristic asymmetry is difficult to produce through abiotic processes, so finding a significant enantiomeric
-      excess on Mars would strongly suggest that the amino acids detected are originated from biological activity rather than from non-living chemical
-        reactions (Kvenvolden et al., 1970).</p>
-
-    <p>After confirming the selected biosignatures for detection, the next step involves determining the appropriate detection method. A selection matrix
-       shown in Table 1.4 was employed to evaluate the capability of each detection method for identifying the chosen biosignatures, where a score of 1 
-       indicates the method can detect the biosignature and 0 indicates it cannot.</p>
-
-       <image-component 
-       tag="image" 
-       source="../assets/life_science/Table 1.4 Selection Matrix Table for Analyzing Devices Based on Biosignature Detection Capability.png"
-       subtitle="Table 1.4 Selection Matrix Table for Analyzing Devices Based on Biosignature Detection Capability">
-       </image-component>
-
-    <p>As shown in Table 1.4, the spectrofluorometer was able to detect all five targeted biosignatures. Hence, the spectrofluorometer is selected as the 
-      primary instrument for our science module to conduct all experiments related to detecting the chosen biosignatures. This choice aligns with the goal 
-      of addressing the research gaps identified in the problem context, specifically the need for a compact and energy-efficient design for Mars missions. 
-      The spectrofluorometer's ability to perform multiple tests using a single, versatile instrument ensures minimal yet highly effective technical instrumentation,
-       contributing to the sustainability and operational portability of the Mars rover's scientific payload.</p>
-
-    </div>
-
-    <div id="Detailed procedures">
-      <h3>Detailed procedures</h3>
-  
-      <p>The detailed procedures for detecting each chosen biosignature using the spectrofluorometer are outlined in the subsections below.</p>
-      <sl-tree>
-        <sl-tree-item >
-          <a href="./protein.html">Protein</a>
-        </sl-tree-item>
-        <sl-tree-item >
-          <a href="./nuclei_acids.html">Nuclei Acid</a>
-        </sl-tree-item>
-        <sl-tree-item>
-          <a href="./fad.html">FAD</a>
-        </sl-tree-item>
-        <sl-tree-item>
-          <a href="./fda.html">FDA</a>
-        </sl-tree-item>
-        <sl-tree-item>
-          <a href="./enantiometric_excess_of_amino_acids.html">Enantiomeric Excess of Amino Acids</a>
-        </sl-tree-item>
-  
-      </sl-tree> 
-    </div> 
-    
-    <div id = "section-header-2-2">
-    <h3>1.2.2 Concept 2</h3>
-
-    <p>However, given that our Mars rover is being developed for the University Rover Challenge 2025, priority is placed on meeting the participation requirements
-      for the science mission due to constraints in manpower and time. Therefore, the highest-ranked biosignatures in the selection matrix, Protein will be prioritized
-      for testing without relying on external technology. This decision is made due to the fact that the development of the spectrofluorometer is managed by the UREX 
-      group, which introduces uncertainty regarding its availability and successful development.
-    </p>
-
-    <p>Hence, a series of protein detection tests, independent of any external analytical devices, is conducted to make a comprehensive decision on the final selection 
-      of the onboard selection. The Ninhydrin Test, Biuret Test, and Xanthoproteic Test were selected because each targets distinct characteristics and functional groups
-      within proteins. This approach enables a more comprehensive analysis, as the outcomes of these tests can complement one another to enhance both the accuracy and 
-      sensitivity of the results. The detailed of each detections test are outlined in Table 1.5 below.
+    <p>
+      As stated in our previous semester’s concept selection, the original plan was to conduct all life detection tests using a spectrofluorometer due to its higher sensitivity and broader detection capability.
+      However, as the competition timeline grew tight and the UREX team’s spectrofluorometer was still in development in Semester 1, we began by implementing colorimetric assays. Specifically:
     </p>
 
     <image-component 
@@ -341,16 +111,162 @@
        subtitle="Table 1.5 Overview of Protein Detection Tests and Their Procedures">
     </image-component>
 
-    </div>
+    <p>
+      These classical laboratory experiments require only minimal instrumentation, particularly reagents, test tubes and a camera to provide direct visual confirmation. 
+      We completed initial bench trials and even tested soil samples to ascertain feasibility. 
+      These experiments validated that colorimetric assays could serve as a fallback if the advanced instrument was unavailable to ensure basic compliance with URC’s life detection requirements.
+    </p>
 
-    <div id = "section-header-3">
-    
-    <h2>1.3 Testing and Analysis</h2>
+    <h3>1.2.2 Concept 2: Pivot to Spectrofluorometry</h3>
+      
+    <p>With the UREX team’s timely delivery of a compact and low-power spectrofluorometer, we reverted to our primary plan:</p>
 
-    <p>The initial phase of testing focuses on evaluating the protein detection capability. Each test includes two test tubes: one containing the protein sample and the
-      other serving as a control. The protein sample is prepared by dissolving protein powder in ultrapure water, while the control contains only ultrapure water. The
-      setup prior to adding the protein detection reagents is depicted in the Figure 1.1 on the left. Following the completion of all protein detection tests, the 
-      expected outcomes are outlined in the "Observation for Positive Result" column of Table 1.5. The actual experimental results are displayed in Figure 1.1 on the right. 
+    <p><ul>
+    <li>Integrate the spectrofluorometer into a sealed test chamber for in-situ soil analysis.</li>
+    <li>Use fluorescent markers and dyes that respond to various biosignatures.</li>
+    </ul></p>
+
+    <p>This pivot drastically increased detection power and consolidated the subsystem design, which allows us to retire colorimetric assays before further testing and iterations.
+      For the spectrofluorometric tests, we initially mapped out five key biosignatures for the spectrofluorometer to detect:</p>
+
+      
+    <p><ul>
+    <li>Proteins: Smaller amino acid fragments survive Martian radiation better but intact proteins reduce false positives by confirming more specific biological origins.</li>
+    <li>Nucleic Acids: Strongly life-specific molecules whose partial fragments remain key indicators of past or present biological processes.</li>
+    <li>FAD (Flavin Adenine Dinucleotide): Signals active or historic cellular respiration and therefore highlights underlying metabolic activity.</li>
+    <li>FDA (Fluorescein Diacetate): Reveals live enzyme activity through fluorescence, which offers a sensitive measure of current microbial viability.</li>
+    <li>Enantiomeric Excess: Confirms biotic origins by detecting an imbalance in amino acid chirality that is nearly impossible to replicate through abiotic processes.</li>
+    </ul></p>
+
+    <p>
+      This comprehensive suite addresses major structural, metabolic and functional markers of life which all measurable by suitable excitation-emission scanning in one spectrofluorometer.
+
+      However, due to time constraints and the complexities of adding specialized reagents for enantiomeric excess detection, we opted to omit this test. 
+      While analyzing amino acid chirality could help further minimize false positives, we prioritized URC 2025 eligibility by focusing on our remaining four methods, 
+      which already offer a robust and comprehensive approach to life detection.
+    </p>
+
+    <h3>1.2.2.1 Concept 2.1</h3>
+
+    <p>
+      The detailed procedures for the initial plan of detecting each chosen biosignature using the spectrofluorometer are outlined in the subsections below.
+    </p>
+
+      <sl-tree>
+        
+        <sl-tree-item >
+          <a href="./protein.html">Protein</a>
+        </sl-tree-item>
+        
+        <sl-tree-item >
+          <a href="./nuclei_acids.html">Nuclei Acid</a>
+        </sl-tree-item>
+        
+        <sl-tree-item>
+          <a href="./fad.html">FAD</a>
+        </sl-tree-item>
+        
+        <sl-tree-item>
+          <a href="./fda.html">FDA</a>
+        </sl-tree-item>
+        
+        <sl-tree-item>
+          <a href="./enantiometric_excess_of_amino_acids.html">Enantiomeric Excess of Amino Acids</a>
+        </sl-tree-item>
+  
+      </sl-tree> 
+
+    <p>
+      The overall experimental procedure is consistent across all tests as shown below: 
+    </p>
+
+    <ol>
+    <li>Soil is combined with a buffer solution.</li>
+    <li>The solution with soil is stirred or shaken for five minutes.</li>
+    <li>The mixture is then filtered.</li>
+    <li>The resulting supernatant is mixed with a second solution to activate its fluorescent properties.</li>
+    <li>The mixture is then stirred or shaken for another five minutes.</li>
+    <li>The sample is then sent for fluorescence measurement.</li>
+    </ol>
+      
+    <p>
+      All tests require distinct buffer and secondary solutions. Hence, it results in a total need for four different buffer solutions and four corresponding second solutions onboard.
+
+      However, because many of the required chemicals were expensive and not readily available from the NUS Chemistry Department, coupled with budget constraints and lengthy lead times, 
+      we then conducted another round of research to design experiments using only reagents directly procurable from the NUS Chemistry department laboratory. 
+      The result is an iterated version of the spectrofluorometric experiment plan outlined in the next concept.
+    </p>
+
+    <h3>1.2.2.2 Concept 2.2</h3>
+
+    <p>
+      The detailed procedures for the iterated plan of detecting each chosen biosignature using the 
+      spectrofluorometer are outlined in the subsections below.
+    </p>
+
+    <p>
+      The overall experimental procedure is similar as concept 2.1 as stated below.
+    </p>
+
+    <ol>
+    <li>Soil is combined with a buffer solution.</li>
+    <li>The solution with soil is stirred or shaken for five minutes.</li>
+    <li>The mixture is then filtered.</li>
+    <li>The resulting supernatant is mixed with a second solution to activate its fluorescent properties.</li>
+    <li>The mixture is then stirred or shaken for another five minutes.</li>
+    <li>The sample is then sent for fluorescence measurement.</li>
+    </ol>
+
+    <p>
+      All tests require distinct buffer and secondary solutions. Hence, it still results in a total need for four different buffer solutions and four corresponding second solutions onboard.
+    </p>
+
+    <p>
+      However, once the engineering team began designing the science payload and realized the complexity of fitting 8 pumps and 8 beakers, 
+      we decided to iterate the experiment plan. By adopting a universal buffer approach, we could significantly reduce the number of onboard reagents. 
+      This updated spectrofluorometric experiment plan is presented in the following concept.
+    </p>
+
+    <h3>1.2.2.3 Concept 2.3</h3>
+
+    <p>
+      The detailed procedures for the iterated plan of detecting each chosen biosignature using the spectrofluorometer and an universal buffer are outlined in the subsections below.
+    </p>
+
+    <p>
+      The overall experimental procedure is still similar as Concept 2.1 as stated below.
+    </p>
+
+    <ol>
+    <li>Soil is combined with a buffer solution.</li>
+    <li>The solution with soil is stirred or shaken for five minutes.</li>
+    <li>The mixture is then filtered.</li>
+    <li>The resulting supernatant is mixed with a second solution to activate its fluorescent properties.</li>
+    <li>The mixture is then stirred or shaken for another five minutes.</li>
+    <li>The sample is then sent for fluorescence measurement.</li>
+    </ol>
+
+     <p>
+       In this revised concept, all tests use a single universal buffer solution with separate secondary reagents for each assay. By consolidating the buffer requirements, 
+       the total onboard solutions are reduced to one common buffer plus five secondary solutions, which both lightens the science payload and simplifies the engineering 
+       team’s design of the onboard experiment setup.
+     </p>
+
+     <p>
+       In conclusion, it is still suggested for the engineering team to design an onboard experiment setup capable of accommodating a total of five experiments. 
+       This additional setup would serve as a backup in case of any issues with the primary configuration and ensure readiness for future developments, 
+       particularly in testing the enantiomeric excess of amino acids.
+     </p>
+
+    <h3>1.3 Testing and Analysis</h3>
+
+    <p>
+      Testing and Analysis for Concept 1
+    </p>
+
+    <p>
+      In Semester 1, we focused on conducting experiments for protein testing, and all three experiments successfully demonstrated the presence of protein. 
+      The experiment outcomes are stated below.    
     </p>
 
     <image-component 
@@ -358,8 +274,6 @@
        source="../assets/life_science/Figure 1.1 Experimental Setup and Results for Protein Detection Tests (Xanthoproteic Test, Biuret Test, Ninhydrin Test).png"
        subtitle="Figure 1.1 Experimental Setup and Results for Protein Detection Tests (Xanthoproteic Test, Biuret Test, Ninhydrin Test)">
     </image-component>
-    
-    <p>A summary and analysis of the experimental outcomes are provided in Table 1.6 below.</p>
 
     <image-component 
        tag="image" 
@@ -367,12 +281,10 @@
        subtitle="Table 1.6 Summary of Experimental Outcomes for Protein Detection Tests">
     </image-component>
 
-    <p>As shown in the summary table, all three protein detection tests demonstrated strong efficacy in detecting the presence of proteins. Consequently, given that
-       the life detection tests in the URC Science Mission will be performed with soil samples, the second round of testing will evaluate the protein detection capability
-        of these methods in the presence of soil.
+    <p>
+      On top of that, second round of testing was conducted to evaluate the protein detection capability of 
+      these methods in the presence of soil. Six test tubes were prepared for each protein detection test with the following configurations:
     </p>
-
-    <p>In the second round of testing, six test tubes are prepared for each protein detection test with the following configurations in Table 1.7.</p>
 
     <image-component 
        tag="image" 
@@ -380,23 +292,8 @@
        subtitle="Table 1.7 Experiment Settings for Second Round of Protein Detection Testing">
     </image-component>
 
-    <p><strong>Objectives:</strong>
-    <ul>
-    <li>Test Tubes 1, 2, 3, 4, and 5 are used to assess the effect of soil on protein detection.</li>
-    <li>Test Tubes 1 and 2, and Test Tubes 3 and 4 are used to evaluate whether stirring influences the outcome of the experiment.</li>
-    </ul>
-    </p>
-
-    <p>The hypothesis for this round of testing is that the presence of soil and the method of mixing (stirring versus no stirring) will influence the protein 
-      detection outcomes. It is anticipated that stirring will improve the distribution of the protein within the soil, enhancing detection efficiency, while 
-      the soil itself may introduce potential interferences that could affect the accuracy of the results. This test aims to determine whether soil particles or
-       the absence of stirring could lead to false negatives or reduced detection capability.
-    </p>
-
-    <p>The setup before adding the protein detection reagents is shown in the image on the left in each figure from Figure 1.2 to Figure 1.4. After completing the
-       protein detection tests, the anticipated positive outcomes are indicated in Figure 1.2 to Figure 1.4 with red-coloured text. The actual experimental results
-        are displayed in the image on the right of Figure 1.2 to Figure 1.4. A summary and analysis of the experimental outcomes are provided in the table right after
-         each figure, from Table 1.8 to Table 1.10.
+    <p>
+      The key findings are outlined below:
     </p>
 
     <image-component 
@@ -405,7 +302,7 @@
        subtitle="Figure 1.2 Experimental Setup and Results for Ninhydrin Test">
     </image-component>
 
-    <image-component 
+  <image-component 
        tag="image" 
        source="../assets/life_science/Table 1.8 Summary of Experimental Outcomes for Ninhydrin Test.png"
        subtitle="Table 1.8 Summary of Experimental Outcomes for Ninhydrin Test">
@@ -435,6 +332,190 @@
        subtitle="Table 1.10 Summary of Experimental Outcomes for Xanthoproteic Test">
     </image-component>
 
+    <p>
+      Testing and Analysis for Concept 2
+    </p>
+
+    <p>
+      After the development of the spectrofluorometer is confirmed, we shift our plan to focus on conducting the experiments of Concept 2.
+    </p>
+
+    <image-component 
+       tag="image" 
+       source="../assets/PT stacked 1.png"
+       subtitle="Table 1.10 Summary of Experimental Outcomes for Xanthoproteic Test">
+    </image-component>
+
+    <image-component 
+       tag="image" 
+       source="../assets/PT overlay.png"
+       subtitle="Table 1.10 Summary of Experimental Outcomes for Xanthoproteic Test">
+    </image-component>
+
+    <image-component 
+       tag="image" 
+       source="../assets/DNA stacked 1.png"
+       subtitle="Table 1.10 Summary of Experimental Outcomes for Xanthoproteic Test">
+    </image-component>
+
+    <image-component 
+       tag="image" 
+       source="../assets/DNA overlay.png"
+       subtitle="Table 1.10 Summary of Experimental Outcomes for Xanthoproteic Test">
+    </image-component>
+
+    <image-component 
+       tag="image" 
+       source="../assets/FDA stacked 1.png"
+       subtitle="Table 1.10 Summary of Experimental Outcomes for Xanthoproteic Test">
+    </image-component>
+
+    <image-component 
+       tag="image" 
+       source="../assets/FDA overlay.png"
+       subtitle="Table 1.10 Summary of Experimental Outcomes for Xanthoproteic Test">
+    </image-component>
+
+    <image-component 
+       tag="image" 
+       source="../assets/FAD stacked 1.png"
+       subtitle="Table 1.10 Summary of Experimental Outcomes for Xanthoproteic Test">
+    </image-component>
+
+    <image-component 
+       tag="image" 
+       source="../assets/FAD overlay.png"
+       subtitle="Table 1.10 Summary of Experimental Outcomes for Xanthoproteic Test">
+    </image-component>
+
+    <image-component 
+       tag="image" 
+       source="../assets/PT stacked 2.png"
+       subtitle="Table 1.10 Summary of Experimental Outcomes for Xanthoproteic Test">
+    </image-component>
+
+    <image-component 
+       tag="image" 
+       source="../assets/DNA stacked 2.png"
+       subtitle="Table 1.10 Summary of Experimental Outcomes for Xanthoproteic Test">
+    </image-component>
+
+    <image-component 
+       tag="image" 
+       source="../assets/FDA stacked 2.png"
+       subtitle="Table 1.10 Summary of Experimental Outcomes for Xanthoproteic Test">
+    </image-component>
+
+    <image-component 
+       tag="image" 
+       source="../assets/FAD stacked 2.png"
+       subtitle="Table 1.10 Summary of Experimental Outcomes for Xanthoproteic Test">
+    </image-component>
+
+
+    <h3>1.4 Fulfilment of deliverables</h3>
+
+
+    <h3>1.5 Shortcomings and Future Work</h3>
+
+
+      
+    <h1>BELOW IS ALL OLD STUFF</h1>
+
+      
+
+      
+      
+    <p>After confirming the selected biosignatures for detection, the next step involves determining the appropriate detection method. A selection matrix
+       shown in Table 1.4 was employed to evaluate the capability of each detection method for identifying the chosen biosignatures, where a score of 1 
+       indicates the method can detect the biosignature and 0 indicates it cannot.</p>
+
+       <image-component 
+       tag="image" 
+       source="../assets/life_science/Table 1.4 Selection Matrix Table for Analyzing Devices Based on Biosignature Detection Capability.png"
+       subtitle="Table 1.4 Selection Matrix Table for Analyzing Devices Based on Biosignature Detection Capability">
+       </image-component>
+
+    <p>As shown in Table 1.4, the spectrofluorometer was able to detect all five targeted biosignatures. Hence, the spectrofluorometer is selected as the 
+      primary instrument for our science module to conduct all experiments related to detecting the chosen biosignatures. This choice aligns with the goal 
+      of addressing the research gaps identified in the problem context, specifically the need for a compact and energy-efficient design for Mars missions. 
+      The spectrofluorometer's ability to perform multiple tests using a single, versatile instrument ensures minimal yet highly effective technical instrumentation,
+       contributing to the sustainability and operational portability of the Mars rover's scientific payload.</p>
+
+    </div>
+
+    <div id="Detailed procedures">
+      <h3>Detailed procedures</h3>
+  
+      <p>The detailed procedures for detecting each chosen biosignature using the spectrofluorometer are outlined in the subsections below.</p>
+      
+    </div> 
+    
+    <div id = "section-header-2-2">
+    <h3>1.2.2 Concept 2</h3>
+
+    <p>However, given that our Mars rover is being developed for the University Rover Challenge 2025, priority is placed on meeting the participation requirements
+      for the science mission due to constraints in manpower and time. Therefore, the highest-ranked biosignatures in the selection matrix, Protein will be prioritized
+      for testing without relying on external technology. This decision is made due to the fact that the development of the spectrofluorometer is managed by the UREX 
+      group, which introduces uncertainty regarding its availability and successful development.
+    </p>
+
+    <p>Hence, a series of protein detection tests, independent of any external analytical devices, is conducted to make a comprehensive decision on the final selection 
+      of the onboard selection. The Ninhydrin Test, Biuret Test, and Xanthoproteic Test were selected because each targets distinct characteristics and functional groups
+      within proteins. This approach enables a more comprehensive analysis, as the outcomes of these tests can complement one another to enhance both the accuracy and 
+      sensitivity of the results. The detailed of each detections test are outlined in Table 1.5 below.
+    </p>
+
+
+
+    </div>
+
+    <div id = "section-header-3">
+    
+    <h2>1.3 Testing and Analysis</h2>
+
+    <p>The initial phase of testing focuses on evaluating the protein detection capability. Each test includes two test tubes: one containing the protein sample and the
+      other serving as a control. The protein sample is prepared by dissolving protein powder in ultrapure water, while the control contains only ultrapure water. The
+      setup prior to adding the protein detection reagents is depicted in the Figure 1.1 on the left. Following the completion of all protein detection tests, the 
+      expected outcomes are outlined in the "Observation for Positive Result" column of Table 1.5. The actual experimental results are displayed in Figure 1.1 on the right. 
+    </p>
+
+
+    
+    <p>A summary and analysis of the experimental outcomes are provided in Table 1.6 below.</p>
+
+
+    <p>As shown in the summary table, all three protein detection tests demonstrated strong efficacy in detecting the presence of proteins. Consequently, given that
+       the life detection tests in the URC Science Mission will be performed with soil samples, the second round of testing will evaluate the protein detection capability
+        of these methods in the presence of soil.
+    </p>
+
+    <p>In the second round of testing, six test tubes are prepared for each protein detection test with the following configurations in Table 1.7.</p>
+
+
+
+    <p><strong>Objectives:</strong>
+    <ul>
+    <li>Test Tubes 1, 2, 3, 4, and 5 are used to assess the effect of soil on protein detection.</li>
+    <li>Test Tubes 1 and 2, and Test Tubes 3 and 4 are used to evaluate whether stirring influences the outcome of the experiment.</li>
+    </ul>
+    </p>
+
+    <p>The hypothesis for this round of testing is that the presence of soil and the method of mixing (stirring versus no stirring) will influence the protein 
+      detection outcomes. It is anticipated that stirring will improve the distribution of the protein within the soil, enhancing detection efficiency, while 
+      the soil itself may introduce potential interferences that could affect the accuracy of the results. This test aims to determine whether soil particles or
+       the absence of stirring could lead to false negatives or reduced detection capability.
+    </p>
+
+    <p>The setup before adding the protein detection reagents is shown in the image on the left in each figure from Figure 1.2 to Figure 1.4. After completing the
+       protein detection tests, the anticipated positive outcomes are indicated in Figure 1.2 to Figure 1.4 with red-coloured text. The actual experimental results
+        are displayed in the image on the right of Figure 1.2 to Figure 1.4. A summary and analysis of the experimental outcomes are provided in the table right after
+         each figure, from Table 1.8 to Table 1.10.
+    </p>
+
+
+
+  
     </div>
 
     <div id = "section-header-4">
