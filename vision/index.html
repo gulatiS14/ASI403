@@ -28,134 +28,150 @@
     
     <h1>2. Vision Sub-system</h1>
 
-    <div id="Value-Prop-and-Design-Statement">
-        <h2>2.1 Sub-system specific Value Proposition and Design statement</h2>
-        <p> The vision subsystem's main use case is to provide the geological context around as well as, to find the best site for rover to sample soil for finding signs of life.</p>
+    <p> The following report will be a continuation from Semester 1, please read through the archived part link below to recap:</p>
+
+    <sl-tree-item >
+        <a href="../Sem_1/vision/">Vision (Sem 1 Archived)</a>
+      </sl-tree-item>
+
+      <div id="Value-Prop-and-Design-Statement">
+        <h2>2.1 Sub-system specific Value Proposition and Design Statement</h2>
+        <p>
+            Originally, the vision subsystem was focused on providing geological context to help select the best site for soil sampling in search of signs of life. However, with the shift in priorities, the value proposition now also emphasizes establishing a robust spectroscopy system and a fully functioning GUI. This updated approach not only supports informed site selection and comprehensive scientific documentation but also streamlines operator tasks by integrating advanced spectroscopic capabilities with an intuitive user interface.
+        </p>
     
-        <p><b> The 2 main value propositions that were identified are as follows:</b></p>
+        <p><b>The 2 main value propositions that were identified are now:</b></p>
         
-        <p> A geological imaging system that transforms the rover's sampling capabilities by providing crucial contextual information that enables informed site selection, comprehensive scientific documentation, and efficient mission execution.</p>
+        <p>
+            1. A geological imaging and spectroscopy system that transforms the rover's sampling capabilities by providing crucial contextual information and scientific analysis tools. This enables informed site selection, comprehensive scientific documentation, and efficient mission execution.
+        </p>
             
-        <p> By integrating panoramic views, high-resolution close-ups, and stratigraphic profiling capabilities, the system ensures each sample collected has maximum scientific value for detecting potential biosignatures in Mars-analog environments and fullfil the URC requirements.</p>
+        <p>
+            2. By integrating panoramic views, high-resolution close-ups, stratigraphic profiling, and spectroscopic analysis, the system ensures each sample collected has maximum scientific value. It fulfills URC requirements while providing operators with detailed insights necessary for detecting potential biosignatures.
+        </p>
             
+        <p><b>From these value propositions, the following design statements can be obtained to design an integrated system that can:</b></p>
         
+        <p><b>Design Statement (1): </b>Combine panoramic vision with high-resolution imaging to support each phase of the scientific investigation process, such as providing accurate images for stratigraphic profiles.</p>
     
-        <p><b>From these value propositions, the following design statements can be obtained to design an integrated camera system that can:</b></p>
-        
-        <p><b>Design statement (1): </b>It combines panoramic vision to support each phase of the scientific investigation process, such as providing accurate images for stratigraphic profiles.</p>
+        <p><b>Design Statement (2): </b>Enable the team to document geological context and soil details while precisely identifying optimal sampling locations. By automating scale calculations and location documentation, the design allows operators to focus on scientific analysis rather than technical operation, maximizing the scientific return from each collected sample.</p> 
     
-        <p><b>Design statement (2): </b>The system will enable team to document geological context, the soil details and precisely identify optimal sampling locations.</p>
-            
-        <p><b>Design statement (3): </b>By automating scale calculations and location documentation, the design allows operators to focus on scientific analysis rather than technical operation, maximizing the scientific return from each collected sample.</p>
+        <p><b>Design Statement (3): </b>Create from scratch an easy-to-use GUI for science operators. This interface will integrate with the spectroscopy system to simplify operational tasks, enhance mission efficiency, and fulfill URC requirements.</p> 
+    
+        <p>
+            In this semester, the main focus has been to create a functioning science module by laying a strong foundation through comprehensive documentation, applying industry best practices, and employing rigorous scientific methods to achieve optimal results.
+        </p>
     </div>
+    
+    
     
     <div id="Concept-Development">
         <h2>2.2 Concept Development</h2>
         <p>
-          The geological complexity of the Mars Desert Research Station (MDRS) environment, with its "horizontal layers" and diverse "regolith terrain systems" (Clarke, 2003), demands sophisticated imaging solutions. The science team's design process explores three critical functions for the rover's vision system: wide-angle photography for contextual documentation, close-up imaging for detailed sample analysis, and methods for identifying optimal sampling locations.
+            During the concept development phase, numerous innovative approaches were conceptualized to build robust pipelines supporting the system. The primary focus was on integrating components such as video streaming, GUI design, and sensor interfacing to optimize performance and ensure scalability. This exploratory phase laid the foundation for the tailored solutions implemented in the final design.
         </p>
-        
-        <p>These functions are discussed in detail in the following subsections, and Table 2.1 shows the morphological chart for the overall subsystem: </p>
+          
 
-        <image-component 
-        tag="image" 
-        source="../assets/vis_morph_1.jpg"
-        subtitle="Table 2.1: Morphological chart for vision component selection">
-        </image-component>
+        <h3>2.2.1 Different Ways to Setup GUI</h3>
+            <p>
+            For the rover's mission, achieving low-latency access to GPIO controls is essential. In this context, the design must enable real-time stereo camera streaming (using the ZED2i) while ensuring responsive control via a dedicated GUI. The challenge lies in balancing hardware constraints—using a Jetson for processing and streaming, and a Raspberry Pi (RPi) for direct GPIO management—with overall network reliability and user experience.
+            </p>
 
-        <h3>2.2.1 For the function to take “wide shots”</h3>
+            <p>
+            The following architectural options were examined:
+            </p>
 
-        <p>
-          The team evaluates three potential approaches for wide-angle photography: a stereo camera system that provides depth perception and wide field of view capabilities, a 360° panoramic camera for complete site documentation, or a dual monocular setup. The integration with ROS 2 becomes particularly advantageous here, as it "leverages its strengths in inter-process communication and software modularity" (WVU Team Mountaineers & , 2024), allowing efficient handling of high-bandwidth image data and seamless integration with OpenCV for image processing.
-        </p>
-        
-        <p>In order to represent each category, a market study was conducted, and the following options were chosen:</p>
-
-        <ol>
+            <ul>
             <li>
-                <p><strong>Stereo Camera:</strong></p> 
-                <p><strong>ZED 2i Stereo Camera:</strong> A professional-grade stereo vision camera with 4K capability and built-in depth perception (StereoLabs, 2022).</p>
+                <strong>Current Approach (Optimal):</strong> The GUI and server run on the RPi while the Jetson processes and streams the ZED2i data via UDP. This method offers direct GPIO access through the RPi, ensuring rapid response times and maintaining a safe, isolated network environment for critical controls.
             </li>
             <li>
-                <p><strong>360 Degree Camera:</strong></p> 
-                <p><strong>Insta360 X3:</strong> A 360-degree camera capable of capturing full panoramic views in a single shot (Insta360 , n.d.).</p>
+                <strong>Alternative Approaches:</strong> Other options considered include hosting the GUI on the Jetson with a reverse camera stream from the RPi, accessing the RPi directly via SSH, or consolidating all functionalities on the Jetson. However, these alternatives present challenges such as increased latency, complex remote GPIO control, and potential single points of failure.
             </li>
-            <li>
-                <p><strong>Wide Monocular Camera:</strong></p> 
-                <p><strong>Yealink UVC30:</strong> A high-quality 4K monocular USB camera with good low-light performance (Yealink, 2021).</p>
-            </li>
-        </ol>
-        
-        <image-component 
-        tag="image" 
-        source="../assets/vis_cam_sel_1.png"
-        subtitle="Figure 2.1: Showing each camera selected for each group">
-        </image-component>
+            </ul>
 
-        <p>
-            The team will evaluate these options based on weighted concept selection matrix where criteria such as image quality, field of view and depth perception most importantly, as it is necessary to meet the minimum reuiremnets. This can be seen in the Table 2.2 below:
-        </p>
+            <p>
+            A critical evaluation of these alternatives highlights that the current approach is most effective. Direct control via the RPi minimizes latency and avoids the pitfalls associated with SSH overhead or dual streaming complications. Furthermore, by decoupling the processing and control functionalities, the system leverages each hardware component's strengths—GPU-accelerated streaming on the Jetson and real-time GPIO management on the RPi.
+            </p>
 
-        <image-component 
-        tag="image" 
-        source="../assets/vis_con_sel_1.png"
-        subtitle="Table 2.2: Weighted concept selection matrix for choosing the component for wide eyed functionality">
-        </image-component>
+            <image-component 
+            tag="image" 
+            source="../assets/Vision/gui_morph.png"
+            subtitle="Table 2.: Weighted concept selection matrix for choosing the GUI architecture">
+            </image-component>
 
-        <p>
-            From the above component matrix, the ZED 2i stereo camera is selected for our URC rover implementation. Other than the benefits in camera quality, it connects via USB Type-C (USB 3.0) to our NVIDIA Jetson platform, enabling real-time spatial computing with depth sensing from 0.3m to 20m. The ZED 2i is well-suited for the harsh desert environment with its IP66 rating and operating temperature range of -10°C to +45°C, to ensure reliable performance in the Mars Desert Research Station conditions (StereoLabs, 2022).
-        </p>
+            <h4>Challenges with Each Approach</h4>
 
-        <h3>2.2.2 For the function to take “close-up shots”</h3>
+                <p>
+                Each architectural alternative presents specific limitations in the context of rover deployment. Direct SSH access to the RPi compromises latency and system robustness, especially under unstable network conditions. Hosting the GUI on Jetson requires remote GPIO control over the network, introducing latency and increasing failure points. A fully Jetson-hosted solution faces physical wiring constraints and possible voltage mismatches for GPIO control. These limitations emphasize the need for a hybrid approach that balances computational efficiency, real-time GPIO responsiveness, and operational resilience.
+                </p>
 
-        <p>
-          For close-up documentation, the team is considering a dedicated microscopic camera for maximum magnification, a high-resolution camera with electronic zoom capabilities, or a hybrid autofocus system. This capability is crucial as teams must "take a close up, well-focused, high-resolution picture with some indication of scale" at sampling sites.
-        </p>
-        
-        <p>In order to represent each category, a market study was conducted to look for the most feasible and popular options to represent each category:</p>
-        
-        <ol>
-            <li>
-                <p><strong>Microscopic Camera:</strong></p> 
-                <p><strong>Off-the-shelf Digital Microscope:</strong> Most popular choice among hobbyists and makers (Team, n.d.).</p>
-            </li>
-            <li>
-                <p><strong>High Resolution with electronic zoom:</strong></p> 
-                <p><strong>RPI Camera:</strong> Industry standard for robotics (Raspberry Pi Ltd, 2024).</p>
-            </li>
-            <li>
-                <p><strong>Hybrid Autofocus Camera:</strong></p> 
-                <p><strong>Olympus Tough TG-6:</strong> Professional-grade macro photography capabilities (dpreview, 2019).</p>
-            </li>
-        </ol>
+            <h4>Why Current Approach is Optimal</h4>
 
-        <p>Further analysis is done using a weighted component selection matrix, to determine the suitable choice, which can be seen in the Table 2.3 below:</p>
+                <p>
+                The current design leverages the strengths of both processing units — the Jetson efficiently handles GPU-accelerated camera streaming, while the RPi offers direct, low-latency access to GPIOs without network dependencies. This architecture provides network resilience through static IP communication and isolates security risks by avoiding SSH exposure. Furthermore, it supports future scalability without requiring a complete system redesign, making it the most suitable choice for rover operations in dynamic and uncertain environments.
+                </p>
 
-        <image-component 
-        tag="image" 
-        source="../assets/vis_con_sel_2.png"
-        subtitle="Table 2.3: Weighted concept selection matrix for choosing the component for close up functionality">
-        </image-component>
+        <h3>2.2.2 Choosing the Correct Video Streaming Method</h3>
 
-        <p>While both the Digital Microscope Camera and RPi Camera with E-Zoom show promising characteristics (tied at 7.80/10), with the Hybrid Autofocus Camera scoring lower (6.45/10), further testing is required to understand which is the better choice for the mission especially to find the correct sampling location. This testing will likely reveal practical differences not apparent in theoretical analysis and will ensure the selected system meets all mission requirements effectively.</p>
+            
+                <p>
+                  For the rover’s mission, it is essential to stream high-quality video from the ZED2i camera to the Raspberry Pi for real-time monitoring and control. Several streaming options were considered to meet the demands of low latency and system reliability. These options include raw UDP sockets, a GStreamer pipeline, the native ZED2i SDK API, and TCP-based streaming. Each method offers distinct advantages and drawbacks, making it crucial to evaluate them against our hardware constraints and performance needs.
+                </p>
+                
+                <h4>Evaluation of Streaming Methods</h4>
+                <p>
+                  <strong>Raw UDP Sockets:</strong> This method involves direct frame-by-frame transmission via UDP packets. It offers low-level control and minimal overhead, making it ideal for achieving the low latency required for real-time video feedback and GPIO control.
+                </p>
+                <p>
+                  <strong>GStreamer Pipeline:</strong> Although GStreamer provides hardware-accelerated streaming through RTP/RTSP plugins, it relies on GPU codecs and complex pipeline configurations. The lack of stable support for these plugins on the Raspberry Pi OS Lite creates potential issues, such as increased latency and system instability.
+                </p>
+                <p>
+                  <strong>ZED2i SDK API:</strong> The native API is optimized for GPU processing; however, it can monopolize GPU resources on the Jetson. This resource-intensive method might starve other critical computer vision tasks, limiting overall system performance.
+                </p>
+                <p>
+                  <strong>TCP Sockets:</strong> While TCP ensures reliable data delivery, its retransmission mechanisms introduce significant delays. In a real-time control environment, these delays could adversely affect the synchronization between video streaming and actuator commands.
+                </p>
+                
+                <image-component 
+                    tag="image" 
+                    source="../assets/Vision/stream_morph.png"
+                    subtitle="Table 2.: Different lenses and their specifications">
+                </image-component>
+                
+                <h4>Why Raw UDP Was Chosen</h4>
+                <p>
+                  Among the evaluated methods, raw UDP emerged as the optimal choice. Its connectionless nature minimizes overhead and eliminates the need for GPU-dependent codecs, ensuring that the Jetson’s processing power is reserved for critical computer vision tasks. Additionally, UDP's customizable error handling allows for better management of packet loss, maintaining synchronization between video feedback and the rover's GPIO-controlled actuators.
+                </p>
+                
+                    
+                
 
-        <h3>2.2.3 For the function of identifying sampling locations</h3>
+        <h3>2.2.3 Choosing the Right Zoom Lens</h3>
+            <p>
+            Choosing the right zoom lens was a critical decision for our rover’s imaging system. One of the primary challenges involved positioning the zoom lens due to mechanical constraints—specifically, a single linear actuator attached to the auger left limited options for mounting the camera close to the actuator. As a result, an alternative approach was proposed: fixing the zoom lens directly into the chassis. This solution required the use of a telephoto lens to achieve the necessary optical zoom while securely attaching the lens, ensuring that both the camera and lens are safely housed in the harsh, rugged environments encountered during URC missions.
+            </p>
 
-        <p>
-            Finally, for identifying optimal soil sampling locations, the team evaluated three approaches: manual intervention based on operator expertise, deep learning algorithms for automated feature detection, and hyperspectral imaging for compositional analysis. Site selection is particularly critical at MDRS where soil conditions vary significantly - from cracking clays with high salinity to non-cracking clays that exhibit different moisture retention properties (Clarke, 2003).
-        </p>
-        
-        <image-component 
-        tag="image" 
-        source="../assets/vis_con_sel_3.png"
-        subtitle="Table 2.4: Weighted concept selection matrix for choosing the methodology of finding site">
-        </image-component>
+            <image-component 
+                    tag="image" 
+                    source="../assets/Vision/lens_on_Chasis.jpg"
+                    subtitle="Figure 2.: 3D model of lens on the rover">
+            </image-component>
 
-        <p>
-            The concept selection in Table 2.4 analysis for sample site identification indicates that a hybrid approach combining manual intervention with deep learning support is optimal for the URC science mission requirements. The manual component scored 8.0/10 in our weighted analysis, with deep learning scoring 7.6/10, reflecting their complementary strengths. It has potential to be a similar sytem comparable to AI-assisted geological feature detection systems deployed on Mars rovers (Neveu et al., 2018; Li et al., 2023). While hyperspectral imaging could provide valuable compositional data (Olszewska & Napora, 2020), it was excluded due to hardware constraints and mission requirements being adequately met with the selected hybrid approach. 
-        </p>
-        
-    </div>
+            <p>
+            Two competing lens options were evaluated: the 16mm telephoto lens and the 8–50mm Arducam zoom lens. The 16mm telephoto lens is fully compatible with the Raspberry Pi HQ Camera’s standard C-mount system and a 1/2.3-inch sensor, offering a narrow field of view and moderate magnification ideal for detailed close-up imaging. Its manual focus mechanism allows for precise adjustments—an essential feature for scientific documentation—while its compact and robust design minimizes the risk of damage in extreme conditions. In contrast, the 8–50mm Arducam zoom lens, although versatile with its adjustable focal length, presents added mechanical complexity and bulk, which could compromise durability and performance in our application.
+            </p>
+
+            <image-component 
+            tag="image" 
+            source="../assets/Vision/lens_morph.png"
+            subtitle="Table 2.: Different lenses and their specifications">
+            </image-component>
+
+            <p>
+            Ultimately, the 16mm telephoto lens was selected as the preferred solution, as it is specifically optimized for our proprietary camera system and meets the operational requirements of our use case. The descision was based on component availability and compatibility with the HQ Camera Sensor. More testing with the USB Camera will be shown in later part of the report.
+            </p>
+            
 
     <div id="Prototyping">
         <h2>2.3 Prototyping</h2>
