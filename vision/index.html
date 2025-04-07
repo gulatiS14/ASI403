@@ -306,7 +306,7 @@
 
     
 
-        <h3>Testbench for Spectrometer</h3>
+        <h3>2.3.2 Testbench for Spectrometer</h3>
 
             <p>
             The spectrofluorometer system was initially developed by a separate team in the previous semester. This device was designed specifically for the purpose of detecting signs of life by analysing the fluorescence characteristics of a sample. As part of the current phase of development, there was a critical requirement to understand the working principles of this spectrometer system and integrate it effectively within the vision subsystem of the overall project.
@@ -350,7 +350,7 @@
             Overall, the spectroscopy testbench provides a reliable and modular setup to perform multiple spectroscopic tests in a controlled manner. Its design emphasizes precision, spatial efficiency, and scientific robustness, making it an essential component for validating the spectrometer’s capabilities before field deployment.
             </p>
 
-
+<!-- 
         <h3>2.3.2 Deep Learning for Soil Classification</h3>
 
         <p>
@@ -396,14 +396,98 @@
         subtitle="Figure 2.12: Confusion Matrix for our Model">
         </image-component>
 
-        <a href="https://github.com/gulatiS14/Soil_Classification">Github link for the Soil Classification</a>
+        <a href="https://github.com/gulatiS14/Soil_Classification">Github link for the Soil Classification</a> -->
         
     </div>
 
     <div id="Testing-Analysis">
         <h2>2.4 Testing and Analysis</h2>
 
-        <h3>2.4.1 Testing of Close-Up Shots</h3>
+        <h3>Testing Light Source for Spectrometer</h3>
+
+            <p>
+            The project aimed to develop a cost-effective spectrofluorometer by adapting a DIY grating spectrometer for fluorescence-based experiments. Spectrofluorometry involves exciting a sample with a specific wavelength of light and then detecting the longer wavelength emitted from the sample. Key components include an excitation source, an emission detector, and optical filters or gratings to isolate desired wavelengths. Given the steep learning curve in fluorophore-specific excitation/emission pairs and hardware calibration, a systematic testing of light sources was imperative.
+            </p>
+
+            <image-component 
+            tag="image" 
+            source="../assets/Vision/spec_work.png"
+            subtitle="Figure 2.: Working principles of the spectro-fluorometer">
+            </image-component>
+
+            <p>
+            The initial strategy focused on LED-based excitation, inspired by previous experiments such as a rhodamine test using a single LED. However, significant challenges emerged, primarily in the areas of cost and availability. For instance, UV LEDs critical for experiments like enantiomeric excess testing (requiring around 340 nm excitation) were either prohibitively expensive or unavailable. Similarly, specialized visible LEDs tuned to specific wavelengths (such as 490 nm for Fluorescein Diacetate) were both costly and difficult to source. Moreover, unreliable spectral data for online UV LEDs further complicated verification without advanced instrumentation.
+            </p>
+
+            <image-component 
+            tag="image" 
+            source="../assets/Vision/exp_led.png"
+            subtitle="Figure 2.: Laser Diodes of certain wavelegth can be very expensive">
+            </image-component>
+
+            <h3>Testing Light Source for Spectrometer</h3>
+
+
+            <ul>
+            <li>
+                <strong>Standard LEDs:</strong>
+                <ul>
+                <li>Exhibited low luminosity, resulting in weak fluorescence signals.</li>
+                <li>Failed to provide the necessary excitation intensity for reliable detection.</li>
+                </ul>
+            </li>
+            <p></p>
+            <li>
+                <strong>Household LED Bulbs (3000K Color Temperature):</strong>
+                <ul>
+                <li>Displayed spectral peaks dominated by yellow light (~580 nm).</li>
+                <li>Offered minimal intensity in the green range (490–540 nm), making them suboptimal for target excitation wavelengths.</li>
+                </ul>
+            </li>
+                <image-component
+                tag="image"
+                source="../assets/Vision/led_bulb.jpg"
+                subtitle="Figure 2.: Household LED Bulbs (3000K Color Temperature)">
+                </image-component>
+                <p>
+                     
+                </p>
+                <image-component
+                tag="image"
+                source="../assets/Vision/led_spectral.jpg"
+                subtitle="Figure 2.: Spectral analysis of the LED Bulb">
+                </image-component>
+
+            <p></p>
+            <li>
+                <strong>Incandescent Bulbs:</strong>
+                <ul>
+                <li>Provided a broad spectrum with a usable peak at approximately 540 nm when aligned directly with the spectrometer.</li>
+                <li>Were sensitive to filament alignment, causing peak shifts of about ±20 nm with minor positional variations, as seen in the Video attached.</li>
+                <li>Produced high heat output and were energy inefficient.</li>
+                </ul>
+            </li>
+            </ul>
+
+            <div class="video-container">
+                <video-component tag="rick" source="https://drive.google.com/file/d/1pu-UCG8IyS5FMICH-Y8ii1otrCydGR_1/preview" width="640" height="480" allow="autoplay"
+                subtitle="Video: Spectral analysis of the incandescent bulb, and the peak shifting with the filament alignment">
+                </video-component>
+            </div>
+
+
+
+
+            <p>
+            As an interim solution, the use of an incandescent bulb peaking at 540 nm was adopted for preliminary testing, such as DNA/RNA assays with Propidium Iodide (which emits at 617 nm). Future improvements are planned to refine this setup further. Proposed enhancements include the integration of bandpass filters to isolate target wavelengths when using broadband sources like halogen or incandescent bulbs, and the development of rigorous calibration protocols using fluorescent standards (e.g., fluorescein) to compensate for imperfect light sources. Additionally, exploration of UV workarounds via derivatization agents, such as dansyl chloride, aims to enable visible-light excitation for assays requiring UV sensitivity.
+            </p>
+
+            <p>
+            The iterative testing process underscored key lessons: resourcefulness in adapting to logistical constraints, the necessity of balancing precision with practicality under budget limitations, and the value of collaborative problem-solving using open-source tools and online forums. Despite the hurdles in sourcing and validating suitable light sources, the findings demonstrated the feasibility of low-cost fluorescence spectroscopy, paving the way for further refinement of excitation specificity and improved signal-to-noise ratios.
+            </p>
+
+
+        <h3>2.4.2 Testing of Close-Up Shots</h3>
 
         <p>
         As part of the University Rover Challenge science mission requirements, we need to implement a reliable close-up imaging system to document potential sampling sites with high detail and accurate scaling. We are evaluating two distinct approaches for detailed geological documentation: the Raspberry Pi Camera Module 3 NoIR, featuring a 12-megapixel sensor with 4608 × 2592 pixel resolution and a versatile focus range from 10 cm to infinity, and a Digital Microscope USB camera offering 0.3 megapixels (680 × 480 pixels) with a specialized close-up focus range of 15 mm to 40 mm.
